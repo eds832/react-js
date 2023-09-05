@@ -1,0 +1,43 @@
+/* Set header styles */
+header {	    
+  background-image: url("./../../assets/header-background.svg");
+}
+
+.head-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+}
+
+.h1 {
+  font-weight: 100;
+  font-size: 50px;
+  line-height: 49px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-left: 8%;
+}
+
+.h3 {
+  color: #e50914;
+  margin-left: 3%;
+}
+
+.light {	    
+  font-weight: 100;
+}
+
+.head-line button {
+  font-size: 16px;
+  background-color: #555;
+  color: #e50914;
+  padding: 6px 12px;
+  border-radius: 2px;
+  border: none;
+  margin-right: 20px;
+}

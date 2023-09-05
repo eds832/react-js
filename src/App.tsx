@@ -1,24 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
+import GenreSelect from './components/GenreSelect/GenreSelect';
+import MovieGrid from './components/MovieGrid/MovieGrid';
+import MovieCounter from './components/MovieCounter/MovieCounter';
+import Header from './components/Header/Header';
 
 function App() {
 	return (
-		<div className='App'>
-			<header className='App-header'>
-				<img src={logo} className='App-logo' alt='logo' />
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
-				</p>
-				<a
-					className='App-link'
-					href='https://reactjs.org'
-					target='_blank'
-					rel='noopener noreferrer'
-				>
-					Learn React
-				</a>
-			</header>
+		<div className='container'>
+			<Header />
+			<GenreSelect
+				genres={['All', 'Documentary', 'Comedy', 'Horor', 'Crime', 'Drama']}
+				selectedGenre='All'
+				onSelect={(genre) => console.log('Selected genre:', genre)}
+			/>
+			<MovieCounter />
+			<MovieGrid />
 		</div>
 	);
 }
