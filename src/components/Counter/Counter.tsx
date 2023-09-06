@@ -1,11 +1,11 @@
-import { createElement, useState } from 'react';
+import { createElement, useState, FC } from 'react';
 
 export type CounterType = {
 	initialValue: number;
 };
 
-const Counter = (props: CounterType) => {
-	const [value, setValue] = useState(props.initialValue);
+const Counter: FC<CounterType> = ({ initialValue }) => {
+	const [value, setValue] = useState(initialValue);
 
 	const increment = () => {
 		setValue(value + 1);

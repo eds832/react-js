@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import './GenreSelect.css';
 
@@ -8,13 +8,17 @@ export type GenreSelectType = {
 	onSelect: (genre: string) => void;
 };
 
-const GenreSelect = (props: GenreSelectType) => {
+const GenreSelect: FC<GenreSelectType> = ({
+	genres,
+	selectedGenre,
+	onSelect,
+}) => {
 	const handleSelect = (genre: string) => {
-		props.onSelect(genre);
+		onSelect(genre);
 	};
 
-	const genres = props.genres.map((genre) => {
-		const className = genre === props.selectedGenre ? 'selected' : undefined;
+	const genreButtons = genres.map((genre) => {
+		const className = genre === selectedGenre ? 'selected' : undefined;
 		return (
 			<button
 				key={genre}
@@ -26,7 +30,7 @@ const GenreSelect = (props: GenreSelectType) => {
 		);
 	});
 
-	return <div className='genre-buttons'>{genres}</div>;
+	return <div className='genre-buttons'>{genreButtons}</div>;
 };
 
 export default GenreSelect;

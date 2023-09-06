@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import './SearchForm.css';
 
@@ -7,8 +7,8 @@ export type SearchFormType = {
 	onSearch: (query: string) => void;
 };
 
-const SearchForm = (props: SearchFormType) => {
-	const [query, setQuery] = useState(props.initialQuery);
+const SearchForm: FC<SearchFormType> = ({ initialQuery, onSearch }) => {
+	const [query, setQuery] = useState(initialQuery);
 
 	const handleInputChange = (event: {
 		target: { value: React.SetStateAction<string> };
@@ -18,7 +18,7 @@ const SearchForm = (props: SearchFormType) => {
 
 	const handleSearch = (event: { preventDefault: () => void }) => {
 		event.preventDefault();
-		props.onSearch(query);
+		onSearch(query);
 	};
 
 	return (
