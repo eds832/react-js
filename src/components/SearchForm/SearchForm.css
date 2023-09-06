@@ -1,0 +1,33 @@
+/* Set search form styles */
+form {
+  display: flex;
+  margin-top: 20px;
+  width: 84%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 2px;
+  margin-bottom: 140px;
+  background-color: #222;
+  color: #FFFFFF;
+}
+
+.search-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 140px;
+  margin-left: 10px;
+  width: 200px;
+  text-transform: uppercase;
+}

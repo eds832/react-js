@@ -1,46 +1,29 @@
-# Getting Started with Create React App
+**Task1**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Create components
+To understand more how components work it's recommended to create a few interactive components.
 
-## Available Scripts
+Create the followong three components and render them all on one page, so that you can play around with them and test their look and behavior.
 
-In the project directory, you can run:
+Counter
 
-### `npm start`
+A component that renders a numeric value and two buttons: one to decrement the value by 1, another to increment the value by 1.
+The component should take an initial value in a property.
+The component should be written using EcmaScript classes syntax, the `render` method should use `React.createElement` API (without JSX).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+SearchForm
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Refer to the design prototype, implement a component that renders a search input and a button that triggers a new search.
+The component should accept two properties:
 
-### `npm test`
+Initial search query. Use the value to set the initial value for the input
+A "onSearch" callback property. Call the callback property every time the user presses Enter when the input has focus or when the user clicks the Search button. Pass current input value in callback arguments.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+GenreSelect
 
-### `npm run build`
+Refer to the design prototype, implement a component that renders a list of movie genres with currently selected genre highlighted.
+The component should accept three properties:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+A list of genre names to display. Use the incoming list to render genre buttons.
+A name of currently selected genre. Use the name to identify which button to highlight.
+A "onSelect" callback property. Call the callback function when the user clicks on any genre button. Pass respective genre name to the callback arguments.
