@@ -1,10 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import GenreSelect from './components/GenreSelect/GenreSelect';
-import MovieGrid from './components/MovieGrid/MovieGrid';
-import MovieCounter from './components/MovieCounter/MovieCounter';
-import Header from './components/Header/Header';
+import { Header, GenreSelect, MovieGrid, MovieCounter } from './components';
 
 function App() {
 	return (

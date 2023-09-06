@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import './GenreSelect.css';
 
-export type GenreSelectType = {
+type GenreSelectType = {
 	genres: string[];
 	selectedGenre: string;
 	onSelect: (genre: string) => void;

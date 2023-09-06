@@ -1,6 +1,6 @@
 import { createElement, useState, FC } from 'react';
 
-export type CounterType = {
+type CounterType = {
 	initialValue: number;
 };
 

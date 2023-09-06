@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 
 import './SearchForm.css';
 
-export type SearchFormType = {
+type SearchFormType = {
 	initialQuery: string;
 	onSearch: (query: string) => void;
 };
