@@ -4,14 +4,14 @@ import Counter from '../Counter';
 
 describe('Counter', () => {
 	it('renders initial value provided in props', () => {
-		const { getByText } = render(<Counter initialValue={5} />);
-		expect(getByText('5')).toBeInTheDocument();
+		const { getByTestId } = render(<Counter initialValue={5} />);
+		expect(getByTestId('counter-value')).toBeInTheDocument();
 	});
 
 	it('decrements the displayed value on click of decrement button', () => {
-		const { getByText } = render(<Counter initialValue={5} />);
-		const decrementButton = getByText('-');
-		const value = getByText('5');
+		const { getByTestId } = render(<Counter initialValue={5} />);
+		const decrementButton = getByTestId('counter-minus');
+		const value = getByTestId('counter-value');
 
 		fireEvent.click(decrementButton);
 
@@ -19,9 +19,9 @@ describe('Counter', () => {
 	});
 
 	it('increments the displayed value on click of increment button', () => {
-		const { getByText } = render(<Counter initialValue={5} />);
-		const incrementButton = getByText('+ ADD MOVIE');
-		const value = getByText('5');
+		const { getByTestId } = render(<Counter initialValue={5} />);
+		const incrementButton = getByTestId('counter-plus');
+		const value = getByTestId('counter-value');
 
 		fireEvent.click(incrementButton);
 

@@ -1,47 +1,31 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import GenreSelect from './../GenreSelect';
+import GenreSelect, { GenreSelectProps } from '../GenreSelect';
 
 describe('GenreSelect', () => {
-	const genres = ['Action', 'Comedy', 'Drama'];
-	const selectedGenre = 'Comedy';
-	const onSelect = jest.fn();
+	const props: GenreSelectProps = {
+		genres: ['Action', 'Comedy', 'Drama'],
+		selectedGenre: 'Comedy',
+		onSelect: jest.fn(),
+	};
 
 	it('renders all genres passed in props', () => {
-		const { getByText } = render(
-			<GenreSelect
-				genres={genres}
-				selectedGenre={selectedGenre}
-				onSelect={onSelect}
-			/>
-		);
-		genres.forEach((genre) => {
-			expect(getByText(genre)).toBeInTheDocument();
+		const { getByTestId } = render(<GenreSelect {...props} />);
+		props.genres.forEach((genre) => {
+			expect(getByTestId(`${genre}-genre-button`)).toBeInTheDocument();
 		});
 	});
 
 	it('highlights a selected genre passed in props', () => {
-		const { getByText } = render(
-			<GenreSelect
-				genres={genres}
-				selectedGenre={selectedGenre}
-				onSelect={onSelect}
-			/>
-		);
-		const selectedButton = getByText(selectedGenre);
+		const { getByTestId } = render(<GenreSelect {...props} />);
+		const selectedButton = getByTestId(`${props.selectedGenre}-genre-button`);
 		expect(selectedButton).toHaveClass('selected');
 	});
 
 	it('calls onSelect callback with correct genre after a click event on a genre button', () => {
-		const { getByText } = render(
-			<GenreSelect
-				genres={genres}
-				selectedGenre={selectedGenre}
-				onSelect={onSelect}
-			/>
-		);
-		const genreButton = getByText('Action');
+		const { getByTestId } = render(<GenreSelect {...props} />);
+		const genreButton = getByTestId('Action-genre-button');
 		fireEvent.click(genreButton);
-		expect(onSelect).toHaveBeenCalledWith('Action');
+		expect(props.onSelect).toHaveBeenCalledWith('Action');
 	});
 });

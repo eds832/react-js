@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 
 import './GenreSelect.css';
 
-type GenreSelectType = {
+export interface GenreSelectProps {
 	genres: string[];
 	selectedGenre: string;
 	onSelect: (genre: string) => void;
-};
+}
 
-const GenreSelect: FC<GenreSelectType> = ({
+const GenreSelect: FC<GenreSelectProps> = ({
 	genres,
 	selectedGenre,
 	onSelect,
@@ -19,11 +19,13 @@ const GenreSelect: FC<GenreSelectType> = ({
 
 	const genreButtons = genres.map((genre) => {
 		const className = genre === selectedGenre ? 'selected' : undefined;
+		const testId = `${genre}-genre-button`;
 		return (
 			<button
 				key={genre}
 				className={className}
 				onClick={() => handleSelect(genre)}
+				data-testid={testId}
 			>
 				{genre}
 			</button>

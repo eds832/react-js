@@ -1,24 +1,24 @@
 import React from 'react';
 import { render, fireEvent, act } from '@testing-library/react';
-import SearchForm from './../SearchForm';
+import SearchForm from '../SearchForm';
 import userEvent from '@testing-library/user-event';
 
 describe('SearchForm', () => {
 	const handleSearch = jest.fn();
 
 	it('renders an input with the value equal to initial value passed in props', () => {
-		const { getByDisplayValue } = render(
+		const { getByTestId } = render(
 			<SearchForm initialQuery='test' onSearch={handleSearch} />
 		);
-		expect(getByDisplayValue('test')).toBeInTheDocument();
+		expect(getByTestId('search-input')).toBeInTheDocument();
 	});
 
 	it('calls onSearch prop with proper value after clicking Submit button', () => {
-		const { getByPlaceholderText, getByText } = render(
+		const { getByTestId } = render(
 			<SearchForm initialQuery='' onSearch={handleSearch} />
 		);
-		const input = getByPlaceholderText('What do you want to watch...');
-		const submitButton = getByText('Search');
+		const input = getByTestId('search-input');
+		const submitButton = getByTestId('search-button');
 
 		fireEvent.change(input, { target: { value: 'test' } });
 		fireEvent.click(submitButton);
@@ -27,11 +27,11 @@ describe('SearchForm', () => {
 	});
 
 	it('calls onSearch prop with proper value after pressing Enter key', async () => {
-		const { getByPlaceholderText } = render(
+		const { getByTestId } = render(
 			<SearchForm initialQuery='' onSearch={handleSearch} />
 		);
 
-		const input = getByPlaceholderText('What do you want to watch...');
+		const input = getByTestId('search-input');
 
 		await act(async () => {
 			await userEvent.type(input, 'test{enter}');
