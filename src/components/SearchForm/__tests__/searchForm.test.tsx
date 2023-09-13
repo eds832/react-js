@@ -10,7 +10,7 @@ describe('SearchForm', () => {
 		const { getByTestId } = render(
 			<SearchForm initialQuery='test' onSearch={handleSearch} />
 		);
-		expect(getByTestId('search-input')).toBeInTheDocument();
+		expect(getByTestId('search-input')).toHaveValue('test');
 	});
 
 	it('calls onSearch prop with proper value after clicking Submit button', () => {
