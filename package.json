@@ -48,8 +48,10 @@
 		"@testing-library/dom": "^9.3.1",
 		"@testing-library/user-event": "^14.4.3",
 		"@trivago/prettier-plugin-sort-imports": "^4.2.0",
+		"cypress": "^13.2.0",
 		"eslint": "^8.48.0",
 		"eslint-config-prettier": "^9.0.0",
+		"eslint-plugin-cypress": "^2.14.0",
 		"eslint-plugin-prettier": "^5.0.0",
 		"husky": "^8.0.3",
 		"prettier": "^3.0.3"

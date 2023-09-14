@@ -27,3 +27,38 @@ The component should accept three properties:
 A list of genre names to display. Use the incoming list to render genre buttons.
 A name of currently selected genre. Use the name to identify which button to highlight.
 A "onSelect" callback property. Call the callback function when the user clicks on any genre button. Pass respective genre name to the callback arguments.
+
+**Task2**
+
+Unit and component testing
+Check that you have jest and @testing-library/react packages installed for unit and component tests.
+If you haven't created all components from the previous module, finish them now. Cover the logic for all three with tests using these libraries.
+Counter
+Test that component renders initial value provided in props
+Test that a click event on "decrement" button decrements the displayed value
+Test that a click event on "increment" button increments the displayed value
+
+SearchForm
+Test that component renders an input with the value equal to initial value passed in props
+Test that after typing to the input and a "click" event on the Submit button, the "onChange" prop is called with proper value
+Test that after typing to the input and pressing Enter key, the "onChange" prop is called with proper value
+
+GenreSelect
+Test that component renders all genres passed in props
+Test that component highlights a selected genre passed in props
+Test that after a click event on a genre button component calls "onChange" callback and passes correct genre in arguments
+
+End-to-End Testing
+Install and setup Cypress or WebdriverIO for end-to-end tests.
+Cover the logic for one of your components using the framework.
+
+**Scripts used in the task**
+
+npm install --save-dev @testing-library/user-event @testing-library/dom
+npm install cypress --save-dev
+npm install eslint-plugin-cypress@latest --save-dev
+To open cypress: npx cypress open
+To run cypress tests: npx cypress run
+To run cypress testes with opening a browser: npx cypress run --headed
+To run cypress testes with a spec: npx cypress run --spec cypress/e2e/Counter/Counter.cy.js
+To run cypress testes with a browser: npx cypress run --browser chrome
