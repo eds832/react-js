@@ -13,10 +13,6 @@ const GenreSelect: FC<GenreSelectProps> = ({
 	selectedGenre,
 	onSelect,
 }) => {
-	const handleSelect = (genre: string) => {
-		onSelect(genre);
-	};
-
 	const genreButtons = genres.map((genre) => {
 		const className = genre === selectedGenre ? 'selected' : undefined;
 		const testId = `${genre}-genre-button`;
@@ -24,7 +20,7 @@ const GenreSelect: FC<GenreSelectProps> = ({
 			<button
 				key={genre}
 				className={className}
-				onClick={() => handleSelect(genre)}
+				onClick={() => onSelect(genre)}
 				data-testid={testId}
 			>
 				{genre}
