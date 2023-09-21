@@ -1,0 +1,41 @@
+.sort-control {
+  display: flex;
+  align-items: center;
+  margin-left: 400px;
+  margin-top: 20px;
+  position: relative;
+  font-size: 16px;
+  background-color: #232323;
+  
+}
+
+.sort-control label {
+  margin-right: 30px;
+  white-space: nowrap;
+  color: #777;
+}
+
+.sort-control select {
+  padding: 5px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 150px;
+  background-color: #232323;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+.sort-control:after {
+  content: "▼";
+  color: #F65251;
+  right: 1px;
+  font-size: 12px;
+  top: 24px;  
+  position: absolute;
+  pointer-events: none;
+}

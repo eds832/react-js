@@ -14,15 +14,15 @@ input[type="text"] {
   border: none;
   border-radius: 2px;
   margin-bottom: 140px;
-  background-color: #222;
+  background-color: #424242;
   color: #FFFFFF;
 }
 
 .search-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #e50914;
-  color: #fff;
+  background-color: #F65251;
+  color: #FFFFFF;
   border: none;
   border-radius: 2px;
   cursor: pointer;
