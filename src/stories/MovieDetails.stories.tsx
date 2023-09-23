@@ -21,6 +21,7 @@ export const OnGoToAllMoviesClick: Story = {
 		rating: 8.9,
 		duration: 177,
 		description: 'A description of the movie',
+		genresList: ['Action'],
 		onMovieClick: () => console.log('go to all movies clicked'),
 	},
 	play: async ({ canvasElement }) => {

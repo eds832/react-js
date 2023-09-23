@@ -1,11 +1,14 @@
 import React from 'react';
 
 import './MovieCounter.css';
+import Typography, { TypographyTypes } from '../Paragraph/Typography';
 
 const MovieCounter = () => {
 	return (
 		<div className='movie-counter'>
-			<span>39 movies found</span>
+			<Typography type={TypographyTypes.MOVIE_COUNTER}>
+				39<span className='lighter'> movies found</span>
+			</Typography>
 		</div>
 	);
 };

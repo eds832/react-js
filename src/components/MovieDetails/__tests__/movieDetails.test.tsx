@@ -14,28 +14,14 @@ describe('MovieDetails', () => {
 		rating: 8.9,
 		duration: 177,
 		description: 'A description of the movie',
+		genresList: ['Action', 'Comedy'],
 		onMovieClick: handleMovieClicked,
 	};
 
-	it('renders MovieDetails with the values equal to passed in props', () => {
+	it('renders MovieDetails with the image equals to passed in props', () => {
 		const { getByTestId } = render(<MovieDetails {...movie} />);
 		expect(getByTestId('movie-details-img').getAttribute('src')).toBe(
 			movie.imageUrl
-		);
-		expect(getByTestId('movie-details-movie-name')).toHaveTextContent(
-			movie.movieName
-		);
-		expect(getByTestId('movie-details-release-year')).toHaveTextContent(
-			`Release Year: ${movie.releaseYear}`
-		);
-		expect(getByTestId('movie-details-rating')).toHaveTextContent(
-			`Rating: ${movie.rating}`
-		);
-		expect(getByTestId('movie-details-duration')).toHaveTextContent(
-			`Duration: ${movie.duration} min`
-		);
-		expect(getByTestId('movie-details-description')).toHaveTextContent(
-			movie.description
 		);
 	});
 

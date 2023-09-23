@@ -2,13 +2,14 @@
 .genre-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 5px;
   width: 600px;
 }
 
 .genre-buttons button {
   padding: 20px 5px;
   font-size: 16px;
+  font-weight: 500;
   background-color: #232323;
   color: #FFFFFF;
   border: none;

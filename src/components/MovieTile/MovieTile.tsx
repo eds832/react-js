@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 
-import './MovieTitle.css';
+import './MovieTile.css';
 import { MovieType } from 'src/store/movies/types';
+import Typography, { TypographyTypes } from '../Paragraph/Typography';
 
-const MovieTitle: FC<MovieType> = ({
+const MovieTile: FC<MovieType> = ({
 	imageUrl,
 	movieName,
 	releaseYear,
@@ -15,18 +16,30 @@ const MovieTitle: FC<MovieType> = ({
 			onClick={() => onMovieClick(movieName)}
 			data-testid={`${movieName.replaceAll(/\s+/g, '')}-div`}
 		>
-			<img data-testid='movie-title-img' className='movie-img' src={imageUrl} />
-			<figcaption className='movie-figcaption'>
-				<h2 data-testid='movie-title-movie-name'>{movieName}</h2>
+			<img data-testid='movie-tile-img' className='movie-img' src={imageUrl} />
+			<div className='movie-tile-description'>
+				<Typography
+					type={TypographyTypes.MOVIE_TILE_TITLE}
+					dataTestid='movie-tile-movie-name'
+				>
+					{movieName}
+				</Typography>
 				<div className='movie-release-year'>
-					<p data-testid='movie-title-release-year'>{releaseYear}</p>
+					<Typography
+						dataTestid='movie-tile-release-year'
+						children={releaseYear}
+						type={TypographyTypes.MOVIE_TILE_RELEASE_YEAR}
+					/>
 				</div>
-				<p data-testid='movie-title-genres' className='movie-genres'>
+				<Typography
+					dataTestid='movie-tile-genres'
+					type={TypographyTypes.MOVIE_GENRES}
+				>
 					{genresList.join(', ')}
-				</p>
-			</figcaption>
+				</Typography>
+			</div>
 		</div>
 	);
 };
 
-export default MovieTitle;
+export default MovieTile;

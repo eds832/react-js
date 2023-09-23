@@ -2,8 +2,21 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  background-color: #232323;
+}
+
+.under-heder {  
+  width: 1080px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .under-heder-controls {
   display: flex;
+  border-bottom: 1px solid #555555;
+}
+
+.gray {
+  height: 10px;
+  background-color: #555555;
 }

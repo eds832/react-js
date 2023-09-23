@@ -1,5 +1,8 @@
 /* Set movie counter styles */
 .movie-counter {
   margin-top: 20px;
-  color: #fff;
+}
+
+.lighter {
+  font-weight: 400;
 }

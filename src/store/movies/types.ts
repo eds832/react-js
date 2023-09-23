@@ -1,4 +1,4 @@
-export type MovieType = {
+export interface MovieType {
 	imageUrl: string;
 	movieName: string;
 	releaseYear: number;
@@ -7,4 +7,4 @@ export type MovieType = {
 	duration?: number;
 	description?: string;
 	onMovieClick: (movieName: string) => void;
-};
+}

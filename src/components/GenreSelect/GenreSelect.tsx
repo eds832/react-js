@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import './GenreSelect.css';
+import Button from '../Button/Button';
 
 export interface GenreSelectProps {
 	genres: string[];
@@ -17,14 +18,13 @@ const GenreSelect: FC<GenreSelectProps> = ({
 		const className = genre === selectedGenre ? 'selected' : undefined;
 		const testId = `${genre}-genre-button`;
 		return (
-			<button
+			<Button
 				key={genre}
-				className={className}
+				buttonClass={className}
 				onClick={() => onSelect(genre)}
-				data-testid={testId}
-			>
-				{genre}
-			</button>
+				dataTestid={testId}
+				buttonText={genre}
+			/>
 		);
 	});
 

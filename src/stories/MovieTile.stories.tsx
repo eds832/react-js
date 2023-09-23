@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
-import MovieTitle from '../components/MovieTile/MovieTile';
+import MovieTile from '../components/MovieTile/MovieTile';
 
 const meta = {
-	title: 'MovieTitle component',
-	component: MovieTitle,
+	title: 'MovieTile component',
+	component: MovieTile,
 	tags: ['autodocs'],
-} satisfies Meta<typeof MovieTitle>;
+} satisfies Meta<typeof MovieTile>;
 
 export default meta;
 

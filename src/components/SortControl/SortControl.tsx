@@ -1,10 +1,14 @@
 import React from 'react';
+
+import Option from '../Option/Option';
 import './SortControl.css';
 
 interface SortControlProps {
 	initialValue: string;
 	onChange: (value: string) => void;
 }
+
+const options = ['releaseDate', 'title'];
 
 const SortControl: React.FC<SortControlProps> = ({
 	initialValue,
@@ -24,12 +28,9 @@ const SortControl: React.FC<SortControlProps> = ({
 				value={initialValue}
 				onChange={handleSelectChange}
 			>
-				<option data-testid='release-date-option' value='releaseDate'>
-					RELEASE DATE
-				</option>
-				<option data-testid='title-option' value='title'>
-					TITLE
-				</option>
+				{options.map((val) => (
+					<Option key={val} value={val} />
+				))}
 			</select>
 		</div>
 	);

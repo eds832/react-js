@@ -7,29 +7,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 25px;
   color: #FFFFFF;
-}
-
-.h1 {
-  font-weight: 100;
-  font-size: 50px;
-  line-height: 49px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #FFFFFF;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  padding-left: 8%;
-}
-
-.h3 {
-  color: #F65251;
-  margin-left: 3%;
-}
-
-.light {	    
-  font-weight: 100;
 }
 
 .head-line button {
@@ -39,5 +18,5 @@ header {
   padding: 6px 12px;
   border-radius: 2px;
   border: none;
-  margin-right: 20px;
+  margin-right: 25px;
 }

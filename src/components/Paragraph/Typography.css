@@ -1,0 +1,98 @@
+.title {
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 49px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  padding-left: 8%;
+}
+
+.netflix-roulette {
+  font-size: 20px;
+  font-weight: 900;
+  color: #F65251;
+  margin-left: 3%;
+}
+
+.movie-tile-title {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 100;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+}
+
+.movie-genres {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 100; 
+  margin-bottom: 20px;
+  opacity: 60%;
+}
+
+.movie-details-title {
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 49px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin-right: 20px;
+  margin-left: -2px;
+}
+
+.movie-details-rating, .movie-details-reating-one-digit {
+  color: #FFFFFF;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border: 1px solid #FFFFFF;
+  padding-left: 15px;
+  padding-top: 17px;
+  font-size: 20px;
+}
+
+.movie-details-reating-one-digit {
+  padding-left: 23px;
+}
+
+.movie-details-genres {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500; 
+  margin-top: 10px; 
+  line-height: 17px; 
+  margin-bottom: 30px;
+  opacity: 50%;
+}
+
+.movie-details-release-year-and-duration {
+  font-size: 24px;
+  font-weight: 300;
+  color: #F65251;
+  margin-right: 50px;
+  margin-bottom: 15px;
+  line-height: 29px;
+}
+
+.movie-details-description {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 300;
+  opacity: 50%;
+}
+
+.movie-tile-release-year {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.movie-counter {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 600;
+}

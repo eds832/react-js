@@ -2,17 +2,19 @@
   display: flex;
   align-items: center;
   margin-left: 400px;
-  margin-top: 20px;
+  margin-top: 5px;
   position: relative;
   font-size: 16px;
-  background-color: #232323;
-  
+  background-color: #232323; 
 }
 
 .sort-control label {
   margin-right: 30px;
   white-space: nowrap;
-  color: #777;
+  color: #FFFFFF;
+  opacity: 60%;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .sort-control select {
