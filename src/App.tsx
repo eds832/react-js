@@ -82,7 +82,7 @@ function App() {
 
 	if (name) {
 		return (
-			<div className='container'>
+			<div className='container details'>
 				<MovieDetails
 					imageUrl={movie.imageUrl}
 					movieName={movie.movieName}

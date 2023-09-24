@@ -3,6 +3,11 @@
   max-width: 1200px;
   margin: 0 auto;
   background-color: #232323;
+  margin-top: 54px;
+}
+
+.details {
+  margin-top: 37px;
 }
 
 .under-heder {  
