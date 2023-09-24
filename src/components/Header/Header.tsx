@@ -1,4 +1,4 @@
-import React, { createElement } from 'react';
+import React from 'react';
 
 import './Header.css';
 import SearchForm from '../SearchForm/SearchForm';
