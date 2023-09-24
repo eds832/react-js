@@ -2,7 +2,7 @@
 form {
   display: flex;
   margin-top: 20px;
-  width: 84%;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -10,24 +10,28 @@ form {
 input[type="text"] {
   flex: 1;
   padding: 10px;
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 400;
   border: none;
   border-radius: 2px;
   margin-bottom: 140px;
   background-color: #424242;
   color: #FFFFFF;
+  height: 57px;
+  opacity: 70%;
 }
 
 .search-button {
-  padding: 10px 20px;
-  font-size: 16px;
+  height: 57px;
+  width: 233px;
+  font-weight: 500;
+  font-size: 20px;
   background-color: #F65251;
   color: #FFFFFF;
   border: none;
   border-radius: 2px;
   cursor: pointer;
-  margin-bottom: 140px;
-  margin-left: 10px;
-  width: 200px;
+  margin-bottom: 150px;
+  margin-left: 15px;
   text-transform: uppercase;
 }

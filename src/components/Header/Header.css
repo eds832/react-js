@@ -12,11 +12,13 @@ header {
 }
 
 .head-line button {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: 600;
   background-color: #555555;
   color: #F65251;
-  padding: 6px 12px;
   border-radius: 2px;
   border: none;
   margin-right: 25px;
+  height: 46px;
+  width: 177px;
 }

@@ -21,7 +21,7 @@ const MovieDetails: FC<MovieType> = ({
 	return (
 		<>
 			<div className='movie-details-netflixroulette-line'>
-				<Netflixroulette />
+				<Netflixroulette light='light' />
 				<Button
 					buttonClass='go-to-all-movies-button'
 					buttonText='⚲'
