@@ -2,8 +2,7 @@
 .genre-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 5px;
-  width: 600px;
+  width: 45%;
 }
 
 .genre-buttons button {

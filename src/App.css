@@ -10,13 +10,14 @@
   margin-top: 37px;
 }
 
-.under-heder {  
+.under-header {  
   width: 1080px;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 5px;
 }
 
-.under-heder-controls {
+.under-header-controls {
   display: flex;
   border-bottom: 1px solid #555555;
 }

@@ -56,12 +56,12 @@ function App() {
 
 	const movie = movies.find((m) => m.movieName === name);
 
-	const UnderHeder = () => {
+	const UnderHeader = () => {
 		return (
 			<>
 				<div className='gray'></div>
-				<div className='under-heder'>
-					<div className='under-heder-controls'>
+				<div className='under-header'>
+					<div className='under-header-controls'>
 						<GenreSelect
 							genres={GENRES}
 							selectedGenre='All'
@@ -93,14 +93,14 @@ function App() {
 					description={movie.description}
 					onMovieClick={movie.onMovieClick}
 				/>
-				<UnderHeder />
+				<UnderHeader />
 			</div>
 		);
 	} else {
 		return (
 			<div className='container'>
 				<Header />
-				<UnderHeder />
+				<UnderHeader />
 			</div>
 		);
 	}
