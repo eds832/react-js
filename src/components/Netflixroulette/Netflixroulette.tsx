@@ -12,13 +12,13 @@ const Netflixroulette: React.FC<NetflixrouletteProps> = ({ light }) => {
 	if (light === 'light') {
 		return (
 			<Typography type={TypographyTypes.NETFLIX_ROULETTE}>
-				<span className='light'>netflixroulete</span>
+				<span className='light'>netflixroulette</span>
 			</Typography>
 		);
 	} else {
 		return (
 			<Typography type={TypographyTypes.NETFLIX_ROULETTE}>
-				netflix<span className='light'>roulete</span>
+				netflix<span className='light'>roulette</span>
 			</Typography>
 		);
 	}
