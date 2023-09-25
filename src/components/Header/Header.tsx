@@ -3,7 +3,7 @@ import React from 'react';
 import './Header.css';
 import SearchForm from '../SearchForm/SearchForm';
 import Button from '../Button/Button';
-import Typography, { TypographyTypes } from '../Paragraph/Typography';
+import Typography, { TypographyTypes } from '../Typography/Typography';
 import Netflixroulette from '../Netflixroulette/Netflixroulette';
 
 const Header = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Netflixroulette.css';
-import Typography, { TypographyTypes } from '../Paragraph/Typography';
+import Typography, { TypographyTypes } from '../Typography/Typography';
 
 interface NetflixrouletteProps {
 	light?: string;

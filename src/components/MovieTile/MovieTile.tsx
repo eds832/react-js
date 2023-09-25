@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 
 import './MovieTile.css';
 import { MovieType } from './../../store/movies/types';
-import Typography, { TypographyTypes } from '../Paragraph/Typography';
+import Typography, { TypographyTypes } from '../Typography/Typography';
 import Button from '../Button/Button';
 
 export interface MovieTileProps {

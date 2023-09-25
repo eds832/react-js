@@ -4,7 +4,7 @@ import './MovieDetails.css';
 import { MovieType } from './../../store/movies/types';
 import Netflixroulette from '../Netflixroulette/Netflixroulette';
 import Button from '../Button/Button';
-import Typography, { TypographyTypes } from '../Paragraph/Typography';
+import Typography, { TypographyTypes } from '../Typography/Typography';
 import getMovieDuration from './../../helpers/getMovieDuration';
 
 const MovieDetails: FC<MovieType> = ({
