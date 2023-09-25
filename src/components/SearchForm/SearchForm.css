@@ -1,5 +1,5 @@
 /* Set search form styles */
-form {
+.search-form {
   display: flex;
   margin-top: 20px;
   width: 80%;
@@ -7,7 +7,7 @@ form {
   margin-right: auto;
 }
 
-input[type="text"] {
+.search-form input[type="text"] {
   flex: 1;
   padding: 10px;
   font-size: 20px;

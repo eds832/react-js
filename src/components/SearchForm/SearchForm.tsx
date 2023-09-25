@@ -24,7 +24,7 @@ const SearchForm: FC<SearchFormProps> = ({ initialQuery, onSearch }) => {
 	};
 
 	return (
-		<form onSubmit={handleSearch}>
+		<form className='search-form' onSubmit={handleSearch}>
 			<Input
 				type='text'
 				placeholderText='What do you want to watch...'
