@@ -64,6 +64,7 @@ const MovieTile: FC<MovieTileProps> = ({
 						children='⋮'
 						onClick={handleClickThreeDots}
 						buttonClass='three-dots'
+						dataTestid='three-dots'
 					/>
 				)}
 			</div>

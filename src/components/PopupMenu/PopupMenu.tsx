@@ -15,7 +15,7 @@ const PopupMenu: React.FC<PopupMenuProps> = ({
 	onDeleteClicked,
 }) => {
 	return (
-		<ul className='popup-select'>
+		<ul className='popup-select' data-testid='popup-menu'>
 			<li>
 				<Button
 					buttonClass='close-popup'

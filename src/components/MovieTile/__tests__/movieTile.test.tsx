@@ -30,4 +30,12 @@ describe('MovieTile', () => {
 		expect(movie.onMovieClick).toHaveBeenCalledTimes(1);
 		expect(movie.onMovieClick).toHaveBeenCalledWith('Movie 1');
 	});
+
+	it('opens popup menu after clicking three dots button', () => {
+		const { getByTestId } = render(<MovieTile movie={movie} />);
+		fireEvent.click(getByTestId('three-dots'));
+		const popupMenu = getByTestId('popup-menu');
+
+		expect(popupMenu).toBeVisible();
+	});
 });
