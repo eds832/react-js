@@ -7,15 +7,17 @@
 }
 
 .movie-details {
-  display: flex;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   background-color: #232323; 
 }
 
 .movie-details-poster {
-  flex: 1;
-  margin-right: 45px;
+  margin-right: 60px;
   margin-left: 60px;
   padding-bottom: 35px;
+  width: 320px;
 }
   
 .movie-details-poster img {
@@ -26,7 +28,7 @@
   
 .movie-details-info {
   flex: 2;
-  padding-right: 45px;
+  padding-right: 60px;
 }
 
 .movie-details-info button {
