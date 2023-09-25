@@ -5,5 +5,6 @@
 		"lib": ["ES2021", "dom"],
 		"baseUrl": "."
 	},
-	"include": ["."]
+	"include": ["."],
+	"exclude": ["cypress/**/*"]
 }

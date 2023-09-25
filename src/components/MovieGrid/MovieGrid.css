@@ -2,6 +2,6 @@
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 50px;
+  grid-gap: 60px;
   margin-top: 20px;
 }
