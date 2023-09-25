@@ -4,9 +4,9 @@ import './MovieTile.css';
 import { MovieType } from './../../store/movies/types';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import Button from '../Button/Button';
-import { PopupMenu } from '../PopupMenu/PopupMenu';
+import PopupMenu from '../PopupMenu/PopupMenu';
 
-export interface MovieTileProps {
+interface MovieTileProps {
 	movie: MovieType;
 	handleEditClicked?: (movieName: string) => void;
 	handleDeleteClicked?: (movieName: string) => void;
