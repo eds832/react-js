@@ -2,7 +2,7 @@ import React from 'react';
 
 import './MovieGrid.css';
 import MovieTile from '../MovieTile/MovieTile';
-import { MovieType } from 'src/store/movies/types';
+import { MovieType } from './../../store/movies/types';
 
 interface MovieGridProps {
 	movies: MovieType[];
@@ -15,11 +15,7 @@ const MovieGrid: React.FC<MovieGridProps> = ({ movies, onMovieClick }) => {
 			{movies.map(({ imageUrl, movieName, releaseYear, genresList }) => (
 				<MovieTile
 					key={movieName}
-					imageUrl={imageUrl}
-					movieName={movieName}
-					releaseYear={releaseYear}
-					genresList={genresList}
-					onMovieClick={onMovieClick}
+					movie={{ imageUrl, movieName, releaseYear, genresList, onMovieClick }}
 				/>
 			))}
 		</div>

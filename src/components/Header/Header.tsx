@@ -11,7 +11,7 @@ const Header = () => {
 		<header>
 			<div className='head-line'>
 				<Netflixroulette />
-				<Button buttonText='+ ADD MOVIE' />
+				<Button children='+ ADD MOVIE' />
 			</div>
 			<div>
 				<Typography children='FIND YOUR MOVIE' type={TypographyTypes.TITLE} />

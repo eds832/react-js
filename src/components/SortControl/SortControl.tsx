@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Option from '../Option/Option';
 import './SortControl.css';
+import Option from '../Option/Option';
 
 interface SortControlProps {
 	initialValue: string;

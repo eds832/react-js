@@ -16,14 +16,14 @@ describe('MovieTile', () => {
 	};
 
 	it('renders MovieTile with the image equals to passed in props', () => {
-		const { getByTestId } = render(<MovieTile {...movie} />);
+		const { getByTestId } = render(<MovieTile movie={movie} />);
 		expect(getByTestId('movie-tile-img').getAttribute('src')).toBe(
 			movie.imageUrl
 		);
 	});
 
 	it('calls onMovieClick prop after clicking Go To All Movies button', () => {
-		const { getByTestId } = render(<MovieTile {...movie} />);
+		const { getByTestId } = render(<MovieTile movie={movie} />);
 		const goToMovie1Div = getByTestId('Movie1-div');
 		fireEvent.click(goToMovie1Div);
 

@@ -36,7 +36,7 @@ const SearchForm: FC<SearchFormProps> = ({ initialQuery, onSearch }) => {
 				type='submit'
 				buttonClass='search-button'
 				dataTestid='search-button'
-				buttonText='Search'
+				children='Search'
 			/>
 		</form>
 	);

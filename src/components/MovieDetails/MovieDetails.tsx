@@ -24,7 +24,7 @@ const MovieDetails: FC<MovieType> = ({
 				<Netflixroulette light='light' />
 				<Button
 					buttonClass='go-to-all-movies-button'
-					buttonText='⚲'
+					children='⚲'
 					dataTestid='go-to-all-movies-button'
 					onClick={() => onMovieClick(null)}
 				/>

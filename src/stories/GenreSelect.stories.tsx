@@ -15,14 +15,14 @@ type Story = StoryObj<typeof meta>;
 
 export const SelectedGenre: Story = {
 	args: {
-		genres: ['All', 'Documentary', 'Comedy', 'Horor', 'Crime', 'Drama'],
+		genres: ['All', 'Documentary', 'Comedy', 'Horor', 'Crime'],
 		selectedGenre: 'All',
 	},
 };
 
 export const SelectComedyGenre: Story = {
 	args: {
-		genres: ['All', 'Documentary', 'Comedy', 'Horor', 'Crime', 'Drama'],
+		genres: ['All', 'Documentary', 'Comedy', 'Horor', 'Crime'],
 		selectedGenre: 'All',
 		onSelect: (genre) => console.log('Selected genre:', genre),
 	},

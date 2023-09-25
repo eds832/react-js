@@ -23,7 +23,7 @@ const GenreSelect: FC<GenreSelectProps> = ({
 				buttonClass={className}
 				onClick={() => onSelect(genre)}
 				dataTestid={testId}
-				buttonText={genre}
+				children={genre}
 			/>
 		);
 	});

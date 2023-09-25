@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './Netflixroulette.css';
-
 import Typography, { TypographyTypes } from '../Paragraph/Typography';
 
 interface NetflixrouletteProps {

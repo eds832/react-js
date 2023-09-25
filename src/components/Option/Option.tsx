@@ -12,9 +12,8 @@ const convertCamelCaseToHyphen = (val: string) => {
 		.replace(/^-/, '');
 };
 
-const convertCamelCaseToCapitalLetters = (val: string) => {
+const convertValueToTextContent = (val: string) => {
 	const words = val.match(/[A-Za-z][a-z]*/g) || [];
-
 	return words.join(' ').toUpperCase();
 };
 
@@ -24,7 +23,7 @@ const Option: React.FC<OptionProps> = ({ value }) => {
 			value={value}
 			data-testid={convertCamelCaseToHyphen(value) + '-option'}
 		>
-			{convertCamelCaseToCapitalLetters(value)}
+			{convertValueToTextContent(value)}
 		</option>
 	);
 };
