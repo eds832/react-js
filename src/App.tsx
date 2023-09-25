@@ -73,7 +73,14 @@ function App() {
 						/>
 					</div>
 					<MovieCounter />
-					<MovieGrid movies={movies} onMovieClick={handleMovieClicked} />
+					<MovieGrid
+						movies={movies}
+						onMovieClick={handleMovieClicked}
+						handleEditClicked={(movieName) => console.log('Edit', movieName)}
+						handleDeleteClicked={(movieName) =>
+							console.log('Delete', movieName)
+						}
+					/>
 				</div>
 				<Footer />
 			</>

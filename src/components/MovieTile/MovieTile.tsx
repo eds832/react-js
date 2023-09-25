@@ -7,8 +7,8 @@ import Button from '../Button/Button';
 
 export interface MovieTileProps {
 	movie: MovieType;
-	handleEditClicked?: (event?: React.MouseEvent<HTMLElement>) => void;
-	handleDeleteClicked?: (event?: React.MouseEvent<HTMLElement>) => void;
+	handleEditClicked?: (movieName: string) => void;
+	handleDeleteClicked?: (movieName: string) => void;
 }
 
 const MovieTile: FC<MovieTileProps> = ({
@@ -18,7 +18,7 @@ const MovieTile: FC<MovieTileProps> = ({
 }) => {
 	const [showPopupMenu, setShowPopupMenu] = useState(false);
 
-	const handleClickThreeDot = (event) => {
+	const handleClickThreeDot = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
 		if (showPopupMenu) {
 			setShowPopupMenu(false);
@@ -28,6 +28,18 @@ const MovieTile: FC<MovieTileProps> = ({
 	};
 
 	const { imageUrl, movieName, releaseYear, genresList, onMovieClick } = movie;
+
+	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
+		event.stopPropagation();
+		handleEditClicked(movieName);
+		handleClickThreeDot(event);
+	};
+
+	const onDeleteClicked = (event: React.MouseEvent<HTMLElement>) => {
+		event.stopPropagation();
+		handleDeleteClicked(movieName);
+		handleClickThreeDot(event);
+	};
 
 	return (
 		<div
@@ -48,17 +60,14 @@ const MovieTile: FC<MovieTileProps> = ({
 							</Button>
 						</li>
 						<li>
-							<Button
-								buttonClass='select-popup-button'
-								onClick={handleEditClicked}
-							>
+							<Button buttonClass='select-popup-button' onClick={onEditClicked}>
 								<span className='popup-button-text'>Edit</span>
 							</Button>
 						</li>
 						<li>
 							<Button
 								buttonClass='select-popup-button'
-								onClick={handleDeleteClicked}
+								onClick={onDeleteClicked}
 							>
 								<span className='popup-button-text'>Delete</span>
 							</Button>
