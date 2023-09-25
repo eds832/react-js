@@ -7,7 +7,7 @@
   height: auto;
 }
 
-.three-dot {
+.three-dots {
   border: none;
   background-color: #232323;
   color: #FFFFFF;
@@ -25,52 +25,6 @@
 
 .movie-img:hover button {   
   opacity: 1;
-}
-
-.popup-select {
-  position: absolute;
-  top: 3%;
-  right: 4%;
-  width: 190px;
-  height: 111px; 
-  background-color: #232323;
-}
-
-.popup-select li {
-  list-style: none;
-}
-
-.popup-select button {
-  width: 190px;
-  padding-right: auto;
-  font-size: 16px;
-  font-weight: 500;
-  border: none;
-  color: #FFFFFF;
-  background-color: #232323;
-}
-
-.popup-select button:hover {
-  background-color: #F65261;
-}
-
-.close-popup {
-  text-align: right;
-  height: 28px;
-}
-
-.popup-button-close {
-  font-size: 9px;
-  padding-right: 10px;
-}
-
-.select-popup-button { 
-  text-align: left;
-  height: 35px;
-}
-
-.popup-button-text {
-  padding-left: 25px;
 }
 
 .movie-tile-description {

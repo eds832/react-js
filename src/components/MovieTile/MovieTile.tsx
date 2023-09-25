@@ -4,6 +4,7 @@ import './MovieTile.css';
 import { MovieType } from './../../store/movies/types';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import Button from '../Button/Button';
+import { PopupMenu } from '../PopupMenu/PopupMenu';
 
 export interface MovieTileProps {
 	movie: MovieType;
@@ -18,7 +19,7 @@ const MovieTile: FC<MovieTileProps> = ({
 }) => {
 	const [showPopupMenu, setShowPopupMenu] = useState(false);
 
-	const handleClickThreeDot = (event: React.MouseEvent<HTMLElement>) => {
+	const handleClickThreeDots = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
 		if (showPopupMenu) {
 			setShowPopupMenu(false);
@@ -32,13 +33,13 @@ const MovieTile: FC<MovieTileProps> = ({
 	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
 		handleEditClicked(movieName);
-		handleClickThreeDot(event);
+		handleClickThreeDots(event);
 	};
 
 	const onDeleteClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
 		handleDeleteClicked(movieName);
-		handleClickThreeDot(event);
+		handleClickThreeDots(event);
 	};
 
 	return (
@@ -53,31 +54,16 @@ const MovieTile: FC<MovieTileProps> = ({
 					src={imageUrl}
 				/>
 				{showPopupMenu ? (
-					<ul className='popup-select'>
-						<li>
-							<Button buttonClass='close-popup' onClick={handleClickThreeDot}>
-								<span className='popup-button-close'>╳</span>
-							</Button>
-						</li>
-						<li>
-							<Button buttonClass='select-popup-button' onClick={onEditClicked}>
-								<span className='popup-button-text'>Edit</span>
-							</Button>
-						</li>
-						<li>
-							<Button
-								buttonClass='select-popup-button'
-								onClick={onDeleteClicked}
-							>
-								<span className='popup-button-text'>Delete</span>
-							</Button>
-						</li>
-					</ul>
+					<PopupMenu
+						handleClickThreeDots={handleClickThreeDots}
+						onEditClicked={onEditClicked}
+						onDeleteClicked={onDeleteClicked}
+					/>
 				) : (
 					<Button
 						children='⋮'
-						onClick={handleClickThreeDot}
-						buttonClass='three-dot'
+						onClick={handleClickThreeDots}
+						buttonClass='three-dots'
 					/>
 				)}
 			</div>
