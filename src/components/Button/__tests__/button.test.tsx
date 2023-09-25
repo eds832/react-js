@@ -10,7 +10,10 @@ describe('Button', () => {
 		const { getByTestId } = render(
 			<Button children='test button' dataTestid='test' />
 		);
-		expect(getByTestId('test')).toBeInTheDocument();
+		const button = getByTestId('test');
+
+		expect(button).toBeInTheDocument();
+		expect(button).toHaveTextContent('test button');
 	});
 
 	it('onClick provided in props called when button is clicked', () => {
