@@ -31,14 +31,3 @@
   display: grid;
   grid-template-columns: auto 65px;
 }
-
-.movie-release-year {  
-  color: #FFFFFF;
-  border: 1px solid;
-  opacity: 50%;
-  text-align: center;
-  border-radius: 3px;
-  padding-top: 5px;
-  margin-top: 5px;
-  width: 65px;
-}

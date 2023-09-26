@@ -1,0 +1,10 @@
+.under-header-line {
+  height: 4px;
+  border-top: 2px solid #555555;
+  border-bottom: 1px solid #000000;
+  background-color: #232323;
+  position: relative;
+  top: -4px;
+  width: 1080px;
+  z-index: 0;
+}

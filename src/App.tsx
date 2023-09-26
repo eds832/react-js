@@ -7,6 +7,7 @@ import SortControl from './components/SortControl/SortControl';
 import { MovieType } from './store/movies/types';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import Footer from './components/Footer/Footer';
+import UnderHeaderLine from './components/UnderHeaderLine/UnderHeaderLine';
 
 const genres = GENRES.filter((m) => m !== 'All');
 
@@ -72,6 +73,7 @@ function App() {
 							onChange={(value) => console.log('Selected: ' + value)}
 						/>
 					</div>
+					<UnderHeaderLine />
 					<MovieCounter />
 					<MovieGrid
 						movies={movies}

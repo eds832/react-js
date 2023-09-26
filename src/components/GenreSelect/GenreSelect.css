@@ -17,5 +17,6 @@
 }
 
 .genre-buttons button.selected {
-  border-bottom: 2px solid #F65251;
+  border-bottom: 4px solid #F65251;
+  z-index: 1;
 }
