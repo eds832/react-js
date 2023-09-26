@@ -6,7 +6,10 @@
 }
 
 .genre-buttons button {
-  padding: 20px 5px;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  padding-right: 5px;
+  padding-left: 5px;
   font-size: 16px;
   font-weight: 500;
   background-color: #232323;
@@ -18,5 +21,6 @@
 
 .genre-buttons button.selected {
   border-bottom: 4px solid #F65251;
+  padding-bottom: 21px;
   z-index: 1;
 }
