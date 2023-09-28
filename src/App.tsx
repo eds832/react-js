@@ -8,6 +8,7 @@ import { MovieType } from './types/movies/types';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import Footer from './components/Footer/Footer';
 import UnderHeaderLine from './components/UnderHeaderLine/UnderHeaderLine';
+import Dialog from './components/Dialog/Dialog';
 
 function App() {
 	const [movie, setMovie] = useState(null);
@@ -34,6 +35,11 @@ function App() {
 		}
 		return 0;
 	};
+
+	const [isOpenDialog, setOpenDialog] = useState(false);
+
+	const handleOpenDialog = () => setOpenDialog(true);
+	const hadleCloseDialog = () => setOpenDialog(false);
 
 	const handleMovieClicked = (clickedMovieName?: string) => {
 		if (!clickedMovieName) {
@@ -145,7 +151,9 @@ function App() {
 					<MovieGrid
 						movies={movies}
 						onMovieClick={handleMovieClicked}
-						handleEditClicked={(movieName) => console.log('Edit', movieName)}
+						handleEditClicked={(movieName) => {
+							console.log('Edit', movieName);
+						}}
 						handleDeleteClicked={(movieName) =>
 							console.log('Delete', movieName)
 						}
@@ -160,15 +168,39 @@ function App() {
 		return (
 			<div className='container details'>
 				<MovieDetails {...movie} />
-				<UnderHeader />
+				{isOpenDialog ? (
+					<div className='container blur'>
+						<UnderHeader />
+					</div>
+				) : (
+					<div className='container'>
+						<UnderHeader />
+					</div>
+				)}
 			</div>
 		);
 	} else {
 		return (
-			<div className='container'>
-				<Header />
-				<UnderHeader />
-			</div>
+			<>
+				<Dialog
+					title='EDIT MOVIE'
+					onOpen={handleOpenDialog}
+					onClose={hadleCloseDialog}
+				>
+					<p>This is the content of my dialog.</p>
+				</Dialog>
+				{isOpenDialog ? (
+					<div className='container blur'>
+						<Header />
+						<UnderHeader />
+					</div>
+				) : (
+					<div className='container'>
+						<Header />
+						<UnderHeader />
+					</div>
+				)}
+			</>
 		);
 	}
 }

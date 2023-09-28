@@ -115,4 +115,48 @@ Cover new components with tests using jest and @testing-library/react. Verify ne
 install storybook: npx storybook@latest init
 run storybook: npm run storybook
 
+** Task 4 **
 
+Implement new components
+
+Implement the following new components. Use Storybook to manually verify your components look and behavior during development. Remember to cover these new components with tests.
+
+
+Dialog
+
+The component should render a modal dialog with custom content. It should use the Portals functionality.
+You can install and use react-portal npm package. Additionally, you can also install focus-trap-react package for better UX.
+Use Figma prototype to get inspiration about the visual design.
+The Dialog component should accept the following props:
+a string or JSX for title
+JSX for body content in "children" property
+a callback function for handling clicks on close button (×) in the header
+
+
+
+MovieForm
+
+The component should render a form element with form controls to add or edit a movie.
+Use Add movie and Edit dialogs to get inspiration about form layout and inputs.
+The MovieForm component should accept the following props:
+an optional object for initial movie info. Later, when we will implement "add movie" use case, we will not pass this property
+a callback function for handling form submit
+
+To handle form events we recommend you to render HTML <form> element and add "onSubmit" event handler to it.
+This will keep inputs uncontrolled, which will dramatically simplify the logic of handling form state.
+
+You can collect form state on submit by using `Object.fromEntries(new FormData(event.target))`
+
+Apply composition
+
+Having implemented above components, now you can compose them to implement the following use cases. Write new Storybook stories to showcase them.
+Add movie. Render Dialog and put a MovieForm inside without passing initial movie info. This should render a dialog with the empty movie form.
+Edit movie. Render Dialog and put a MovieForm inside, pass some dumb data for initial movie info. This should render a dialog with prefilled form fields.
+Delete movie. Render Dialog with content from "delete movie" modal from Figma prototype.
+
+
+** Scrips used in the task 4 **
+
+npm install focus-trap-react
+npm install react-portal
+npm i --save-dev @types/react-portal

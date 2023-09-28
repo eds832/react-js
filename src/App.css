@@ -25,3 +25,11 @@
   height: 10px;
   background-color: #555555;
 }
+
+.blur {
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px);
+}
