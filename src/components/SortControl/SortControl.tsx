@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import './SortControl.css';
 import Option from '../Option/Option';
