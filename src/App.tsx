@@ -9,23 +9,6 @@ import MovieDetails from './components/MovieDetails/MovieDetails';
 import Footer from './components/Footer/Footer';
 import UnderHeaderLine from './components/UnderHeaderLine/UnderHeaderLine';
 
-const genres = GENRES.filter((m) => m !== 'All');
-
-const randomGenerator = () => Math.floor(Math.random() * genres.length);
-
-const generateMovieGenres = () => {
-	let movieGenresLength = randomGenerator();
-	movieGenresLength = movieGenresLength === 0 ? 1 : movieGenresLength;
-	const genresList: string[] = [];
-	for (let i = 0; i < movieGenresLength; i++) {
-		const genre = genres[randomGenerator()];
-		if (!genresList.find((m) => m === genre)) {
-			genresList.push(genre);
-		}
-	}
-	return genresList;
-};
-
 function App() {
 	const [name, setName] = useState(null);
 
@@ -37,23 +20,76 @@ function App() {
 		}
 	};
 
-	const movies: MovieType[] = Array.from(Array(6).keys()).map((num) => {
-		const showNum = num + 1;
-		return {
-			imageUrl: `https://via.placeholder.com/300x450.png?text=Movie+${showNum}`,
-			movieName: `Movie ${showNum}`,
-			releaseYear: 2023 - num,
-			genresList: generateMovieGenres(),
-			rating: Math.floor(Math.random() * 90) / 10 + 1,
-			duration: Math.floor(Math.random() * 200) + 30,
-			description: `There are many variations of passages of Lorem Ipsum available, 
-			but the majority have suffered alteration in some form, by injected humour, 
-			or randomised words which don't look even slightly believable. 
-			If you are going to use a passage of Lorem Ipsum, 
-			you need to be sure there isn't anything embarrassing hidden in the middle of text.`,
+	const imageUrlBase = 'https://via.placeholder.com/300x450.png?text=Movie+';
+
+	const movieDescription = `There are many variations of passages of Lorem Ipsum available, 
+	but the majority have suffered alteration in some form, by injected humour, 
+	or randomised words which don't look even slightly believable. 
+	If you are going to use a passage of Lorem Ipsum, 
+	you need to be sure there isn't anything embarrassing hidden in the middle of text.`;
+
+	const movies: MovieType[] = [
+		{
+			imageUrl: imageUrlBase + 1,
+			movieName: 'Movie 1',
+			releaseYear: 2023,
+			genresList: ['Comedy', 'Horor', 'Crime'],
+			rating: 5.4,
+			duration: 110,
+			description: movieDescription,
 			onMovieClick: handleMovieClicked,
-		};
-	});
+		},
+		{
+			imageUrl: imageUrlBase + 2,
+			movieName: 'Movie 2',
+			releaseYear: 2023,
+			genresList: ['Comedy'],
+			rating: 5.5,
+			duration: 117,
+			description: movieDescription,
+			onMovieClick: handleMovieClicked,
+		},
+		{
+			imageUrl: imageUrlBase + 3,
+			movieName: 'Movie 3',
+			releaseYear: 2023,
+			genresList: ['Horor'],
+			rating: 7,
+			duration: 100,
+			description: movieDescription,
+			onMovieClick: handleMovieClicked,
+		},
+		{
+			imageUrl: imageUrlBase + 4,
+			movieName: 'Movie 4',
+			releaseYear: 2023,
+			genresList: ['Crime'],
+			rating: 9.9,
+			duration: 40,
+			description: movieDescription,
+			onMovieClick: handleMovieClicked,
+		},
+		{
+			imageUrl: imageUrlBase + 5,
+			movieName: 'Movie 5',
+			releaseYear: 2023,
+			genresList: ['Comedy', 'Crime'],
+			rating: 8.3,
+			duration: 310,
+			description: movieDescription,
+			onMovieClick: handleMovieClicked,
+		},
+		{
+			imageUrl: imageUrlBase + 6,
+			movieName: 'Movie 6',
+			releaseYear: 2023,
+			genresList: ['Documentary', 'Crime'],
+			rating: 7.4,
+			duration: 210,
+			description: movieDescription,
+			onMovieClick: handleMovieClicked,
+		},
+	];
 
 	const movie = movies.find((m) => m.movieName === name);
 
