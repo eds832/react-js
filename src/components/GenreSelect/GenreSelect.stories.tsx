@@ -13,13 +13,6 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const SelectedGenre: Story = {
-	args: {
-		genres: ['All', 'Documentary', 'Comedy', 'Horor', 'Crime'],
-		selectedGenre: 'All',
-	},
-};
-
 export const InitialState: Story = {
 	args: {
 		genres: ['All', 'Documentary', 'Comedy', 'Horor', 'Crime'],
