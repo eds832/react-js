@@ -27,13 +27,13 @@ const generateMovieGenres = () => {
 };
 
 function App() {
-	const [name, setMovie] = useState(null);
+	const [name, setName] = useState(null);
 
 	const handleMovieClicked = (clickedMovieName?: string) => {
 		if (!clickedMovieName) {
-			setMovie(null);
+			setName(null);
 		} else {
-			setMovie(clickedMovieName);
+			setName(clickedMovieName);
 		}
 	};
 
