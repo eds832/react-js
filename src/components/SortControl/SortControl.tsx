@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './SortControl.css';
 import Option from '../Option/Option';
+import { RELEASE_DATE, TITLE } from './../../constants';
 
 interface SortControlProps {
 	initialValue: string;
 	onChange: (value: string) => void;
 }
 
-const options = ['RELEASE DATE', 'TITLE'];
+const options = [RELEASE_DATE, TITLE];
 
 const SortControl: React.FC<SortControlProps> = ({
 	initialValue,

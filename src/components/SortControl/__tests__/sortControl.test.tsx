@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import SortControl from '../SortControl';
+import { RELEASE_DATE, TITLE } from './../../../constants';
 
 describe('SortControl', () => {
 	const handleChange = jest.fn();
@@ -12,7 +13,7 @@ describe('SortControl', () => {
 		);
 
 		expect(getByTestId('sort-control-label')).toHaveTextContent('SORT BY');
-		expect(getByTestId('sort-select')).toHaveValue('RELEASE DATE');
+		expect(getByTestId('sort-select')).toHaveValue(RELEASE_DATE);
 	});
 
 	it('calls the onChange callback when the select value changes', () => {
@@ -25,6 +26,6 @@ describe('SortControl', () => {
 		});
 
 		expect(handleChange).toHaveBeenCalledTimes(1);
-		expect(handleChange).toHaveBeenCalledWith('TITLE');
+		expect(handleChange).toHaveBeenCalledWith(TITLE);
 	});
 });

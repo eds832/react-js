@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './App.css';
 import { Header, GenreSelect, MovieGrid, MovieCounter } from './components';
-import { GENRES } from './constants';
+import { GENRES, RELEASE_DATE } from './constants';
 import SortControl from './components/SortControl/SortControl';
 import { MovieType } from './types/movies/types';
 import MovieDetails from './components/MovieDetails/MovieDetails';
@@ -11,6 +11,29 @@ import UnderHeaderLine from './components/UnderHeaderLine/UnderHeaderLine';
 
 function App() {
 	const [movie, setMovie] = useState(null);
+
+	const [sortState, setSortState] = useState(RELEASE_DATE);
+
+	const handleSortChange = (sort) => {
+		setSortState(sort);
+	};
+
+	const compareMovies = (m1: MovieType, m2: MovieType) => {
+		if (sortState == RELEASE_DATE) {
+			if (m1.releaseYear > m2.releaseYear) {
+				return -1;
+			} else if (m1.releaseYear < m2.releaseYear) {
+				return 1;
+			}
+		} else {
+			if (m1.movieName < m2.movieName) {
+				return -1;
+			} else if (m1.movieName > m2.movieName) {
+				return 1;
+			}
+		}
+		return 0;
+	};
 
 	const handleMovieClicked = (clickedMovieName?: string) => {
 		if (!clickedMovieName) {
@@ -90,7 +113,7 @@ function App() {
 			description: movieDescription,
 			onMovieClick: handleMovieClicked,
 		},
-	];
+	].sort(compareMovies);
 
 	const UnderHeader = () => {
 		return (
@@ -103,10 +126,7 @@ function App() {
 							selectedGenre='All'
 							onSelect={(genre) => console.log('Selected genre:', genre)}
 						/>
-						<SortControl
-							initialValue='releaseDate'
-							onChange={(value) => console.log('Selected: ' + value)}
-						/>
+						<SortControl initialValue={sortState} onChange={handleSortChange} />
 					</div>
 					<UnderHeaderLine />
 					<MovieCounter />

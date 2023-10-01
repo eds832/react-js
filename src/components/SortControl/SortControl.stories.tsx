@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
 import SortControl from './SortControl';
+import { TITLE } from './../../constants';
 
 const meta = {
 	title: 'SortControl component',
@@ -15,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const HandleSelectClick: Story = {
 	args: {
-		initialValue: 'TITLE',
+		initialValue: TITLE,
 		onChange: () => console.log('release date clicked'),
 	},
 	play: async ({ canvasElement }) => {
