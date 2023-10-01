@@ -11,14 +11,14 @@ export interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
 	buttonClass,
 	onClick,
-	type,
+	type = 'button',
 	children,
 	dataTestid,
 }) => (
 	<button
 		className={buttonClass}
 		onClick={onClick}
-		type={type ? type : 'button'}
+		type={type}
 		data-testid={dataTestid}
 	>
 		{children}
