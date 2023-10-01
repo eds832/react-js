@@ -8,7 +8,7 @@ describe('SortControl', () => {
 
 	it('renders the label and initial value of the select', () => {
 		const { getByTestId } = render(
-			<SortControl initialValue='releaseDate' onChange={handleChange} />
+			<SortControl initialValue='RELEASE DATE' onChange={handleChange} />
 		);
 
 		expect(getByTestId('sort-control-label')).toHaveTextContent('SORT BY');

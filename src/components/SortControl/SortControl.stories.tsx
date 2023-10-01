@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const HandleSelectClick: Story = {
 	args: {
-		initialValue: 'title',
+		initialValue: 'TITLE',
 		onChange: () => console.log('release date clicked'),
 	},
 	play: async ({ canvasElement }) => {

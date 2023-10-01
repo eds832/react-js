@@ -32,7 +32,9 @@ const SortControl: React.FC<SortControlProps> = ({
 					<Option
 						key={val}
 						value={val}
-						dataTestid={val.toLocaleLowerCase().replaceAll(/\s+/g, '-')}
+						dataTestid={
+							val.toLocaleLowerCase().replaceAll(/\s+/g, '-') + '-option'
+						}
 						textContent={val}
 					/>
 				))}
