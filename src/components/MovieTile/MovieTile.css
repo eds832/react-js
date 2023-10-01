@@ -31,3 +31,15 @@
   display: grid;
   grid-template-columns: auto 65px;
 }
+
+.movie-tile-title-div p {
+  margin-bottom: 9px;
+  margin-top: 21px;
+}
+
+.movie-release-year p {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 18px;
+  width: 65px;
+}

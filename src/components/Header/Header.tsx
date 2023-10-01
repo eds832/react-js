@@ -13,7 +13,7 @@ const Header = () => {
 				<Netflixroulette />
 				<Button children='+ ADD MOVIE' />
 			</div>
-			<div>
+			<div className='title-div'>
 				<Typography children='FIND YOUR MOVIE' type={TypographyTypes.TITLE} />
 			</div>
 			<SearchForm

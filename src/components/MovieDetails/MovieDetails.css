@@ -52,6 +52,27 @@
   transform: rotate(45deg);
 }
 
-.movie-details-title-and-rating, .movie-details-release-year-and-duration {
+.movie-details-title-and-rating, .movie-details-release-year-and-duration-div {
   display: flex;
+}
+
+.movie-details-title-div p {
+  margin-right: 20px;
+  margin-left: -2px;
+}
+
+.movie-details-rating-div p {
+  padding-left: 15px;
+  padding-top: 17px;
+  margin-top: -6px;
+}
+
+.movie-details-genres-div p {
+  margin-top: 10px;  
+  margin-bottom: 30px;
+}
+
+.movie-details-release-year-and-duration-div p {
+  margin-right: 50px;
+  margin-bottom: 30px;
 }

@@ -69,12 +69,14 @@ const MovieTile: FC<MovieTileProps> = ({
 				)}
 			</div>
 			<div className='movie-tile-description'>
-				<Typography
-					type={TypographyTypes.MOVIE_TILE_TITLE}
-					dataTestid='movie-tile-movie-name'
-				>
-					{movieName}
-				</Typography>
+				<div className='movie-tile-title-div'>
+					<Typography
+						type={TypographyTypes.MOVIE_TILE_TITLE}
+						dataTestid='movie-tile-movie-name'
+					>
+						{movieName}
+					</Typography>
+				</div>
 				<div className='movie-release-year'>
 					<Typography
 						dataTestid='movie-tile-release-year'

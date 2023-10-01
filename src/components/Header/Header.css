@@ -22,3 +22,8 @@ header {
   height: 46px;
   width: 177px;
 }
+
+.title-div {
+  margin-bottom: 45px;
+  padding-left: 10%;
+}

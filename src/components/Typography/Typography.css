@@ -5,30 +5,24 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #FFFFFF;
-  margin-bottom: 45px;
-  padding-left: 10%;
 }
 
 .netflix-roulette {
   font-size: 20px;
   font-weight: 900;
   color: #F65251;
-  margin-left: 3%;
 }
 
 .movie-tile-title {
-  margin-top: 21px;
   font-size: 18px;
   font-weight: 100;
   color: #FFFFFF;
-  margin-bottom: 9px;
 }
 
 .movie-genres {
   color: #FFFFFF;
   font-size: 14px;
   font-weight: 100; 
-  margin-bottom: 1px;
   opacity: 60%;
 }
 
@@ -39,8 +33,6 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #FFFFFF;
-  margin-right: 20px;
-  margin-left: -2px;
 }
 
 .movie-details-rating {
@@ -49,19 +41,14 @@
   width: 60px;
   height: 60px;
   border: 1px solid #FFFFFF;
-  padding-left: 15px;
-  padding-top: 17px;
   font-size: 20px;
-  margin-top: -6px;
 }
 
 .movie-details-genres {
   color: #FFFFFF;
   font-size: 14px;
   font-weight: 500; 
-  margin-top: 10px; 
-  line-height: 17px; 
-  margin-bottom: 30px;
+  line-height: 17px;
   opacity: 50%;
 }
 
@@ -69,8 +56,6 @@
   font-size: 24px;
   font-weight: 300;
   color: #F65251;
-  margin-right: 50px;
-  margin-bottom: 15px;
   line-height: 29px;
 }
 
@@ -89,10 +74,6 @@
   opacity: 50%;
   text-align: center;
   border-radius: 3px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-top: 18px;
-  width: 65px;
 }
 
 .movie-counter {

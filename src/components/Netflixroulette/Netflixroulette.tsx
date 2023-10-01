@@ -8,19 +8,25 @@ interface NetflixrouletteProps {
 }
 
 const Netflixroulette: React.FC<NetflixrouletteProps> = ({ light }) => {
-	if (light === 'light') {
-		return (
+	const Netflix = () => {
+		if (light === 'light') {
+			return <span className='light'>netflixroulette</span>;
+		} else {
+			return (
+				<>
+					netflix<span className='light'>roulette</span>
+				</>
+			);
+		}
+	};
+
+	return (
+		<div className='netflix-roulette-div'>
 			<Typography type={TypographyTypes.NETFLIX_ROULETTE}>
-				<span className='light'>netflixroulette</span>
+				<Netflix />
 			</Typography>
-		);
-	} else {
-		return (
-			<Typography type={TypographyTypes.NETFLIX_ROULETTE}>
-				netflix<span className='light'>roulette</span>
-			</Typography>
-		);
-	}
+		</div>
+	);
 };
 
 export default Netflixroulette;

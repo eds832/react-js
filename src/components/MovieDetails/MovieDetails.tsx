@@ -36,24 +36,30 @@ const MovieDetails: FC<MovieType> = ({
 				</div>
 				<div className='movie-details-info'>
 					<div className='movie-details-title-and-rating'>
-						<Typography
-							dataTestid='movie-details-movie-name'
-							type={TypographyTypes.MOVIE_DETILES_TITLE}
-						>
-							{movieName}
-						</Typography>
-						<Typography
-							dataTestid='movie-details-rating'
-							type={TypographyTypes.MOVIE_DETAILS_RATING}
-						>
-							{ratingString}
-						</Typography>
+						<div className='movie-details-title-div'>
+							<Typography
+								dataTestid='movie-details-movie-name'
+								type={TypographyTypes.MOVIE_DETILES_TITLE}
+							>
+								{movieName}
+							</Typography>
+						</div>
+						<div className='movie-details-rating-div'>
+							<Typography
+								dataTestid='movie-details-rating'
+								type={TypographyTypes.MOVIE_DETAILS_RATING}
+							>
+								{ratingString}
+							</Typography>
+						</div>
 					</div>
-					<Typography
-						type={TypographyTypes.MOVIE_DETAILS_GENRES}
-						children={genresList.join(' & ')}
-					/>
-					<div className='movie-details-release-year-and-duration'>
+					<div className='movie-details-genres-div'>
+						<Typography
+							type={TypographyTypes.MOVIE_DETAILS_GENRES}
+							children={genresList.join(' & ')}
+						/>
+					</div>
+					<div className='movie-details-release-year-and-duration-div'>
 						<Typography
 							dataTestid='movie-details-release-year'
 							type={TypographyTypes.MOVIE_DETAILS_RELEASE_YEAR_AND_DURATION}
