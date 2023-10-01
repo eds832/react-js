@@ -20,6 +20,14 @@ export const SelectedGenre: Story = {
 	},
 };
 
+export const InitialState: Story = {
+	args: {
+		genres: ['All', 'Documentary', 'Comedy', 'Horor', 'Crime'],
+		selectedGenre: 'All',
+		onSelect: (genre) => console.log('Selected genre:', genre),
+	},
+};
+
 export const SelectComedyGenre: Story = {
 	args: {
 		genres: ['All', 'Documentary', 'Comedy', 'Horor', 'Crime'],
