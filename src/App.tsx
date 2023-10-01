@@ -14,7 +14,7 @@ function App() {
 
 	const [sortState, setSortState] = useState(RELEASE_DATE);
 
-	const handleSortChange = (sort) => {
+	const handleSortChange = (sort: string) => {
 		setSortState(sort);
 	};
 
