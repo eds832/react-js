@@ -2,7 +2,7 @@ import React from 'react';
 
 import './MovieGrid.css';
 import MovieTile from '../MovieTile/MovieTile';
-import { MovieType } from './../../store/movies/types';
+import { MovieType } from './../../types/movies/types';
 
 interface MovieGridProps {
 	movies: MovieType[];
