@@ -12,19 +12,19 @@ describe('SortControl', () => {
 		);
 
 		expect(getByTestId('sort-control-label')).toHaveTextContent('SORT BY');
-		expect(getByTestId('sort-select')).toHaveValue('releaseDate');
+		expect(getByTestId('sort-select')).toHaveValue('RELEASE DATE');
 	});
 
 	it('calls the onChange callback when the select value changes', () => {
 		const { getByTestId } = render(
-			<SortControl initialValue='releaseDate' onChange={handleChange} />
+			<SortControl initialValue='RELEASE DATE' onChange={handleChange} />
 		);
 
 		fireEvent.change(getByTestId('sort-select'), {
-			target: { value: 'title' },
+			target: { value: 'TITLE' },
 		});
 
 		expect(handleChange).toHaveBeenCalledTimes(1);
-		expect(handleChange).toHaveBeenCalledWith('title');
+		expect(handleChange).toHaveBeenCalledWith('TITLE');
 	});
 });

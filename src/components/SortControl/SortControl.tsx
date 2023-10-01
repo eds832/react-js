@@ -8,7 +8,7 @@ interface SortControlProps {
 	onChange: (value: string) => void;
 }
 
-const options = ['releaseDate', 'title'];
+const options = ['RELEASE DATE', 'TITLE'];
 
 const SortControl: React.FC<SortControlProps> = ({
 	initialValue,
@@ -29,7 +29,12 @@ const SortControl: React.FC<SortControlProps> = ({
 				onChange={handleSelectChange}
 			>
 				{options.map((val) => (
-					<Option key={val} value={val} />
+					<Option
+						key={val}
+						value={val}
+						dataTestid={val.toLocaleLowerCase().replaceAll(/\s+/g, '-')}
+						textContent={val}
+					/>
 				))}
 			</select>
 		</div>

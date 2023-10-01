@@ -2,28 +2,14 @@ import React from 'react';
 
 interface OptionProps {
 	value: string;
+	dataTestid: string;
+	textContent: string;
 }
 
-const convertCamelCaseToHyphen = (val: string) => {
-	return val
-		.replace(/\.?([A-Z])/g, function (x, y) {
-			return '-' + y.toLowerCase();
-		})
-		.replace(/^-/, '');
-};
-
-const convertValueToTextContent = (val: string) => {
-	const words = val.match(/[A-Za-z][a-z]*/g) || [];
-	return words.join(' ').toUpperCase();
-};
-
-const Option: React.FC<OptionProps> = ({ value }) => {
+const Option: React.FC<OptionProps> = ({ value, dataTestid, textContent }) => {
 	return (
-		<option
-			value={value}
-			data-testid={convertCamelCaseToHyphen(value) + '-option'}
-		>
-			{convertValueToTextContent(value)}
+		<option value={value} data-testid={dataTestid}>
+			{textContent}
 		</option>
 	);
 };
