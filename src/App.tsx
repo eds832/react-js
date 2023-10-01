@@ -33,7 +33,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 1,
 			movieName: 'Movie 1',
-			releaseYear: 2023,
+			releaseYear: 2018,
 			genresList: ['Comedy', 'Horor', 'Crime'],
 			rating: 5.4,
 			duration: 110,
@@ -53,7 +53,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 3,
 			movieName: 'Movie 3',
-			releaseYear: 2023,
+			releaseYear: 2019,
 			genresList: ['Horor'],
 			rating: 7,
 			duration: 100,
@@ -63,7 +63,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 4,
 			movieName: 'Movie 4',
-			releaseYear: 2023,
+			releaseYear: 2021,
 			genresList: ['Crime'],
 			rating: 9.9,
 			duration: 40,
@@ -73,7 +73,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 5,
 			movieName: 'Movie 5',
-			releaseYear: 2023,
+			releaseYear: 2022,
 			genresList: ['Comedy', 'Crime'],
 			rating: 8.3,
 			duration: 310,
@@ -83,7 +83,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 6,
 			movieName: 'Movie 6',
-			releaseYear: 2023,
+			releaseYear: 2020,
 			genresList: ['Documentary', 'Crime'],
 			rating: 7.4,
 			duration: 210,
