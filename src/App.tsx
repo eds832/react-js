@@ -10,13 +10,14 @@ import Footer from './components/Footer/Footer';
 import UnderHeaderLine from './components/UnderHeaderLine/UnderHeaderLine';
 
 function App() {
-	const [name, setName] = useState(null);
+	const [movie, setMovie] = useState(null);
 
 	const handleMovieClicked = (clickedMovieName?: string) => {
 		if (!clickedMovieName) {
-			setName(null);
+			setMovie(null);
 		} else {
-			setName(clickedMovieName);
+			const chosenMovie = movies.find((m) => m.movieName === clickedMovieName);
+			setMovie(chosenMovie);
 		}
 	};
 
@@ -90,8 +91,6 @@ function App() {
 			onMovieClick: handleMovieClicked,
 		},
 	];
-
-	const movie = movies.find((m) => m.movieName === name);
 
 	const UnderHeader = () => {
 		return (
