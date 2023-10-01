@@ -44,6 +44,12 @@ function App() {
 		}
 	};
 
+	const [genreState, setGenreState] = useState('All');
+
+	const handleGenreSelect = (genre: string) => {
+		setGenreState(genre);
+	};
+
 	const imageUrlBase = 'https://via.placeholder.com/300x450.png?text=Movie+';
 
 	const movieDescription = `There are many variations of passages of Lorem Ipsum available, 
@@ -113,7 +119,13 @@ function App() {
 			description: movieDescription,
 			onMovieClick: handleMovieClicked,
 		},
-	].sort(compareMovies);
+	]
+		.sort(compareMovies)
+		.filter(
+			(m) =>
+				genreState === 'All' ||
+				m.genresList.find((genre) => genre === genreState)
+		);
 
 	const UnderHeader = () => {
 		return (
@@ -123,8 +135,8 @@ function App() {
 					<div className='under-header-controls'>
 						<GenreSelect
 							genres={GENRES}
-							selectedGenre='All'
-							onSelect={(genre) => console.log('Selected genre:', genre)}
+							selectedGenre={genreState}
+							onSelect={handleGenreSelect}
 						/>
 						<SortControl initialValue={sortState} onChange={handleSortChange} />
 					</div>
