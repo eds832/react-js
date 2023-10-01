@@ -43,7 +43,7 @@
   margin-left: -2px;
 }
 
-.movie-details-rating, .movie-details-reating-one-digit {
+.movie-details-rating {
   color: #FFFFFF;
   border-radius: 50%;
   width: 60px;
@@ -53,10 +53,6 @@
   padding-top: 17px;
   font-size: 20px;
   margin-top: -6px;
-}
-
-.movie-details-reating-one-digit {
-  padding-left: 23px;
 }
 
 .movie-details-genres {

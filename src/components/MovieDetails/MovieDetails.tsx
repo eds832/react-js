@@ -17,7 +17,8 @@ const MovieDetails: FC<MovieType> = ({
 	description,
 	onMovieClick,
 }) => {
-	const isRatingHasOneDigit = rating % 1 == 0;
+	const ratingString = rating % 1 == 0 ? rating + '.0' : rating.toString();
+
 	return (
 		<>
 			<div className='movie-details-netflixroulette-line'>
@@ -41,21 +42,12 @@ const MovieDetails: FC<MovieType> = ({
 						>
 							{movieName}
 						</Typography>
-						{isRatingHasOneDigit ? (
-							<Typography
-								dataTestid='movie-details-rating'
-								type={TypographyTypes.MOVIE_DETAILS_RATING_ONE_DIGIT}
-							>
-								{rating}
-							</Typography>
-						) : (
-							<Typography
-								dataTestid='movie-details-rating'
-								type={TypographyTypes.MOVIE_DETAILS_RATING}
-							>
-								{rating}
-							</Typography>
-						)}
+						<Typography
+							dataTestid='movie-details-rating'
+							type={TypographyTypes.MOVIE_DETAILS_RATING}
+						>
+							{ratingString}
+						</Typography>
 					</div>
 					<Typography
 						type={TypographyTypes.MOVIE_DETAILS_GENRES}
