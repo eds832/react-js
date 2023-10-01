@@ -124,19 +124,10 @@ function App() {
 		);
 	};
 
-	if (name) {
+	if (movie) {
 		return (
 			<div className='container details'>
-				<MovieDetails
-					imageUrl={movie.imageUrl}
-					movieName={movie.movieName}
-					releaseYear={movie.releaseYear}
-					genresList={movie.genresList}
-					rating={movie.rating}
-					duration={movie.duration}
-					description={movie.description}
-					onMovieClick={movie.onMovieClick}
-				/>
+				<MovieDetails {...movie} />
 				<UnderHeader />
 			</div>
 		);
