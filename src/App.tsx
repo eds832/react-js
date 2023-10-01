@@ -4,7 +4,7 @@ import './App.css';
 import { Header, GenreSelect, MovieGrid, MovieCounter } from './components';
 import { GENRES } from './constants';
 import SortControl from './components/SortControl/SortControl';
-import { MovieType } from './store/movies/types';
+import { MovieType } from './types/movies/types';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import Footer from './components/Footer/Footer';
 import UnderHeaderLine from './components/UnderHeaderLine/UnderHeaderLine';

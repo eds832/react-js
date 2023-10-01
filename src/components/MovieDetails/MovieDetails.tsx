@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
 import './MovieDetails.css';
-import { MovieType } from './../../store/movies/types';
+import { MovieType } from './../../types/movies/types';
 import Netflixroulette from '../Netflixroulette/Netflixroulette';
 import Button from '../Button/Button';
 import Typography, { TypographyTypes } from '../Typography/Typography';

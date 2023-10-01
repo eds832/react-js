@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 
 import './MovieTile.css';
-import { MovieType } from './../../store/movies/types';
+import { MovieType } from './../../types/movies/types';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import Button from '../Button/Button';
 import PopupMenu from '../PopupMenu/PopupMenu';
