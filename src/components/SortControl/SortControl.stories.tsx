@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
-import SortControl from '../components/SortControl/SortControl';
+import SortControl from './SortControl';
 
 const meta = {
 	title: 'SortControl component',

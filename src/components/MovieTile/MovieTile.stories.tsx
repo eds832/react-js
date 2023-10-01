@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
-import MovieTile from '../components/MovieTile/MovieTile';
-import { MovieType } from './../store/movies/types';
+import MovieTile from './MovieTile';
+import { MovieType } from './../../types/movies/types';
 
 const meta = {
 	title: 'MovieTile component',

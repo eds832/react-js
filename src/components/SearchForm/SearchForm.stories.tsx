@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
-import SearchForm from '../components/SearchForm/SearchForm';
+import SearchForm from './SearchForm';
 
 const meta = {
 	title: 'SearchForm component',
