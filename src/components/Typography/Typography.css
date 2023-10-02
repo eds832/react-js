@@ -26,15 +26,6 @@
   opacity: 60%;
 }
 
-.movie-details-title {
-  font-weight: 300;
-  font-size: 40px;
-  line-height: 49px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #FFFFFF;
-}
-
 .movie-details-rating {
   color: #FFFFFF;
   border-radius: 50%;

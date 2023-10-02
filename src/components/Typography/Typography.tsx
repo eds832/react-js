@@ -7,7 +7,6 @@ export const enum TypographyTypes {
 	NETFLIX_ROULETTE = 'netflix-roulette',
 	MOVIE_TILE_TITLE = 'movie-tile-title',
 	MOVIE_GENRES = 'movie-genres',
-	MOVIE_DETILES_TITLE = 'movie-details-title',
 	MOVIE_DETAILS_RATING = 'movie-details-rating',
 	MOVIE_DETAILS_GENRES = 'movie-details-genres',
 	MOVIE_DETAILS_RELEASE_YEAR_AND_DURATION = 'movie-details-release-year-and-duration',

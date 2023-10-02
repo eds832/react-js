@@ -39,7 +39,7 @@ const MovieDetails: FC<MovieType> = ({
 						<div className='movie-details-title-div'>
 							<Typography
 								dataTestid='movie-details-movie-name'
-								type={TypographyTypes.MOVIE_DETILES_TITLE}
+								type={TypographyTypes.TITLE}
 							>
 								{movieName}
 							</Typography>
