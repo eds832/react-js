@@ -1,23 +1,37 @@
 import React from 'react';
 
 import './MovieGrid.css';
+import MovieTile from '../MovieTile/MovieTile';
+import { MovieType } from './../../types/movies/types';
 
-const MovieGrid = () => {
-	const MOVIES_DATA = Array.from(Array(6).keys()).map((number) => {
-		const showNum = number + 1;
-		return {
-			name: 'Movie ' + showNum,
-			src: 'https://via.placeholder.com/300x450.png?text=Movie+' + showNum,
-		};
-	});
+interface MovieGridProps {
+	movies: MovieType[];
+	onMovieClick: (clickedMovieName?: string) => void;
+	handleEditClicked: (movieName: string) => void;
+	handleDeleteClicked: (movieName: string) => void;
+}
 
+const MovieGrid: React.FC<MovieGridProps> = ({
+	movies,
+	onMovieClick,
+	handleEditClicked,
+	handleDeleteClicked,
+}) => {
 	return (
 		<div className='movie-grid'>
-			{MOVIES_DATA.map(({ name, src }) => (
-				<div key={name}>
-					<img src={src} />
-					<h2>{name}</h2>
-				</div>
+			{movies.map(({ imageUrl, movieName, releaseYear, genresList }) => (
+				<MovieTile
+					key={movieName}
+					movie={{
+						imageUrl,
+						movieName,
+						releaseYear,
+						genresList,
+						onMovieClick,
+					}}
+					handleDeleteClicked={handleDeleteClicked}
+					handleEditClicked={handleEditClicked}
+				/>
 			))}
 		</div>
 	);

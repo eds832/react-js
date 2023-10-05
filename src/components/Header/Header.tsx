@@ -1,20 +1,20 @@
-import React, { createElement } from 'react';
+import React from 'react';
 
 import './Header.css';
-import Counter from '../Counter/Counter';
 import SearchForm from '../SearchForm/SearchForm';
+import Button from '../Button/Button';
+import Typography, { TypographyTypes } from '../Typography/Typography';
+import Netflixroulette from '../Netflixroulette/Netflixroulette';
 
 const Header = () => {
 	return (
 		<header>
 			<div className='head-line'>
-				<h3 className='h3'>
-					netflix<span className='light'>roulete</span>
-				</h3>
-				{createElement(Counter, { initialValue: 0 })}
+				<Netflixroulette />
+				<Button children='+ ADD MOVIE' />
 			</div>
-			<div>
-				<h1 className='h1'>FIND YOUR MOVIE</h1>
+			<div className='title-div'>
+				<Typography children='FIND YOUR MOVIE' type={TypographyTypes.TITLE} />
 			</div>
 			<SearchForm
 				initialQuery=''

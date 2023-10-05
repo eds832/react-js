@@ -1,0 +1,45 @@
+.movie-img {
+  position: relative;
+}
+
+.movie-img img {
+  width: 100%;
+  height: auto;
+}
+
+.three-dots {
+  border: none;
+  background-color: #232323;
+  color: #FFFFFF;
+  padding-left: 14px;
+  padding-right: 14px;
+  height: 36px;
+  font-size: 28px;
+  font-weight: 900;
+  border-radius: 50%;
+  position: absolute;
+  top: 3%;
+  right: 4%;
+  opacity:0;
+}
+
+.movie-img:hover button {   
+  opacity: 1;
+}
+
+.movie-tile-description {
+  display: grid;
+  grid-template-columns: auto 65px;
+}
+
+.movie-tile-title-div p {
+  margin-bottom: 9px;
+  margin-top: 21px;
+}
+
+.movie-release-year p {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 18px;
+  width: 65px;
+}

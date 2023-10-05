@@ -2,4 +2,26 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  background-color: #232323;
+  margin-top: 54px;
+}
+
+.details {
+  margin-top: 37px;
+}
+
+.under-header {  
+  width: 1080px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5px;
+}
+
+.under-header-controls {
+  display: flex;
+}
+
+.gray {
+  height: 10px;
+  background-color: #555555;
 }

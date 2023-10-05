@@ -7,37 +7,23 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  color: #fff;
-}
-
-.h1 {
-  font-weight: 100;
-  font-size: 50px;
-  line-height: 49px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  padding: 25px;
   color: #FFFFFF;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  padding-left: 8%;
-}
-
-.h3 {
-  color: #e50914;
-  margin-left: 3%;
-}
-
-.light {	    
-  font-weight: 100;
 }
 
 .head-line button {
-  font-size: 16px;
-  background-color: #555;
-  color: #e50914;
-  padding: 6px 12px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #555555;
+  color: #F65251;
   border-radius: 2px;
   border: none;
-  margin-right: 20px;
+  margin-right: 25px;
+  height: 46px;
+  width: 177px;
+}
+
+.title-div {
+  margin-bottom: 45px;
+  padding-left: 10%;
 }

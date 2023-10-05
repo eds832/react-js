@@ -1,0 +1,44 @@
+.sort-control {
+  display: flex;
+  align-items: center;
+  width: 23%;
+  margin-left: 32%;
+  position: relative;
+  font-size: 16px;
+  background-color: #232323; 
+  padding-bottom: 5px;
+}
+
+.sort-control label {
+  margin-right: 30px;
+  white-space: nowrap;
+  color: #FFFFFF;
+  opacity: 60%;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.sort-control select {
+  padding: 5px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 150px;
+  background-color: #232323;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+.sort-control:after {
+  content: "▼";
+  color: #F65251;
+  right: 1px;
+  font-size: 12px;
+  top: 22px;  
+  position: absolute;
+  pointer-events: none;
+}

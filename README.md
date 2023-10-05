@@ -62,3 +62,57 @@ To run cypress tests: npx cypress run
 To run cypress testes with opening a browser: npx cypress run --headed
 To run cypress testes with a spec: npx cypress run --spec cypress/e2e/Counter/Counter.cy.js
 To run cypress testes with a browser: npx cypress run --browser chrome
+
+** Task 3 **
+
+https://react-gmp.netlify.app/react-components/components/
+
+Install Storybook: https://storybook.js.org/docs/react/get-started/install
+
+Install and configure Storybook by following guide from the official website.
+In the end you should have a "storybook" npm script. When running "npm run storybook" it should start Storybook and open it in your browser.
+Write Storybook stories for existing components
+Create a story file for every component you created in previous modules. You should have at least one story for each of the following components (in total minimum 3):
+
+Counter
+SearchForm
+GenreSelect
+
+You can write more stories to cover several states of GenreSelect or SearchForm, but this is optional.
+
+Implement other components
+Based on Figma prototype implement the following components:
+
+MovieTile
+
+This component should render a movie tile from the list of movies.
+It should take properties to receive image url, movie name, release year, and a list of relevant genres. Alternatively, you can define one component property to take an object with all movie info. Additionally, the component should receive a callback property to capture click event.
+Optionally, you can implement a context menu popup that opens when a user clicks on three dots button and contains "Edit" and "Delete" menu items.
+
+
+MovieDetails
+
+This component will render movie details when a movie is selected from the list (clicked). The details include movie poster image on the left and the rest of info on the right.
+The component should take properties to receive image url, movie name, release year, rating, duration and a description. Alternatively,  you can specify a single property that accepts an object with all movie info.
+
+
+SortControl
+
+This component will render a label "Sort by" and a select control to the right. Select should have the following options:
+Release Date
+Title
+
+The component should take a property that specifies current selection. Additionally, it should take a callback property to handle selection changes. The callback should be called every time a user changes "Sort by" value. The new value should be passed in callback arguments.
+Use Storybook when implementing every individual component. Write a story for every component you create. It will help you to check the result and play around with some interactivity before you embed components into the app.
+
+Although, it's not required to implement high-fidelity design as per design prototype, it still makes sense to apply some styling to your components, so that you practice in styling React components and your final result looks good.
+
+Write tests
+Cover new components with tests using jest and @testing-library/react. Verify necessary data is rendered as well as that behavior works correctly. You can write snapshot tests to cover the rendering. Although, remember that snapshot tests are fragile and will fail any time you change your component markup.
+
+** Scripts used in task 3 **
+
+install storybook: npx storybook@latest init
+run storybook: npm run storybook
+
+

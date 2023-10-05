@@ -1,6 +1,8 @@
 import React, { FC, useState } from 'react';
 
 import './SearchForm.css';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
 
 interface SearchFormProps {
 	initialQuery: string;
@@ -22,21 +24,20 @@ const SearchForm: FC<SearchFormProps> = ({ initialQuery, onSearch }) => {
 	};
 
 	return (
-		<form onSubmit={handleSearch}>
-			<input
+		<form className='search-form' onSubmit={handleSearch}>
+			<Input
 				type='text'
-				placeholder='What do you want to watch...'
+				placeholderText='What do you want to watch...'
 				value={query}
 				onChange={handleInputChange}
-				data-testid='search-input'
+				dataTestid='search-input'
 			/>
-			<button
+			<Button
 				type='submit'
-				className='search-button'
-				data-testid='search-button'
-			>
-				Search
-			</button>
+				buttonClass='search-button'
+				dataTestid='search-button'
+				children='Search'
+			/>
 		</form>
 	);
 };

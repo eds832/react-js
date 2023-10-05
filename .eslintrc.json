@@ -11,7 +11,8 @@
 		"plugin:@typescript-eslint/eslint-recommended",
 		"plugin:@typescript-eslint/recommended",
 		"prettier",
-		"plugin:cypress/recommended"
+		"plugin:cypress/recommended",
+		"plugin:storybook/recommended"
 	],
 	"rules": {
 		"prettier/prettier": [
@@ -24,7 +25,12 @@
 				"singleQuote": true,
 				"useTabs": true,
 				"endOfLine": "auto",
-				"max-len": ["error", { "code": 80 }],
+				"max-len": [
+					"error",
+					{
+						"code": 80
+					}
+				],
 				"importOrder": [
 					"^react(.*)$",
 					"<THIRD_PARTY_MODULES>",
@@ -36,7 +42,6 @@
 				"importOrderSortSpecifiers": true
 			}
 		],
-
 		"@typescript-eslint/no-namespace": "off",
 		"no-duplicate-imports": "error"
 	}

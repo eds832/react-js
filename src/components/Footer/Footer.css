@@ -1,0 +1,15 @@
+.footer {
+  background-color: #424242;
+  width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 510px;
+  margin-top: 40px;
+}
+
+.gray-footer {
+  height: 30px;
+  background-color: #555555;
+}
