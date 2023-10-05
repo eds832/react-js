@@ -189,17 +189,10 @@ function App() {
 				>
 					<p>This is the content of my dialog.</p>
 				</Dialog>
-				{isOpenDialog ? (
-					<div className='container blur'>
-						<Header />
-						<UnderHeader />
-					</div>
-				) : (
-					<div className='container'>
-						<Header />
-						<UnderHeader />
-					</div>
-				)}
+				<div className={isOpenDialog ? 'container blur' : 'container'}>
+					<Header />
+					<UnderHeader />
+				</div>
 			</>
 		);
 	}
