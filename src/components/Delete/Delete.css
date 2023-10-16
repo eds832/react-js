@@ -1,0 +1,26 @@
+.delete {
+    top: 172px;
+    width: 686px;
+    height: 352px;
+    color: #FFFFFF;
+}
+
+.delete-title {
+    margin-top: 25px;
+    margin-left: 80px;
+}
+
+.delete-main {
+    margin-top: 40px;
+    margin-left: 80px;
+}
+
+.confirm-delete {
+    margin-top: 50px;
+    margin-left: 415px;
+    width: 180px;
+    height: 57px;
+    background-color: #F65261;
+    border: none;
+    border-radius: 3px;
+}

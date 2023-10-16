@@ -1,0 +1,98 @@
+.movie-edit-form {
+    padding: 40px;
+}
+
+.movie-edit-form-top {
+    display: flex;
+}
+
+.movie-edit-form label {
+    font-size: 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #F65261;
+}
+
+.movie-edit-form-top-left {
+    width: 60%;
+}
+
+.movie-edit-form-top-right {
+    width: 40%;
+}
+
+.movie-edit-form-top-left input, .movie-edit-form-top-right input, .movie-edit-form-textarea textarea {
+    width: 100%;
+    padding: 17px;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 2px;
+    border: none;
+    background-color: #424242;
+    color: #FFFFFF;
+    margin-top: 12px;
+    margin-bottom: 5px;
+}
+
+.movie-edit-form-top-left input {
+    width: 95%;
+}
+
+.release-date-input-wrapper input[type=text] {
+    background: url("./../../assets/calendar.svg") right / contain no-repeat; 
+    background-size: 24px 24px; 
+    background-position: 94% 50%;
+    background-color: #424242;
+}
+
+.edit-movie-title, .edit-movie-rating {
+    position: relative;
+    top: 25px;
+}
+
+.edit-movie-genre, .edit-movie-duration {
+    position: relative;
+    top: 50px;
+}
+
+.movie-edit-form-textarea { 
+    position: relative;
+    top: 75px;
+}
+
+.movie-edit-form-textarea textarea { 
+    height: 197px;
+    resize: none;
+}
+
+.movie-edit-form-buttons {
+    position: relative;
+    top: 115px;
+    display: flex;
+    float: right;
+}
+
+.movie-edit-form-buttons button {
+    height: 57px;
+    width: 180px;
+    background-color: #F65251;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 15px;
+    text-transform: uppercase;
+}
+
+.movie-edit-form-reset button {
+    width: 182px;
+    background-color: #232323;
+    color: #F65261;
+    border: 2px solid #F65261;
+}
+
+.error-message {
+    font-size: 14px;
+    font-weight: 400;
+    color: #F65261;
+}

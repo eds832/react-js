@@ -6,12 +6,20 @@ import Button from '../Button/Button';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import Netflixroulette from '../Netflixroulette/Netflixroulette';
 
-const Header = () => {
+interface HeaderProps {
+	onAddMovieClicked?: () => void;
+}
+
+const Header = ({ onAddMovieClicked }) => {
+	const handleAddMovie = (event?: React.MouseEvent<HTMLElement>) => {
+		event.stopPropagation();
+		onAddMovieClicked?.();
+	};
 	return (
 		<header>
 			<div className='head-line'>
 				<Netflixroulette />
-				<Button children='+ ADD MOVIE' />
+				<Button onClick={handleAddMovie} children='+ ADD MOVIE' />
 			</div>
 			<div className='title-div'>
 				<Typography children='FIND YOUR MOVIE' type={TypographyTypes.TITLE} />

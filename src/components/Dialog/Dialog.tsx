@@ -6,35 +6,26 @@ import './Dialog.css';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import Button from '../Button/Button';
 
-interface DialogProps {
+export interface DialogProps {
 	title: string;
 	children: JSX.Element;
 	onClose: () => void;
-	onOpen: () => void;
+	dialogClass?: string;
 }
 
 const Dialog: React.FC<DialogProps> = ({
 	title,
 	children,
 	onClose,
-	onOpen,
+	dialogClass,
 }) => {
 	return (
-		<PortalWithState closeOnOutsideClick closeOnEsc>
-			{({ openPortal, closePortal, portal }) => (
+		<PortalWithState closeOnOutsideClick closeOnEsc defaultOpen>
+			{({ closePortal, portal }) => (
 				<>
-					<Button
-						buttonClass='select-popup-button'
-						onClick={(event?: React.MouseEvent<HTMLElement>) => {
-							openPortal(event);
-							onOpen();
-						}}
-					>
-						<span className='popup-button-text'>{title?.split(/\s+/)[0]}</span>
-					</Button>
 					{portal(
 						<FocusTrap>
-							<div className='dialog'>
+							<div className={dialogClass ? dialogClass + ' dialog' : 'dialog'}>
 								<div
 									className='dialog__overlay'
 									onClick={() => {
@@ -47,17 +38,26 @@ const Dialog: React.FC<DialogProps> = ({
 									role='dialog'
 									aria-modal='true'
 								>
-									<Button
-										buttonClass='close-popup'
-										dataTestid='close-popup'
-										onClick={() => {
-											closePortal();
-											onClose();
-										}}
-									>
-										<span className='popup-button-close'>╳</span>
-									</Button>
-									<Typography type={TypographyTypes.TITLE}>{title}</Typography>
+									<div className='close-dialog-button-wrapper'>
+										<Button
+											buttonClass='close-dialog'
+											dataTestid='close-dialog'
+											onClick={() => {
+												closePortal();
+												onClose();
+											}}
+										>
+											<span className='dialog-button-close'>╳</span>
+										</Button>
+									</div>
+									<div className='dialog-title-wrapper'>
+										<Typography
+											dataTestid='dialog-title'
+											type={TypographyTypes.TITLE}
+										>
+											{title}
+										</Typography>
+									</div>
 									<div className='dialog__body'>{children}</div>
 								</div>
 							</div>

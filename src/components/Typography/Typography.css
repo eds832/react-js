@@ -72,3 +72,15 @@
   font-size: 20px;
   font-weight: 600;
 }
+
+.success-style {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.delete-confirm-style {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 500;
+}

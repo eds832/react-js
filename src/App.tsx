@@ -9,6 +9,10 @@ import MovieDetails from './components/MovieDetails/MovieDetails';
 import Footer from './components/Footer/Footer';
 import UnderHeaderLine from './components/UnderHeaderLine/UnderHeaderLine';
 import Dialog from './components/Dialog/Dialog';
+import getReleaseYear from './helpers/getReleaseYear';
+import MovieForm from './components/MovieForm/MovieForm';
+import Success from './components/Success/Success';
+import Delete from './components/Delete/Delete';
 
 function App() {
 	const [movie, setMovie] = useState(null);
@@ -21,9 +25,11 @@ function App() {
 
 	const compareMovies = (m1: MovieType, m2: MovieType) => {
 		if (sortState == RELEASE_DATE) {
-			if (m1.releaseYear > m2.releaseYear) {
+			const releaseYear1 = +getReleaseYear(m1.releaseDate);
+			const releaseYear2 = +getReleaseYear(m2.releaseDate);
+			if (releaseYear1 > releaseYear2) {
 				return -1;
-			} else if (m1.releaseYear < m2.releaseYear) {
+			} else if (releaseYear1 < releaseYear2) {
 				return 1;
 			}
 		} else {
@@ -36,10 +42,70 @@ function App() {
 		return 0;
 	};
 
-	const [isOpenDialog, setOpenDialog] = useState(false);
+	const [openDialog, setOpenDialog] = useState(false);
+	const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
+	const [openAddDialog, setOpenAddDialog] = useState(false);
+	const [openEditDialog, setOpenEditDialog] = useState(null);
+	const [openDeleteDialog, setOpenDeleteDialog] = useState(null);
 
-	const handleOpenDialog = () => setOpenDialog(true);
-	const hadleCloseDialog = () => setOpenDialog(false);
+	const handleOpenAddDialog = () => {
+		setOpenDialog(true);
+		setOpenAddDialog(true);
+	};
+
+	const hadleCloseAddDialog = () => {
+		setOpenDialog(false);
+		setOpenAddDialog(false);
+	};
+
+	const hadleCloseSuccessDialog = () => {
+		setOpenSuccessDialog(false);
+		setOpenDialog(false);
+	};
+
+	const handleMovieAddSuccess = (movie: MovieType) => {
+		console.log(movie);
+		setOpenAddDialog(false);
+		setOpenDialog(true);
+		setOpenSuccessDialog(true);
+	};
+
+	const handleOpenEditDialog = (movieName: string) => {
+		console.log('Edit', movieName);
+		const movie = movies.find((m) => m.movieName === movieName);
+		setOpenEditDialog(movie);
+		setOpenDialog(true);
+	};
+
+	const hadleCloseEditDialog = () => {
+		setOpenDialog(false);
+		setOpenEditDialog(null);
+	};
+
+	const handleMovieEditSuccess = (movie: MovieType) => {
+		console.log(movie);
+		setOpenEditDialog(null);
+		setOpenDialog(true);
+		setOpenSuccessDialog(true);
+	};
+
+	const handleOpenDeleteDialog = (movieName: string) => {
+		console.log('Delete', movieName);
+		const movie = movies.find((m) => m.movieName === movieName);
+		setOpenDeleteDialog(movie);
+		setOpenDialog(true);
+	};
+
+	const handleCloseDeleteDialog = () => {
+		setOpenDialog(false);
+		setOpenDeleteDialog(null);
+	};
+
+	const handleDeleteMovie = () => {
+		console.log(openDeleteDialog, 'was deleted');
+		setOpenDialog(false);
+		setOpenDeleteDialog(null);
+	};
 
 	const handleMovieClicked = (clickedMovieName?: string) => {
 		if (!clickedMovieName) {
@@ -68,7 +134,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 1,
 			movieName: 'Movie 1',
-			releaseYear: 2018,
+			releaseDate: '2018-01-02',
 			genresList: ['Comedy', 'Horor', 'Crime'],
 			rating: 5.4,
 			duration: 110,
@@ -78,7 +144,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 2,
 			movieName: 'Movie 2',
-			releaseYear: 2023,
+			releaseDate: '2023-02-03',
 			genresList: ['Comedy'],
 			rating: 5.5,
 			duration: 117,
@@ -88,7 +154,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 3,
 			movieName: 'Movie 3',
-			releaseYear: 2019,
+			releaseDate: '2019-04-03',
 			genresList: ['Horor'],
 			rating: 7,
 			duration: 100,
@@ -98,7 +164,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 4,
 			movieName: 'Movie 4',
-			releaseYear: 2021,
+			releaseDate: '2021-09-02',
 			genresList: ['Crime'],
 			rating: 9.9,
 			duration: 40,
@@ -108,7 +174,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 5,
 			movieName: 'Movie 5',
-			releaseYear: 2022,
+			releaseDate: '2022-05-11',
 			genresList: ['Comedy', 'Crime'],
 			rating: 8.3,
 			duration: 310,
@@ -118,7 +184,7 @@ function App() {
 		{
 			imageUrl: imageUrlBase + 6,
 			movieName: 'Movie 6',
-			releaseYear: 2020,
+			releaseDate: '2020-09-12',
 			genresList: ['Documentary', 'Crime'],
 			rating: 7.4,
 			duration: 210,
@@ -151,12 +217,8 @@ function App() {
 					<MovieGrid
 						movies={movies}
 						onMovieClick={handleMovieClicked}
-						handleEditClicked={(movieName) => {
-							console.log('Edit', movieName);
-						}}
-						handleDeleteClicked={(movieName) =>
-							console.log('Delete', movieName)
-						}
+						handleEditClicked={handleOpenEditDialog}
+						handleDeleteClicked={handleOpenDeleteDialog}
 					/>
 				</div>
 				<Footer />
@@ -168,29 +230,59 @@ function App() {
 		return (
 			<div className='container details'>
 				<MovieDetails {...movie} />
-				{isOpenDialog ? (
-					<div className='container blur'>
-						<UnderHeader />
-					</div>
-				) : (
-					<div className='container'>
-						<UnderHeader />
-					</div>
-				)}
+				<div className={openDialog ? 'container blur' : 'container'}>
+					<UnderHeader />
+				</div>
 			</div>
 		);
 	} else {
 		return (
 			<>
-				<Dialog
-					title='EDIT MOVIE'
-					onOpen={handleOpenDialog}
-					onClose={hadleCloseDialog}
-				>
-					<p>This is the content of my dialog.</p>
-				</Dialog>
-				<div className={isOpenDialog ? 'container blur' : 'container'}>
-					<Header />
+				{openAddDialog && (
+					<Dialog
+						dialogClass='add'
+						title='ADD MOVIE'
+						onClose={hadleCloseAddDialog}
+					>
+						<MovieForm onMovieSubmit={handleMovieAddSuccess} />
+					</Dialog>
+				)}
+
+				{openEditDialog && (
+					<Dialog
+						dialogClass='add'
+						title='EDIT MOVIE'
+						onClose={hadleCloseEditDialog}
+					>
+						<MovieForm
+							movie={openEditDialog}
+							onMovieSubmit={handleMovieEditSuccess}
+						/>
+					</Dialog>
+				)}
+
+				{openSuccessDialog && (
+					<Dialog
+						dialogClass='success'
+						title=''
+						onClose={hadleCloseSuccessDialog}
+					>
+						<Success />
+					</Dialog>
+				)}
+
+				{openDeleteDialog && (
+					<Dialog
+						dialogClass='delete'
+						title=''
+						onClose={handleCloseDeleteDialog}
+					>
+						<Delete onDelete={handleDeleteMovie} />
+					</Dialog>
+				)}
+
+				<div className={openDialog ? 'container blur' : 'container'}>
+					<Header onAddMovieClicked={handleOpenAddDialog} />
 					<UnderHeader />
 				</div>
 			</>

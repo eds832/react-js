@@ -5,6 +5,7 @@ import { MovieType } from './../../types/movies/types';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import Button from '../Button/Button';
 import PopupMenu from '../PopupMenu/PopupMenu';
+import getReleaseYear from './../../helpers/getReleaseYear';
 
 interface MovieTileProps {
 	movie: MovieType;
@@ -28,7 +29,7 @@ const MovieTile: FC<MovieTileProps> = ({
 		}
 	};
 
-	const { imageUrl, movieName, releaseYear, genresList, onMovieClick } = movie;
+	const { imageUrl, movieName, releaseDate, genresList, onMovieClick } = movie;
 
 	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
@@ -80,7 +81,7 @@ const MovieTile: FC<MovieTileProps> = ({
 				<div className='movie-release-year'>
 					<Typography
 						dataTestid='movie-tile-release-year'
-						children={releaseYear}
+						children={getReleaseYear(releaseDate)}
 						type={TypographyTypes.MOVIE_TILE_RELEASE_YEAR}
 					/>
 				</div>
