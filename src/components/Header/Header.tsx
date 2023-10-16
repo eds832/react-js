@@ -10,7 +10,7 @@ interface HeaderProps {
 	onAddMovieClicked?: () => void;
 }
 
-const Header = ({ onAddMovieClicked }) => {
+const Header: React.FC<HeaderProps> = ({ onAddMovieClicked }) => {
 	const handleAddMovie = (event?: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
 		onAddMovieClicked?.();
