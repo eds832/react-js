@@ -4,7 +4,7 @@ import './GenreDropdownSelect.css';
 import { GENRES } from '../../constants';
 import Input from '../Input/Input';
 
-interface GenreDropdownSelectProps {
+export interface GenreDropdownSelectProps {
 	labelText: string;
 	placeholderText: string;
 	value: string[];
@@ -53,15 +53,19 @@ const GenreDropdownSelect: React.FC<GenreDropdownSelectProps> = ({
 
 	return (
 		<div ref={ref}>
-			<label>{labelText}</label>
+			<label data-testid='genre-dropdown-label'>{labelText}</label>
 			<div
+				data-testid='genre-dropdown-main'
 				className={
 					opened
 						? 'dropdown-select-genre-main dropdown-select-opened'
 						: 'dropdown-select-genre-main dropdown-select-closed'
 				}
 			>
-				<p onClick={handleDropdownClick}>
+				<p
+					onClick={handleDropdownClick}
+					data-testid='genre-dropdown-select-main'
+				>
 					<span className='select-dropdown-placeholder-text'>
 						{placeholderText}
 					</span>
@@ -77,6 +81,7 @@ const GenreDropdownSelect: React.FC<GenreDropdownSelectProps> = ({
 								checked={value?.includes(genre) || false}
 								onChange={handleCheck}
 								name={genre}
+								dataTestid={genre + '-genre-dropdown-option'}
 							/>
 							{genre}
 						</li>

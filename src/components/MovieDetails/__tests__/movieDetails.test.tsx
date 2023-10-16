@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import MovieDetails from '../MovieDetails';
-import { MovieType } from './../../../store/movies/types';
+import { MovieType } from './../../../types/movies/types';
 
 describe('MovieDetails', () => {
 	const handleMovieClicked = jest.fn();

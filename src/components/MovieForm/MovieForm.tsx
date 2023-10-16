@@ -10,7 +10,7 @@ import TextArea from '../Textarea/Textarea';
 import GenreDropdownSelect from '../GenreDropdownSelect/GenreDropdownSelect';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 
-interface MovieFormProps {
+export interface MovieFormProps {
 	movie?: MovieType;
 	onMovieSubmit: (newMovie: MovieType) => void;
 }
@@ -146,6 +146,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 					<div className='movie-edit-form-top-left'>
 						<div>
 							<Input
+								dataTestid='movie-form-title-input'
 								labelText='TITLE'
 								value={movieName}
 								placeholderText='Enter Movie Title'
@@ -155,6 +156,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 						</div>
 						<div className='edit-movie-title'>
 							<Input
+								dataTestid='movie-form-url-input'
 								labelText='MOVIE URL'
 								value={imageUrl}
 								placeholderText='https://'
@@ -175,6 +177,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 					<div className='movie-edit-form-top-right'>
 						<div className='release-date-input-wrapper'>
 							<Input
+								dataTestid='movie-form-date-input'
 								labelText='RELEASE DATE'
 								value={releaseDate}
 								onChange={(e) => setReleaseDate(e)}
@@ -187,6 +190,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 						</div>
 						<div className='edit-movie-rating'>
 							<Input
+								dataTestid='movie-form-rating-input'
 								labelText='RATING'
 								value={ratingString}
 								placeholderText='7.7'
@@ -197,6 +201,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 						</div>
 						<div className='edit-movie-duration'>
 							<Input
+								dataTestid='movie-form-duration-input'
 								labelText='RUNTIME'
 								value={durationValue}
 								onLoseFocus={handleDurationLoseFocus}
@@ -214,6 +219,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 				</div>
 				<div className='movie-edit-form-textarea'>
 					<TextArea
+						dataTestid='movie-form-description-input'
 						onChange={(e) => setDescription(e)}
 						value={description}
 						labelText='OVERVIEW'
@@ -230,7 +236,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 						</Button>
 					</div>
 					<div>
-						<Button type='submit'>
+						<Button type='submit' dataTestid='submit-movie-form'>
 							<Typography type={TypographyTypes.DELETE_CONFIRM}>
 								SUBMIT
 							</Typography>

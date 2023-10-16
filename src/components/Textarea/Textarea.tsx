@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface TextAreaProps {
+export interface TextAreaProps {
 	value: string;
 	onChange: (value: string) => void;
 	onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
@@ -8,6 +8,7 @@ interface TextAreaProps {
 	labelText?: string;
 	error?: string;
 	placeholderText?: string;
+	dataTestid?: string;
 }
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -18,6 +19,7 @@ const TextArea: React.FC<TextAreaProps> = ({
 	labelText,
 	error,
 	placeholderText,
+	dataTestid,
 }) => {
 	const handleTextAreaChange = (
 		event: React.ChangeEvent<HTMLTextAreaElement>
@@ -33,9 +35,10 @@ const TextArea: React.FC<TextAreaProps> = ({
 
 	return (
 		<div className='textarea-wrapper'>
-			<label htmlFor={inputId}>
+			<label data-testid={inputId} htmlFor={inputId}>
 				{labelText}
 				<textarea
+					data-testid={dataTestid}
 					id={inputId}
 					value={value}
 					onChange={handleTextAreaChange}
