@@ -226,11 +226,11 @@ function App() {
 		);
 	};
 
-	if (movie) {
+	if (movie && !openDialog) {
 		return (
 			<div className='container details'>
 				<MovieDetails {...movie} />
-				<div className={openDialog ? 'container blur' : 'container'}>
+				<div className='container'>
 					<UnderHeader />
 				</div>
 			</div>
