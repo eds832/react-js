@@ -14,6 +14,9 @@ const SearchForm: FC<SearchFormProps> = ({ initialQuery, onSearch }) => {
 
 	const handleInputChange = (value: string) => {
 		setQuery(value);
+		if (!value) {
+			onSearch('');
+		}
 	};
 
 	const handleSearch = (event: { preventDefault: () => void }) => {

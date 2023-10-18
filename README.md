@@ -160,3 +160,59 @@ Delete movie. Render Dialog with content from "delete movie" modal from Figma pr
 npm install focus-trap-react
 npm install react-portal
 npm i --save-dev @types/react-portal
+
+** Task 5 **
+
+Prepare
+
+Install and configure eslint-plugin-react-hooks (https://www.npmjs.com/package/eslint-plugin-react-hooks).
+It will help you identify mistakes when using hooks.
+Clone the backend repository (https://github.com/VarvaraZadnepriak/MoviesAPI.ReactJS).
+Navigate to the cloned repository folder and run "npm install" to install dependencies.
+Run "npm start" command to start the backend server. It will start on https://localhost:4000.
+Open Swagger API docs: http://localhost:4000/api-docs.
+
+Implement movie list page
+
+Now it's time to wire our components up and build the real app.
+Create a "MovieListPage" component. You will place all the markup and logic for the main page here.
+Using useState hook define several states for the component:
+
+- search query
+- sort criterion
+- active genre
+- movie list (array)
+- selected movie (default to undefined or null)
+- others if necessary
+
+Render components that you've previously built to create the movie list page. It should look similar to the design prototype (https://www.figma.com/file/fKGjrOqR6nJe6LYJopGCZ8/%5BCDP%5D-Home-Task-%E2%80%93-React-v1). 
+Pixel-perfect design is not necessary, but overall composition and placement should look the same.
+- Pass search query state to the SearchForm component. Modify the state when the search form is submitted.
+- If selected movie is defined, instead of SearchForm render MovieDetails and pass the selected movie in props.
+- Pass static genre list and an active genre to the GenreSelect component. Modify the active genre state when other genres are selected.
+- Pass current sort criterion to SortControl. Modify sort criterion state when the user changes sorting.
+- Render MovieTile for every movie in state. Pass movie info to the MovieTile. You can define a mock movie array for now, so that your array is not empty and you can test results. Handle click events on MovieTile and update the selected movie state when a movie is selected.
+
+As a result of this step, you should have a movie list page, with all controls working but without backend integration.
+
+Implement effects
+
+By using useEffect hook and Fetch API or axios, implement the following effect:
+When search query, sort criterion or active genre changes, make a request to the backend to get movies corresponding to the new parameters. On response, update movie list with response data. Don't forget to abort previous request in case the user quickly updates several parameters.
+ All functionality of the app except forms should work now.
+
+Write end-to-end tests
+
+You've implemented a lot of functionality, composed several components to achieve a working piece of software. Now spend some time on covering this behavior with a reliable end-to-end test. Cover search functionality, sorting and switching genres, selecting a movie and returning back to search.
+
+Materials: https://react-gmp.netlify.app/react-hooks/built-in-hooks
+
+** Scripts used in task5 **
+
+npm install eslint-plugin-react-hooks --save-dev
+npx cypress run --headed
+npm run test
+npm run storybook
+npm run start   
+
+

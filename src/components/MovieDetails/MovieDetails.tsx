@@ -9,6 +9,7 @@ import getMovieDuration from './../../helpers/getMovieDuration';
 import getReleaseYear from './../../helpers/getReleaseYear';
 
 const MovieDetails: FC<MovieType> = ({
+	id,
 	imageUrl,
 	movieName,
 	releaseDate,
@@ -33,13 +34,22 @@ const MovieDetails: FC<MovieType> = ({
 			</div>
 			<div className='movie-details'>
 				<div className='movie-details-poster'>
-					<img data-testid='movie-details-img' src={imageUrl} alt={movieName} />
+					<img
+						data-testid={'movie-details-img-' + id}
+						src={imageUrl}
+						alt={movieName}
+						onError={({ currentTarget }) => {
+							currentTarget.onerror = null;
+							currentTarget.src =
+								'https://via.placeholder.com/300x450.png?text=Movie';
+						}}
+					/>
 				</div>
 				<div className='movie-details-info'>
 					<div className='movie-details-title-and-rating'>
 						<div className='movie-details-title-div'>
 							<Typography
-								dataTestid='movie-details-movie-name'
+								dataTestid={'movie-details-movie-name-' + id}
 								type={TypographyTypes.TITLE}
 							>
 								{movieName}
@@ -47,7 +57,7 @@ const MovieDetails: FC<MovieType> = ({
 						</div>
 						<div className='movie-details-rating-div'>
 							<Typography
-								dataTestid='movie-details-rating'
+								dataTestid={'movie-details-rating-' + id}
 								type={TypographyTypes.MOVIE_DETAILS_RATING}
 							>
 								{ratingString}
@@ -62,20 +72,20 @@ const MovieDetails: FC<MovieType> = ({
 					</div>
 					<div className='movie-details-release-year-and-duration-div'>
 						<Typography
-							dataTestid='movie-details-release-year'
+							dataTestid={'movie-details-release-year-' + id}
 							type={TypographyTypes.MOVIE_DETAILS_RELEASE_YEAR_AND_DURATION}
 						>
 							{getReleaseYear(releaseDate)}
 						</Typography>
 						<Typography
-							dataTestid='movie-details-duration'
+							dataTestid={'movie-details-duration-' + id}
 							type={TypographyTypes.MOVIE_DETAILS_RELEASE_YEAR_AND_DURATION}
 						>
 							{getMovieDuration(duration)}
 						</Typography>
 					</div>
 					<Typography
-						dataTestid='movie-details-description'
+						dataTestid={'movie-details-description-' + id}
 						type={TypographyTypes.MOVIE_DETILES_DESCRITION}
 					>
 						{description}

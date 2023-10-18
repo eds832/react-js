@@ -8,9 +8,10 @@ import Netflixroulette from '../Netflixroulette/Netflixroulette';
 
 interface HeaderProps {
 	onAddMovieClicked?: () => void;
+	onSearch?: (query: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onAddMovieClicked }) => {
+const Header: React.FC<HeaderProps> = ({ onAddMovieClicked, onSearch }) => {
 	const handleAddMovie = (event?: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
 		onAddMovieClicked?.();
@@ -24,10 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onAddMovieClicked }) => {
 			<div className='title-div'>
 				<Typography children='FIND YOUR MOVIE' type={TypographyTypes.TITLE} />
 			</div>
-			<SearchForm
-				initialQuery=''
-				onSearch={(query) => console.log('Search for:', query)}
-			/>
+			<SearchForm initialQuery='' onSearch={onSearch} />
 		</header>
 	);
 };
