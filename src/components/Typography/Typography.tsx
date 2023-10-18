@@ -13,6 +13,8 @@ export const enum TypographyTypes {
 	MOVIE_DETILES_DESCRITION = 'movie-details-description',
 	MOVIE_TILE_RELEASE_YEAR = 'movie-tile-release-year',
 	MOVIE_COUNTER = 'movie-counter',
+	SUCCESS_STYLE = 'success-style',
+	DELETE_CONFIRM = 'delete-confirm-style',
 }
 
 interface TypographyProps {

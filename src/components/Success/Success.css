@@ -1,0 +1,19 @@
+.success {
+    top: 177px;
+    width: 686px;
+    height: 323px;
+    text-align: center;
+    color: #FFFFFF;
+    background: url("./../../assets/success.svg") right / contain no-repeat; 
+    background-size: 66px 66px; 
+    background-position: 50% 15%;
+    background-color: #232323;
+}
+
+.congratulations {
+    margin-top: 90px;
+}
+
+.success-main {
+    margin-top: 30px;
+}

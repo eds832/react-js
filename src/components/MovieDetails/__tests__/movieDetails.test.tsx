@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
 import MovieDetails from '../MovieDetails';
-import { MovieType } from './../../../store/movies/types';
+import { MovieType } from './../../../types/movies/types';
 
 describe('MovieDetails', () => {
 	const handleMovieClicked = jest.fn();
@@ -10,7 +10,7 @@ describe('MovieDetails', () => {
 	const movie: MovieType = {
 		imageUrl: 'https://via.placeholder.com/300x450.png?text=Movie+1',
 		movieName: 'Movie 1',
-		releaseYear: 2022,
+		releaseDate: '2022-01-01',
 		rating: 8.9,
 		duration: 177,
 		description: 'A description of the movie',

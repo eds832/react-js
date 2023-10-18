@@ -12,10 +12,8 @@ interface SearchFormProps {
 const SearchForm: FC<SearchFormProps> = ({ initialQuery, onSearch }) => {
 	const [query, setQuery] = useState(initialQuery);
 
-	const handleInputChange = (event: {
-		target: { value: React.SetStateAction<string> };
-	}) => {
-		setQuery(event.target.value);
+	const handleInputChange = (value: string) => {
+		setQuery(value);
 	};
 
 	const handleSearch = (event: { preventDefault: () => void }) => {

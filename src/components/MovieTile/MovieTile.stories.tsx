@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 const movie: MovieType = {
 	imageUrl: 'https://via.placeholder.com/300x450.png?text=Movie+1',
 	movieName: 'Movie 1',
-	releaseYear: 2022,
+	releaseDate: '2022-07-07',
 	genresList: ['Comedy', 'Action'],
 	onMovieClick: () => console.log('Movie 1 clicked'),
 };

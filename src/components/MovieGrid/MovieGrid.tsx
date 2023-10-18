@@ -19,13 +19,13 @@ const MovieGrid: React.FC<MovieGridProps> = ({
 }) => {
 	return (
 		<div className='movie-grid'>
-			{movies.map(({ imageUrl, movieName, releaseYear, genresList }) => (
+			{movies.map(({ imageUrl, movieName, releaseDate, genresList }) => (
 				<MovieTile
 					key={movieName}
 					movie={{
 						imageUrl,
 						movieName,
-						releaseYear,
+						releaseDate,
 						genresList,
 						onMovieClick,
 					}}

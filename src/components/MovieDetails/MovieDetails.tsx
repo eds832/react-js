@@ -6,11 +6,12 @@ import Netflixroulette from '../Netflixroulette/Netflixroulette';
 import Button from '../Button/Button';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import getMovieDuration from './../../helpers/getMovieDuration';
+import getReleaseYear from './../../helpers/getReleaseYear';
 
 const MovieDetails: FC<MovieType> = ({
 	imageUrl,
 	movieName,
-	releaseYear,
+	releaseDate,
 	genresList,
 	rating,
 	duration,
@@ -64,7 +65,7 @@ const MovieDetails: FC<MovieType> = ({
 							dataTestid='movie-details-release-year'
 							type={TypographyTypes.MOVIE_DETAILS_RELEASE_YEAR_AND_DURATION}
 						>
-							{releaseYear}
+							{getReleaseYear(releaseDate)}
 						</Typography>
 						<Typography
 							dataTestid='movie-details-duration'

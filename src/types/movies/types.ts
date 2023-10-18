@@ -1,10 +1,11 @@
 export interface MovieType {
+	id?: number;
 	imageUrl: string;
 	movieName: string;
-	releaseYear: number;
+	releaseDate: string;
 	genresList?: string[];
 	rating?: number;
 	duration?: number;
 	description?: string;
-	onMovieClick: (movieName: string) => void;
+	onMovieClick?: (movieName: string) => void;
 }

@@ -25,3 +25,17 @@
   height: 10px;
   background-color: #555555;
 }
+
+.blur {
+  -webkit-filter: brightness(50%) blur(1px);
+  -moz-filter: brightness(50%) blur(1px);
+  -o-filter: brightness(50%) blur(1px);
+  -ms-filter: brightness(50%) blur(1px);
+  filter: brightness(50%) blur(1px);
+}
+
+.add {
+  top: 229px;
+  width: 976px;
+  height: 916px;
+}
