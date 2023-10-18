@@ -151,7 +151,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 								value={movieName}
 								placeholderText='Enter Movie Title'
 								error={movieNameError}
-								onChange={(e) => setMovieName(e)}
+								onChange={setMovieName}
 							/>
 						</div>
 						<div className='edit-movie-title'>
@@ -161,7 +161,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 								value={imageUrl}
 								placeholderText='https://'
 								error={imageUrlError}
-								onChange={(e) => setImageUrl(e)}
+								onChange={setImageUrl}
 							/>
 						</div>
 						<div className='edit-movie-genre'>
@@ -180,7 +180,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 								dataTestid='movie-form-date-input'
 								labelText='RELEASE DATE'
 								value={releaseDate}
-								onChange={(e) => setReleaseDate(e)}
+								onChange={setReleaseDate}
 								onInputFocus={(e) => setDateType('date')}
 								onLoseFocus={(e) => setDateType('text')}
 								type={dateType}
@@ -196,7 +196,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 								placeholderText='7.7'
 								pattern='^\d$|^\d\.$|^\d\.\d$'
 								error={ratingError}
-								onChange={(e) => setRatingString(e)}
+								onChange={setRatingString}
 							/>
 						</div>
 						<div className='edit-movie-duration'>
@@ -207,7 +207,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 								onLoseFocus={handleDurationLoseFocus}
 								onInputFocus={handleDurationFocus}
 								placeholderText='minutes'
-								pattern='^\d+$|^\d+min$|^\d+h$|^\d+h \d+min'
+								pattern='^\d+$|^\d+min$|^\d+h$|^\d+h \d+min$'
 								error={durationError}
 								onChange={(e) => {
 									setDurationValue(e);
@@ -220,7 +220,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 				<div className='movie-edit-form-textarea'>
 					<TextArea
 						dataTestid='movie-form-description-input'
-						onChange={(e) => setDescription(e)}
+						onChange={setDescription}
 						value={description}
 						labelText='OVERVIEW'
 						error={descriptionError}
