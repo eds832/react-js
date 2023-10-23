@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Outlet, useParams, useSearchParams } from 'react-router-dom';
 
 import './MovieListPage.css';
-import { Header, GenreSelect, MovieGrid, MovieCounter } from '..';
+import { GenreSelect, MovieGrid, MovieCounter } from '..';
 import { GENRES, RELEASE_DATE } from '../../constants';
 import SortControl from '../SortControl/SortControl';
 import { MovieType } from '../../types/movies/types';
-import MovieDetails from '../MovieDetails/MovieDetails';
 import Footer from '../Footer/Footer';
 import UnderHeaderLine from '../UnderHeaderLine/UnderHeaderLine';
 import Dialog from '../Dialog/Dialog';
@@ -15,15 +15,30 @@ import Success from '../Success/Success';
 import Delete from '../Delete/Delete';
 import { abortController, getMovies } from '../../services';
 
-const MovieListPage = () => {
+interface MovieListPageProps {
+	query: string;
+	openAddDialog: boolean;
+	handleCloseAddDialog: () => void;
+}
+
+const MovieListPage: React.FC<MovieListPageProps> = ({
+	query,
+	openAddDialog,
+	handleCloseAddDialog,
+}) => {
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const { movieId } = useParams();
+
 	const [movies, setMovies] = useState([]);
 
-	const [movie, setMovie] = useState(null);
-
-	const [sortState, setSortState] = useState(RELEASE_DATE);
+	const [sortState, setSortState] = useState(
+		searchParams.get('sortBy') ? searchParams.get('sortBy') : RELEASE_DATE
+	);
 
 	const handleSortChange = (sort: string) => {
 		setSortState(sort);
+		searchParams.set('sortBy', sort);
 	};
 
 	const compareMovies = (m1: MovieType, m2: MovieType) => {
@@ -45,96 +60,98 @@ const MovieListPage = () => {
 		return 0;
 	};
 
-	const [openDialog, setOpenDialog] = useState(false);
 	const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
-	const [openAddDialog, setOpenAddDialog] = useState(false);
+	//const [openAddDialog, setOpenAddDialog] = useState(false);
 	const [openEditDialog, setOpenEditDialog] = useState(null);
 	const [openDeleteDialog, setOpenDeleteDialog] = useState(null);
-	const [search, setSearch] = useState('');
 	const [count, setCount] = useState(0);
 
-	const handleOpenAddDialog = () => {
-		setOpenDialog(true);
-		setOpenAddDialog(true);
-	};
+	// useEffect(() => {
+	// 	if (openAddDialogProp) {
+	// 		setOpenAddDialog(true);
+	// 	}
+	// }, [openAddDialogProp]);
 
-	const hadleCloseAddDialog = () => {
-		setOpenDialog(false);
-		setOpenAddDialog(false);
-	};
+	// const handleOpenAddDialog = () => {
+	// 	setOpenAddDialog(true);
+	// };
+
+	// const hadleCloseAddDialog = () => {
+	// 	setOpenAddDialog(false);
+	// };
 
 	const hadleCloseSuccessDialog = () => {
 		setOpenSuccessDialog(false);
-		setOpenDialog(false);
 	};
 
 	const handleMovieAddSuccess = (movie: MovieType) => {
 		console.log(movie);
-		setOpenAddDialog(false);
-		setOpenDialog(true);
+		handleCloseAddDialog();
 		setOpenSuccessDialog(true);
 	};
 
 	const handleOpenEditDialog = (id: number) => {
 		const movie = movies.find((m) => m.id === id);
 		setOpenEditDialog(movie);
-		setOpenDialog(true);
 	};
 
 	const hadleCloseEditDialog = () => {
-		setOpenDialog(false);
 		setOpenEditDialog(null);
 	};
 
 	const handleMovieEditSuccess = (movie: MovieType) => {
 		console.log(movie);
 		setOpenEditDialog(null);
-		setOpenDialog(true);
 		setOpenSuccessDialog(true);
 	};
 
 	const handleOpenDeleteDialog = (id: number) => {
 		const movie = movies.find((m) => m.id === id);
 		setOpenDeleteDialog(movie);
-		setOpenDialog(true);
 	};
 
 	const handleCloseDeleteDialog = () => {
-		setOpenDialog(false);
 		setOpenDeleteDialog(null);
 	};
 
 	const handleDeleteMovie = () => {
 		console.log(openDeleteDialog, 'was deleted');
-		setOpenDialog(false);
 		setOpenDeleteDialog(null);
 	};
 
-	const handleMovieClicked = (id?: number) => {
-		if (!id) {
-			setMovie(null);
-			setSearch('');
-		} else {
-			const chosenMovie = movies.find((m) => m.id === id);
-			setMovie(chosenMovie);
-		}
-	};
-
-	const [genreState, setGenreState] = useState('All');
+	const [genreState, setGenreState] = useState(
+		searchParams.get('genre') ? searchParams.get('genre') : 'All'
+	);
 
 	const handleGenreSelect = (genre: string) => {
 		setGenreState(genre);
 	};
 
-	const handleSearch = (query: string) => {
-		setSearch(query);
-	};
-
 	useEffect(() => {
+		if (query) {
+			searchParams.set('query', query);
+			searchParams.set('searchBy', 'title');
+		} else {
+			searchParams.delete('query');
+			searchParams.delete('searchBy');
+		}
+		if (genreState !== 'All') {
+			searchParams.set('genre', genreState);
+		} else {
+			searchParams.delete('genre');
+		}
+		searchParams.set('sortBy', sortState);
+		searchParams.set('limit', '50');
+		setSearchParams(searchParams);
+
 		if (abortController) {
 			abortController.abort();
 		}
-		getMovies(search, genreState)
+		getMovies(
+			searchParams.get('query'),
+			searchParams.get('genre'),
+			searchParams.get('limit')
+		)
 			.then((mv) =>
 				mv.map((m) => ({
 					id: m.id,
@@ -149,7 +166,6 @@ const MovieListPage = () => {
 					revenue: m.revenue,
 					duration: m.runtime,
 					description: m.overview,
-					onMovieClick: handleMovieClicked,
 				}))
 			)
 			.then((m) => {
@@ -158,7 +174,7 @@ const MovieListPage = () => {
 				setCount(mv?.length);
 			})
 			.catch((err) => console.log('Error fetching movies:', err));
-	}, [sortState, genreState, search]);
+	}, [sortState, genreState, query]);
 
 	const UnderHeader = () => {
 		return (
@@ -177,7 +193,6 @@ const MovieListPage = () => {
 					<MovieCounter count={count} />
 					<MovieGrid
 						movies={movies}
-						onMovieClick={handleMovieClicked}
 						handleEditClicked={handleOpenEditDialog}
 						handleDeleteClicked={handleOpenDeleteDialog}
 					/>
@@ -187,69 +202,62 @@ const MovieListPage = () => {
 		);
 	};
 
-	if (movie && !openDialog) {
-		return (
-			<div className='container details'>
-				<MovieDetails {...movie} />
+	const openDialog =
+		openAddDialog || openDeleteDialog || openEditDialog || openSuccessDialog;
+
+	const containerClass = openDialog
+		? 'container blur'
+		: movieId
+		? 'container details'
+		: 'container';
+
+	return (
+		<>
+			{openAddDialog && (
+				<Dialog
+					dialogClass='add'
+					title='ADD MOVIE'
+					onClose={handleCloseAddDialog}
+				>
+					<MovieForm onMovieSubmit={handleMovieAddSuccess} />
+				</Dialog>
+			)}
+
+			{openEditDialog && (
+				<Dialog
+					dialogClass='add'
+					title='EDIT MOVIE'
+					onClose={hadleCloseEditDialog}
+				>
+					<MovieForm
+						movie={openEditDialog}
+						onMovieSubmit={handleMovieEditSuccess}
+					/>
+				</Dialog>
+			)}
+
+			{openSuccessDialog && (
+				<Dialog
+					dialogClass='success'
+					title=''
+					onClose={hadleCloseSuccessDialog}
+				>
+					<Success />
+				</Dialog>
+			)}
+
+			{openDeleteDialog && (
+				<Dialog dialogClass='delete' title='' onClose={handleCloseDeleteDialog}>
+					<Delete onDelete={handleDeleteMovie} />
+				</Dialog>
+			)}
+
+			<div className={containerClass}>
+				<Outlet />
 				<UnderHeader />
 			</div>
-		);
-	} else {
-		return (
-			<>
-				{openAddDialog && (
-					<Dialog
-						dialogClass='add'
-						title='ADD MOVIE'
-						onClose={hadleCloseAddDialog}
-					>
-						<MovieForm onMovieSubmit={handleMovieAddSuccess} />
-					</Dialog>
-				)}
-
-				{openEditDialog && (
-					<Dialog
-						dialogClass='add'
-						title='EDIT MOVIE'
-						onClose={hadleCloseEditDialog}
-					>
-						<MovieForm
-							movie={openEditDialog}
-							onMovieSubmit={handleMovieEditSuccess}
-						/>
-					</Dialog>
-				)}
-
-				{openSuccessDialog && (
-					<Dialog
-						dialogClass='success'
-						title=''
-						onClose={hadleCloseSuccessDialog}
-					>
-						<Success />
-					</Dialog>
-				)}
-
-				{openDeleteDialog && (
-					<Dialog
-						dialogClass='delete'
-						title=''
-						onClose={handleCloseDeleteDialog}
-					>
-						<Delete onDelete={handleDeleteMovie} />
-					</Dialog>
-				)}
-
-				<div className={openDialog ? 'container blur' : 'container'}>
-					<Header
-						onAddMovieClicked={handleOpenAddDialog}
-						onSearch={handleSearch}
-					/>
-					<UnderHeader />
-				</div>
-			</>
-		);
-	}
+		</>
+	);
 };
 
 export default MovieListPage;

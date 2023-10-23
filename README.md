@@ -213,6 +213,67 @@ npm install eslint-plugin-react-hooks --save-dev
 npx cypress run --headed
 npm run test
 npm run storybook
-npm run start   
+npm run start  
+
+** Task 6 **
+
+Install React Router
+
+Open react-router tutorial in a separate browser tab. You will find it handy when doing this practical task.
+Install react-router-dom and define the root route to render your MovieListPage component. Use "/" value for route path. This will not change the app behavior. It should still load and work as before. But it will enable you to make further changes.
+
+Move search parameters to URL
+
+Currently you have several occurrences of useState in your component. You keep track of current search query, selected genre, sorting.
+All these parameters influence the list of movies to be displayed on the page. If you make changes and then refresh the page, all parameters will reset. Also, you can't share a link to specific search results with your friends. Let's fix it.
+
+Change your component to read current search query, sorting and active genre from the URL by using the "useSearchParams" hook provided by React Router. Don't forget that params may not be specified. To handle this case, you need to default them to specific values when reading.
+
+useSearchParams allows you to update search parameters similar to useState. Use this functionality to update URL every time the user updates search query, sorting or active genre. This way when you search movies, your URL search params will look something like "?query=abc". Similarly, when you specify sorting, it will add another parameter to the search part of the URL.
+
+At the end of this step your search query, sorting and active genre state should be stored in URL. If you refresh the page, it shouldn't reset the state. And once you deploy your app somewhere, you will be able to share more specific URLs with your friends.
+
+Cover this new functionality with end-to-end tests.
+
+Define a route for movie details
+
+Currently selected movie state is still handled internally by your MovieListPage component. When you select a movie and then refresh the page, the selected movie won't be preserved. And you can't share a link to a specific movie with your friends. Let's fix it.
+
+Open the Nested Routes section of the tutorial. In your MovieListComponent instead of rendering either SearchForm or MovieDetails components based on component state, render <Outlet /> component from React Router. This will temporary remove the possibility to search for movies. Don't worry, we will bring it back in a moment.
+
+In your root route define two child routes:
+
+- The first one should have the same path as your root route: "/". It should render SearchForm component.
+- The second one should add a new dynamic path segment with movie id: "/:movieId". And it should render MovieDetails component.
+
+Here you may need to wrap your MovieDetails with another component, because the router will now give you just a movie ID and you will be responsible for loading the movie from the backend API and rendering the result.
+
+This way when your URL pathname is just "/", the app will render SearchForm at the top and the list of movies at the bottom. And when your URL pathname is "/:movieId", it will render movie details on top and the list of movies at the bottom of the page.
+
+Use a route loader  or useParams hook from React Router to load movie details. Route loader is more preferred, because it is optimized to load and cache your data before your component is rendered.
+
+Update your logic to select a movie. When a movie card is clicked, navigate the user to "/:movieId" route. We recommend to preserve current search params upon navigation, so that your movie list is not reset.
+
+Now you should be able to select a movie, refresh the page and still see the movie selected. Also, once you deploy your app somewhere, you will be able to share a link to a specific movie with your friends. Update your end-to-end tests to cover the newly written logic.
+
+Here's the complete description of desired behavior:
+
+- Navigating to "/" displays a search form and a list of movies.
+- Entering a search query and submitting the search form, the URL updates with "query" search parameter containing the entered search query. The movie list is refreshed to reflect the entered search query.
+- Navigating to "/?query=abc" displays a search form with entered text "abc" and a movie list relevant to the search query.
+- Selecting a genre updates the URL with "genre" search parameter containing the selected genre. The movie list is refreshed to display movies of the selected genre.
+- Navigating to "/?genre=comedy" displays "Comedy" genre as selected and movies of comedy genre.
+- Selecting sorting by title updates the URL with "sortBy" search parameter with the respective value. The movie list is refreshed to display movies sorted by title.
+- Navigating to "/?sortBy=title" displays the list of movies sorted by title.
+- Navigating to "/?query=abc&genre=comedy&sortBy=title" displays the search form with entered value "abc", sort select has "Title" value and the movie list displays movies relevant to these search params.
+- Clicking on a movie from the list changes URL pathname to "/:movieId", where :movieId is the ID of the selected movie. If the URL contained query parameters (query, sortBy, genre), they are preserved after navigating. The movie list stays the same.
+- Navigating to "/:movieId" where :movieId is a random valid movie ID, the page displays movie details on top and a list of movies on the bottom of the page.
+
+** Scripts used in task6 **
+
+npm install react-router-dom --save --legacy-peer-deps
+npm run storybook
+npm run start
+npx cypress run --headed
 
 

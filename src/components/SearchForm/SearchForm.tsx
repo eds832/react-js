@@ -1,4 +1,5 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import './SearchForm.css';
 import Input from '../Input/Input';
@@ -11,6 +12,14 @@ interface SearchFormProps {
 
 const SearchForm: FC<SearchFormProps> = ({ initialQuery, onSearch }) => {
 	const [query, setQuery] = useState(initialQuery);
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	useEffect(() => {
+		if (searchParams.get('query')) {
+			setQuery(searchParams.get('query'));
+			onSearch(searchParams.get('query'));
+		}
+	}, []);
 
 	const handleInputChange = (value: string) => {
 		setQuery(value);

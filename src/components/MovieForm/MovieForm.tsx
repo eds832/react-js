@@ -87,7 +87,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 			setGenresError('Select at least one genre to proceed');
 			isError = true;
 		}
-		if (!ratingString || +ratingString <= 0.1) {
+		if (!ratingString || +ratingString < 0) {
 			setRatingError('Incorrect rating');
 			isError = true;
 		}

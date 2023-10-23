@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { BrowserRouter } from 'react-router-dom';
 
 import SearchForm from '../SearchForm';
 
@@ -9,14 +10,18 @@ describe('SearchForm', () => {
 
 	it('renders an input with the value equal to initial value passed in props', () => {
 		const { getByTestId } = render(
-			<SearchForm initialQuery='test' onSearch={handleSearch} />
+			<BrowserRouter>
+				<SearchForm initialQuery='test' onSearch={handleSearch} />
+			</BrowserRouter>
 		);
 		expect(getByTestId('search-input')).toHaveValue('test');
 	});
 
 	it('calls onSearch prop with proper value after clicking Submit button', () => {
 		const { getByTestId } = render(
-			<SearchForm initialQuery='' onSearch={handleSearch} />
+			<BrowserRouter>
+				<SearchForm initialQuery='' onSearch={handleSearch} />
+			</BrowserRouter>
 		);
 		const input = getByTestId('search-input');
 		const submitButton = getByTestId('search-button');
@@ -29,7 +34,9 @@ describe('SearchForm', () => {
 
 	it('calls onSearch prop with proper value after pressing Enter key', async () => {
 		const { getByTestId } = render(
-			<SearchForm initialQuery='' onSearch={handleSearch} />
+			<BrowserRouter>
+				<SearchForm initialQuery='' onSearch={handleSearch} />
+			</BrowserRouter>
 		);
 
 		const input = getByTestId('search-input');

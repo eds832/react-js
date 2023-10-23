@@ -1,36 +1,18 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
 import MovieDetails from '../MovieDetails';
-import { MovieType } from './../../../types/movies/types';
 
 describe('MovieDetails', () => {
-	const handleMovieClicked = jest.fn();
-
-	const movie: MovieType = {
-		id: 77,
-		imageUrl: 'https://via.placeholder.com/300x450.png?text=Movie+1',
-		movieName: 'Movie 1',
-		releaseDate: '2022-01-01',
-		rating: 8.9,
-		duration: 177,
-		description: 'A description of the movie',
-		genresList: ['Action', 'Comedy'],
-		onMovieClick: handleMovieClicked,
-	};
-
-	it('renders MovieDetails with the image equals to passed in props', () => {
-		const { getByTestId } = render(<MovieDetails {...movie} />);
-		expect(getByTestId('movie-details-img-77').getAttribute('src')).toBe(
-			movie.imageUrl
+	it('renders MovieDetails with the image equals to default', () => {
+		const { getByTestId } = render(
+			<BrowserRouter>
+				<MovieDetails />
+			</BrowserRouter>
 		);
-	});
-
-	it('calls onMovieClick prop after clicking Go To All Movies button', () => {
-		const { getByTestId } = render(<MovieDetails {...movie} />);
-		const goToAllMoviesButton = getByTestId('go-to-all-movies-button');
-		fireEvent.click(goToAllMoviesButton);
-
-		expect(movie.onMovieClick).toHaveBeenCalledTimes(1);
+		expect(getByTestId('movie-details-img-77').getAttribute('src')).toBe(
+			'https://via.placeholder.com/300x450.png?text=Movie'
+		);
 	});
 });

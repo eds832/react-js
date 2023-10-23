@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import './MovieTile.css';
 import { MovieType } from './../../types/movies/types';
@@ -29,8 +30,7 @@ const MovieTile: FC<MovieTileProps> = ({
 		}
 	};
 
-	const { id, imageUrl, movieName, releaseDate, genresList, onMovieClick } =
-		movie;
+	const { id, imageUrl, movieName, releaseDate, genresList } = movie;
 
 	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
@@ -44,8 +44,39 @@ const MovieTile: FC<MovieTileProps> = ({
 		handleClickThreeDots(event);
 	};
 
+	const navigate = useNavigate();
+
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const link = `/${id}${
+		searchParams.get('query') ||
+		searchParams.get('genre') ||
+		searchParams.get('limit') ||
+		searchParams.get('sortBy')
+			? '?'
+			: ''
+	}${
+		searchParams.get('query')
+			? 'searchBy=title&query=' + searchParams.get('query')
+			: ''
+	}${searchParams.get('query') && searchParams.get('genre') ? '&' : ''}${
+		searchParams.get('genre') ? 'genre=' + searchParams.get('genre') : ''
+	}${
+		(searchParams.get('query') || searchParams.get('genre')) &&
+		searchParams.get('limit')
+			? '&'
+			: ''
+	}${searchParams.get('limit') ? 'limit=' + searchParams.get('limit') : ''}${
+		(searchParams.get('query') ||
+			searchParams.get('genre') ||
+			searchParams.get('limit')) &&
+		searchParams.get('sortBy')
+			? '&'
+			: ''
+	}${searchParams.get('sortBy') ? 'sortBy=' + searchParams.get('sortBy') : ''}`;
+
 	return (
-		<div onClick={() => onMovieClick(id)} data-testid={`movie-tile-${id}-div`}>
+		<div onClick={() => navigate(link)} data-testid={`movie-tile-${id}-div`}>
 			<div className='movie-img'>
 				<img
 					data-testid={'movie-tile-img-' + id}

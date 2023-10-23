@@ -4,7 +4,7 @@ describe('GenresSelect', () => {
 		cy.get('[data-testid="movie-grid"]')
 			.find('.movie-tile-description', { timeout: 10000 })
 			.should('have.length', 50);
-		cy.get('[data-testid="Documentary-genre-button"]').click();
+		cy.get('[data-testid="documentary-genre-button"]').click();
 		cy.get('[data-testid="movie-grid"]')
 			.find('.movie-tile-description', { timeout: 10000 })
 			.should('have.length', 13);
