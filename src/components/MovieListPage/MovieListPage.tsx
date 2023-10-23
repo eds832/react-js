@@ -61,24 +61,9 @@ const MovieListPage: React.FC<MovieListPageProps> = ({
 	};
 
 	const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
-	//const [openAddDialog, setOpenAddDialog] = useState(false);
 	const [openEditDialog, setOpenEditDialog] = useState(null);
 	const [openDeleteDialog, setOpenDeleteDialog] = useState(null);
 	const [count, setCount] = useState(0);
-
-	// useEffect(() => {
-	// 	if (openAddDialogProp) {
-	// 		setOpenAddDialog(true);
-	// 	}
-	// }, [openAddDialogProp]);
-
-	// const handleOpenAddDialog = () => {
-	// 	setOpenAddDialog(true);
-	// };
-
-	// const hadleCloseAddDialog = () => {
-	// 	setOpenAddDialog(false);
-	// };
 
 	const hadleCloseSuccessDialog = () => {
 		setOpenSuccessDialog(false);
