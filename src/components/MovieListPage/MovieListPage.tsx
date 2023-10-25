@@ -18,14 +18,22 @@ interface MovieListPageProps {
 	query: string;
 	openAddDialog: boolean;
 	handleCloseAddDialog: () => void;
+	refreshSearch: (query: string) => void;
 }
 
 const MovieListPage: React.FC<MovieListPageProps> = ({
 	query,
 	openAddDialog,
 	handleCloseAddDialog,
+	refreshSearch,
 }) => {
 	const [searchParams, setSearchParams] = useSearchParams();
+
+	useEffect(() => {
+		if (searchParams.get('query')) {
+			refreshSearch(searchParams.get('query'));
+		}
+	}, []);
 
 	const { movieId } = useParams();
 

@@ -17,7 +17,6 @@ const SearchForm: FC<SearchFormProps> = ({ initialQuery, onSearch }) => {
 	useEffect(() => {
 		if (searchParams.get('query')) {
 			setQuery(searchParams.get('query'));
-			onSearch(searchParams.get('query'));
 		}
 	}, []);
 

@@ -30,6 +30,7 @@ const App = () => {
 							openAddDialog={openAddDialog}
 							handleCloseAddDialog={handleCloseAddDialog}
 							query={search}
+							refreshSearch={handleSearch}
 						/>
 					}
 				>
