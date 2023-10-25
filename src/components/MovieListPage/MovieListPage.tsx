@@ -9,7 +9,6 @@ import { MovieType } from '../../types/movies/types';
 import Footer from '../Footer/Footer';
 import UnderHeaderLine from '../UnderHeaderLine/UnderHeaderLine';
 import Dialog from '../Dialog/Dialog';
-import getReleaseYear from '../../helpers/getReleaseYear';
 import MovieForm from '../MovieForm/MovieForm';
 import Success from '../Success/Success';
 import Delete from '../Delete/Delete';
@@ -39,25 +38,6 @@ const MovieListPage: React.FC<MovieListPageProps> = ({
 	const handleSortChange = (sort: string) => {
 		setSortState(sort);
 		searchParams.set('sortBy', sort);
-	};
-
-	const compareMovies = (m1: MovieType, m2: MovieType) => {
-		if (sortState == RELEASE_DATE) {
-			const releaseYear1 = +getReleaseYear(m1.releaseDate);
-			const releaseYear2 = +getReleaseYear(m2.releaseDate);
-			if (releaseYear1 > releaseYear2) {
-				return -1;
-			} else if (releaseYear1 < releaseYear2) {
-				return 1;
-			}
-		} else {
-			if (m1.movieName < m2.movieName) {
-				return -1;
-			} else if (m1.movieName > m2.movieName) {
-				return 1;
-			}
-		}
-		return 0;
 	};
 
 	const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
@@ -135,7 +115,8 @@ const MovieListPage: React.FC<MovieListPageProps> = ({
 		getMovies(
 			searchParams.get('query'),
 			searchParams.get('genre'),
-			searchParams.get('limit')
+			searchParams.get('limit'),
+			searchParams.get('sortBy')
 		)
 			.then((mv) =>
 				mv.map((m) => ({
@@ -153,8 +134,7 @@ const MovieListPage: React.FC<MovieListPageProps> = ({
 					description: m.overview,
 				}))
 			)
-			.then((m) => {
-				const mv = m.sort(compareMovies);
+			.then((mv) => {
 				setMovies(mv);
 				setCount(mv?.length);
 			})
