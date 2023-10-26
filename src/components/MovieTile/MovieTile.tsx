@@ -9,8 +9,8 @@ import getReleaseYear from './../../helpers/getReleaseYear';
 
 interface MovieTileProps {
 	movie: MovieType;
-	handleEditClicked?: (movieName: string) => void;
-	handleDeleteClicked?: (movieName: string) => void;
+	handleEditClicked?: (id: number) => void;
+	handleDeleteClicked?: (id: number) => void;
 }
 
 const MovieTile: FC<MovieTileProps> = ({
@@ -29,30 +29,33 @@ const MovieTile: FC<MovieTileProps> = ({
 		}
 	};
 
-	const { imageUrl, movieName, releaseDate, genresList, onMovieClick } = movie;
+	const { id, imageUrl, movieName, releaseDate, genresList, onMovieClick } =
+		movie;
 
 	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
-		handleEditClicked(movieName);
+		handleEditClicked(id);
 		handleClickThreeDots(event);
 	};
 
 	const onDeleteClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
-		handleDeleteClicked(movieName);
+		handleDeleteClicked(id);
 		handleClickThreeDots(event);
 	};
 
 	return (
-		<div
-			onClick={() => onMovieClick(movieName)}
-			data-testid={`${movieName.replaceAll(/\s+/g, '')}-div`}
-		>
+		<div onClick={() => onMovieClick(id)} data-testid={`movie-tile-${id}-div`}>
 			<div className='movie-img'>
 				<img
-					data-testid='movie-tile-img'
+					data-testid={'movie-tile-img-' + id}
 					className='movie-img'
 					src={imageUrl}
+					onError={({ currentTarget }) => {
+						currentTarget.onerror = null;
+						currentTarget.src =
+							'https://via.placeholder.com/300x450.png?text=Movie';
+					}}
 				/>
 				{showPopupMenu ? (
 					<PopupMenu
@@ -65,7 +68,7 @@ const MovieTile: FC<MovieTileProps> = ({
 						children='⋮'
 						onClick={handleClickThreeDots}
 						buttonClass='three-dots'
-						dataTestid='three-dots'
+						dataTestid={'three-dots-' + id}
 					/>
 				)}
 			</div>
@@ -73,20 +76,20 @@ const MovieTile: FC<MovieTileProps> = ({
 				<div className='movie-tile-title-div'>
 					<Typography
 						type={TypographyTypes.MOVIE_TILE_TITLE}
-						dataTestid='movie-tile-movie-name'
+						dataTestid={'movie-tile-movie-id-' + id}
 					>
 						{movieName}
 					</Typography>
 				</div>
 				<div className='movie-release-year'>
 					<Typography
-						dataTestid='movie-tile-release-year'
+						dataTestid={'movie-tile-release-year-' + id}
 						children={getReleaseYear(releaseDate)}
 						type={TypographyTypes.MOVIE_TILE_RELEASE_YEAR}
 					/>
 				</div>
 				<Typography
-					dataTestid='movie-tile-genres'
+					dataTestid={'movie-tile-genres-' + id}
 					type={TypographyTypes.MOVIE_GENRES}
 				>
 					{genresList.join(', ')}

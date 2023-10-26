@@ -8,6 +8,7 @@ describe('MovieDetails', () => {
 	const handleMovieClicked = jest.fn();
 
 	const movie: MovieType = {
+		id: 77,
 		imageUrl: 'https://via.placeholder.com/300x450.png?text=Movie+1',
 		movieName: 'Movie 1',
 		releaseDate: '2022-01-01',
@@ -20,7 +21,7 @@ describe('MovieDetails', () => {
 
 	it('renders MovieDetails with the image equals to passed in props', () => {
 		const { getByTestId } = render(<MovieDetails {...movie} />);
-		expect(getByTestId('movie-details-img').getAttribute('src')).toBe(
+		expect(getByTestId('movie-details-img-77').getAttribute('src')).toBe(
 			movie.imageUrl
 		);
 	});

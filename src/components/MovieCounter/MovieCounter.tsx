@@ -3,11 +3,16 @@ import React from 'react';
 import './MovieCounter.css';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 
-const MovieCounter = () => {
+interface MovieCounterProps {
+	count: number;
+}
+
+const MovieCounter: React.FC<MovieCounterProps> = ({ count }) => {
 	return (
 		<div className='movie-counter'>
 			<Typography type={TypographyTypes.MOVIE_COUNTER}>
-				39<span className='lighter'> movies found</span>
+				{count}
+				<span className='lighter'> movies found</span>
 			</Typography>
 		</div>
 	);

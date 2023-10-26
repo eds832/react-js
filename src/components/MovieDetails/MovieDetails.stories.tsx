@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const OnGoToAllMoviesClick: Story = {
 	args: {
+		id: 777,
 		imageUrl: 'https://via.placeholder.com/300x450.png?text=Movie+1',
 		movieName: 'Movie 1',
 		releaseDate: '2022-07-07',
