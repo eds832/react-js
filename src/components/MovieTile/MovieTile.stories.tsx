@@ -34,8 +34,6 @@ const movie: MovieType = {
 export const OnMovieClick: Story = {
 	args: {
 		movie,
-		handleDeleteClicked: () => console.log('Movie 1 clicked to Delete'),
-		handleEditClicked: () => console.log('Movie 1 clicked to Edit'),
 	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);

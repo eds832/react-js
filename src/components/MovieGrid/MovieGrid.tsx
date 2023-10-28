@@ -6,15 +6,9 @@ import { MovieType } from './../../types/movies/types';
 
 interface MovieGridProps {
 	movies: MovieType[];
-	handleEditClicked: (id: number) => void;
-	handleDeleteClicked: (id: number) => void;
 }
 
-const MovieGrid: React.FC<MovieGridProps> = ({
-	movies,
-	handleEditClicked,
-	handleDeleteClicked,
-}) => {
+const MovieGrid: React.FC<MovieGridProps> = ({ movies }) => {
 	return (
 		<div className='movie-grid' data-testid='movie-grid'>
 			{movies.map(({ id, imageUrl, movieName, releaseDate, genresList }) => (
@@ -27,8 +21,6 @@ const MovieGrid: React.FC<MovieGridProps> = ({
 						releaseDate,
 						genresList,
 					}}
-					handleDeleteClicked={handleDeleteClicked}
-					handleEditClicked={handleEditClicked}
 				/>
 			))}
 		</div>

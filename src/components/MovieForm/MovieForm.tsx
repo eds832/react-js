@@ -1,7 +1,6 @@
-import React, { FC, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './MovieForm.css';
-import { MovieType } from './../../types/movies/types';
 import Button from '../Button/Button';
 import getMovieDuration from './../../helpers/getMovieDuration';
 import getReleaseYear from './../../helpers/getReleaseYear';
@@ -9,24 +8,78 @@ import Input from '../Input/Input';
 import TextArea from '../Textarea/Textarea';
 import GenreDropdownSelect from '../GenreDropdownSelect/GenreDropdownSelect';
 import Typography, { TypographyTypes } from '../Typography/Typography';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { addMovie, getMovie, updateMovie } from './../../services';
 
-export interface MovieFormProps {
-	movie?: MovieType;
-	onMovieSubmit: (newMovie: MovieType) => void;
-}
+const MovieForm = () => {
+	const { movieId } = useParams();
 
-const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
-	const newMovie: MovieType = movie
-		? movie
-		: {
-				imageUrl: '',
-				movieName: '',
-				releaseDate: '',
-				genresList: [],
-				rating: 0,
-				duration: 0,
-				description: '',
-		  };
+	const [newMovie, setNewMovie] = useState({
+		imageUrl: '',
+		movieName: '',
+		releaseDate: '',
+		genresList: [],
+		rating: 0,
+		duration: 0,
+		description: '',
+	});
+
+	useEffect(() => {
+		if (movieId) {
+			getMovie(movieId)
+				.then((m) => [m])
+				.then((mv) =>
+					mv.map((m) => ({
+						id: m.id,
+						tagline: m.tagline,
+						imageUrl: m.poster_path,
+						movieName: m.title,
+						releaseDate: m.release_date,
+						genresList: m.genres,
+						rating: m.vote_average,
+						ratingCount: m.vote_count,
+						budget: m.budget,
+						revenue: m.revenue,
+						duration: m.runtime,
+						description: m.overview,
+					}))
+				)
+				.then((m) => setNewMovie(m[0]))
+				.catch((err) => console.log('Error fetching movie', err));
+		}
+	}, [movieId]);
+
+	useEffect(() => handleReset(), [newMovie]);
+
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const link = `/success${
+		searchParams.get('query') ||
+		searchParams.get('genre') ||
+		searchParams.get('limit') ||
+		searchParams.get('sortBy')
+			? '?'
+			: ''
+	}${
+		searchParams.get('query')
+			? 'searchBy=title&query=' + searchParams.get('query')
+			: ''
+	}${searchParams.get('query') && searchParams.get('genre') ? '&' : ''}${
+		searchParams.get('genre') ? 'genre=' + searchParams.get('genre') : ''
+	}${
+		(searchParams.get('query') || searchParams.get('genre')) &&
+		searchParams.get('limit')
+			? '&'
+			: ''
+	}${searchParams.get('limit') ? 'limit=' + searchParams.get('limit') : ''}${
+		(searchParams.get('query') ||
+			searchParams.get('genre') ||
+			searchParams.get('limit')) &&
+		searchParams.get('sortBy')
+			? '&'
+			: ''
+	}${searchParams.get('sortBy') ? 'sortBy=' + searchParams.get('sortBy') : ''}`;
+
 	const [imageUrl, setImageUrl] = useState(newMovie.imageUrl);
 	const [movieName, setMovieName] = useState(newMovie.movieName);
 	const [releaseDate, setReleaseDate] = useState(newMovie.releaseDate);
@@ -62,6 +115,8 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 		setDurationError('');
 		setDescriptionError('');
 	};
+
+	const navigate = useNavigate();
 
 	const handleSubmitMovie = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -105,6 +160,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 		const duration = +durationString;
 		const rating = +ratingString;
 		const updatedMovie = {
+			...newMovie,
 			imageUrl,
 			movieName,
 			releaseDate,
@@ -113,7 +169,13 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 			duration,
 			description,
 		};
-		onMovieSubmit(updatedMovie);
+		if (movieId) {
+			updateMovie(updatedMovie);
+		} else {
+			addMovie(updatedMovie);
+		}
+		navigate(link);
+		navigate(0);
 	};
 
 	const handleDurationLoseFocus = (value: string) => {
@@ -207,7 +269,7 @@ const MovieForm: FC<MovieFormProps> = ({ movie, onMovieSubmit }) => {
 								onLoseFocus={handleDurationLoseFocus}
 								onInputFocus={handleDurationFocus}
 								placeholderText='minutes'
-								pattern='^\d+$|^\d+min$|^\d+h$|^\d+h \d+min$'
+								pattern='^\d+$|^\d+min$|^\d+h $|^\d+h \d+min$'
 								error={durationError}
 								onChange={(e) => {
 									setDurationValue(e);

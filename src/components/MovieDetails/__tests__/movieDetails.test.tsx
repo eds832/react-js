@@ -8,7 +8,7 @@ describe('MovieDetails', () => {
 	it('renders MovieDetails with the image equals to default', () => {
 		const { getByTestId } = render(
 			<BrowserRouter>
-				<MovieDetails />
+				<MovieDetails onClose={jest.fn()} onOpen={jest.fn()} />
 			</BrowserRouter>
 		);
 		expect(getByTestId('movie-details-img-77').getAttribute('src')).toBe(

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import './MovieDetails.css';
 import Netflixroulette from '../Netflixroulette/Netflixroulette';
@@ -9,8 +9,14 @@ import getMovieDuration from './../../helpers/getMovieDuration';
 import getReleaseYear from './../../helpers/getReleaseYear';
 import { getMovie } from './../../services';
 
-const MovieDetails = () => {
+interface MovieDetailsProps {
+	onOpen: () => void;
+	onClose: () => void;
+}
+
+const MovieDetails: React.FC<MovieDetailsProps> = ({ onOpen, onClose }) => {
 	const { movieId } = useParams();
+
 	const [movie, setMovie] = useState({
 		id: movieId ? +movieId : 77,
 		imageUrl: 'https://via.placeholder.com/300x450.png?text=Movie',
@@ -21,6 +27,9 @@ const MovieDetails = () => {
 		description: 'Unknown',
 		genresList: ['All'],
 	});
+
+	useEffect(() => onOpen(), []);
+
 	useEffect(() => {
 		getMovie(movieId)
 			.then((m) => [m])
@@ -75,17 +84,21 @@ const MovieDetails = () => {
 			: ''
 	}${searchParams.get('sortBy') ? 'sortBy=' + searchParams.get('sortBy') : ''}`;
 
+	const navigate = useNavigate();
+
 	return (
 		<>
 			<div className='movie-details-netflixroulette-line'>
 				<Netflixroulette light='light' />
-				<Link to={link}>
-					<Button
-						buttonClass='go-to-all-movies-button'
-						children='⚲'
-						dataTestid='go-to-all-movies-button'
-					/>
-				</Link>
+				<Button
+					onClick={() => {
+						onClose();
+						navigate(link);
+					}}
+					buttonClass='go-to-all-movies-button'
+					children='⚲'
+					dataTestid='go-to-all-movies-button'
+				/>
 			</div>
 			<div className='movie-details'>
 				<div className='movie-details-poster'>
