@@ -2,7 +2,8 @@ import React from 'react';
 
 export interface TextAreaProps {
 	value: string;
-	onChange: (value: string) => void;
+	onChange?: (value: string) => void;
+	directOnChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 	onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 	inputId?: string;
 	labelText?: string;
@@ -14,6 +15,7 @@ export interface TextAreaProps {
 const TextArea: React.FC<TextAreaProps> = ({
 	value,
 	onChange,
+	directOnChange,
 	onKeyDown,
 	inputId,
 	labelText,
@@ -24,7 +26,8 @@ const TextArea: React.FC<TextAreaProps> = ({
 	const handleTextAreaChange = (
 		event: React.ChangeEvent<HTMLTextAreaElement>
 	) => {
-		onChange(event.target.value);
+		onChange?.(event.target.value);
+		directOnChange?.(event);
 	};
 
 	const handleTextAreaKeyDown = (

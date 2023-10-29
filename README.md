@@ -277,3 +277,47 @@ npm run start
 npx cypress run --headed
 
 
+** Task 7 **
+
+Install a form library
+
+Currently the most popular form libraries for React are React Hook Form and Formik. We recommend you to review docs for each of them and then select one that you like better. Consult with your mentor when making the decision.
+
+Implement a possibility to add movies
+
+In Advanced Components module you should have created a Storybook story to showcase a composition of Dialog and MovieForm. In current module you will extend this logic to have a fully functioning form that will let you add new movies.
+
+If you open the design prototype, you will see that a form there is placed in a dialog window on top of the movie list page. In order to achieve this behavior and don't loose context when we add a new movie, you need to define another child route to the route that renders <SeachForm /> element. Use "/new" as a value for path and render a new AddMovieForm component (you need to create it). As a result you should have two levels of nesting. Then add an <Outlet /> to the SearchForm component, so that the router can render nested routes together with the movie search form.
+
+Now if you open the app and navigate to "/new", you should be able to see the movie list page with the movie search form on top and contents of your new AddMovieForm component. In the component render your composition of Dialog + MovieForm, so that your form appears in a dialog on top of existing screen.
+
+Extend MovieForm component to use your form library of choice. Add form fields validation. In the AddMovieForm handle form submit and send a request to an API endpoint for adding new movies. When the request fulfills, close the modal by navigating the user to "/". Alternatively, you can navigate them to /:movieId, where :movieId is ID of newly created movie. You should get it from server response.
+
+On design prototype there's a link to add a new movie. Implement it, so that when a user clicks it, the route changes to "/new". Optionally, you can preserve current search query parameters, so that movie list is not updated when you click on the link.
+
+At the end of this step you should have a possibility to add new movies and then search for them in the list using previously built search functionality.
+
+Implement a possibility to edit a movie
+
+To edit an existing movie, you will need another route. According to the design prototype, editing also happens in a dialog window, similar to adding a new movie. Think about the best place to create your child route and create it similar to adding a new movie. Define the pathname yourself, although we recommend "/:movieId/edit".
+
+Similar to adding a new movie, implement a functionality to edit an existing movie. The difference is that you will need to load movie details and then send them to the MovieForm, so that all form fields get populated with existing data.
+
+In a MovieCard context menu there's a link to edit the movie. When a user clicks on the link, navigate them to "/:movieId/edit" or whatever pathname you have defined.
+At the end of this step you should have a possibility to edit any movie from the list.
+
+Write end-to-end tests
+
+Cover the newly added functionality with more end-to-end tests. Verify that navigating the "Add Movie" link opens a dialog with empty movie form and selecting "Edit" from a movie context menu opens a dialog with pre-populated movie details. Write a test that adds a new movie and verify it appears in the list after.
+
+** Scripts used in task7 **
+
+npm install formik --save-dev
+npm install yup --save-dev
+npx cypress run --headed
+npm run test
+npm run storybook
+npm run start  
+
+
+

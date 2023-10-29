@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import './MovieForm.css';
 import Button from '../Button/Button';
 import getMovieDuration from './../../helpers/getMovieDuration';
-import getReleaseYear from './../../helpers/getReleaseYear';
 import Input from '../Input/Input';
 import TextArea from '../Textarea/Textarea';
 import GenreDropdownSelect from '../GenreDropdownSelect/GenreDropdownSelect';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { addMovie, getMovie, updateMovie } from './../../services';
+import { MovieType } from 'src/types/movies/types';
 
 const MovieForm = () => {
 	const { movieId } = useParams();
@@ -19,8 +21,8 @@ const MovieForm = () => {
 		movieName: '',
 		releaseDate: '',
 		genresList: [],
-		rating: 0,
-		duration: 0,
+		rating: '',
+		duration: '',
 		description: '',
 	});
 
@@ -36,11 +38,11 @@ const MovieForm = () => {
 						movieName: m.title,
 						releaseDate: m.release_date,
 						genresList: m.genres,
-						rating: m.vote_average,
+						rating: m.vote_average?.toString(),
 						ratingCount: m.vote_count,
 						budget: m.budget,
 						revenue: m.revenue,
-						duration: m.runtime,
+						duration: m.runtime?.toString(),
 						description: m.overview,
 					}))
 				)
@@ -49,11 +51,11 @@ const MovieForm = () => {
 		}
 	}, [movieId]);
 
-	useEffect(() => handleReset(), [newMovie]);
+	useEffect(() => resetForm(), [newMovie]);
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const link = `/success${
+	const link = `${
 		searchParams.get('query') ||
 		searchParams.get('genre') ||
 		searchParams.get('limit') ||
@@ -80,103 +82,70 @@ const MovieForm = () => {
 			: ''
 	}${searchParams.get('sortBy') ? 'sortBy=' + searchParams.get('sortBy') : ''}`;
 
-	const [imageUrl, setImageUrl] = useState(newMovie.imageUrl);
-	const [movieName, setMovieName] = useState(newMovie.movieName);
-	const [releaseDate, setReleaseDate] = useState(newMovie.releaseDate);
 	const [genresList, setGenresList] = useState(
 		newMovie.genresList ? newMovie.genresList : []
-	);
-	const [ratingString, setRatingString] = useState(
-		newMovie.rating ? newMovie.rating.toString() : ''
 	);
 	const [durationString, setDurationString] = useState(
 		newMovie.duration ? newMovie.duration.toString() : ''
 	);
 	const [durationValue, setDurationValue] = useState(
-		newMovie.duration ? getMovieDuration(newMovie.duration) : ''
+		newMovie.duration ? getMovieDuration(+newMovie.duration) : ''
 	);
-	const [description, setDescription] = useState(newMovie.description);
+
 	const [dateType, setDateType] = useState('text');
-
-	const [imageUrlError, setImageUrlError] = useState('');
-	const [movieNameError, setMovieNameError] = useState('');
-	const [releaseDateError, setReleaseDateError] = useState('');
-	const [genresError, setGenresError] = useState('');
-	const [ratingError, setRatingError] = useState('');
-	const [durationError, setDurationError] = useState('');
-	const [descriptionError, setDescriptionError] = useState('');
-
-	const cleanErrors = () => {
-		setImageUrlError('');
-		setMovieNameError('');
-		setReleaseDateError('');
-		setGenresError('');
-		setRatingError('');
-		setDurationError('');
-		setDescriptionError('');
-	};
 
 	const navigate = useNavigate();
 
-	const handleSubmitMovie = (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-		cleanErrors();
-		let isError = false;
-		if (!imageUrl || imageUrl.trim().length < 5) {
-			setImageUrlError('Incorrect movie image URL');
-			isError = true;
-		}
-		if (!movieName || movieName.trim().length < 2) {
-			setMovieNameError('Incorrect movie title');
-			isError = true;
-		}
-		if (
-			!releaseDate ||
-			+getReleaseYear(releaseDate) < 1900 ||
-			+getReleaseYear(releaseDate) > new Date().getFullYear()
-		) {
-			setReleaseDateError('Incorrect release date');
-			isError = true;
-		}
-		if (genresList.length < 1) {
-			setGenresError('Select at least one genre to proceed');
-			isError = true;
-		}
-		if (!ratingString || +ratingString < 0) {
-			setRatingError('Incorrect rating');
-			isError = true;
-		}
-		if (!durationString || +durationString < 1) {
-			setDurationError('Incorrect movie duration');
-			isError = true;
-		}
-		if (!description || description.trim().length < 2) {
-			setDescriptionError('Incorrect movie description');
-			isError = true;
-		}
-		if (isError) {
-			return;
-		}
-		const duration = +durationString;
-		const rating = +ratingString;
-		const updatedMovie = {
-			...newMovie,
-			imageUrl,
-			movieName,
-			releaseDate,
-			genresList,
-			rating,
-			duration,
-			description,
-		};
+	const handleSubmitMovieWithFormik = (movie: MovieType) => {
 		if (movieId) {
-			updateMovie(updatedMovie);
+			updateMovie(movie).then((id) => {
+				if (id) {
+					navigate(`/success${link}`);
+					navigate(0);
+				} else {
+					navigate(`/${link}`);
+				}
+			});
 		} else {
-			addMovie(updatedMovie);
+			addMovie(movie).then((id) => {
+				if (id) {
+					navigate(`/success${link}`);
+					navigate(0);
+				} else {
+					navigate(`/${link}`);
+				}
+			});
 		}
-		navigate(link);
-		navigate(0);
 	};
+
+	const validationSchema = Yup.object({
+		imageUrl: Yup.string()
+			.min(5, 'Incorrect movie image URL')
+			.required('Incorrect movie image URL'),
+		movieName: Yup.string()
+			.min(2, 'Incorrect movie title')
+			.required('Incorrect movie title'),
+		releaseDate: Yup.string().required('Incorrect release date'),
+		genresList: Yup.array()
+			.min(1, 'Select at least one genre to proceed')
+			.required(),
+		rating: Yup.string().required('Incorrect rating'),
+		duration: Yup.string().required('Incorrect movie duration'),
+		description: Yup.string()
+			.min(2, 'Incorrect movie description')
+			.required('Incorrect movie description'),
+	});
+
+	const formik = useFormik({
+		initialValues: { ...newMovie },
+		onSubmit: handleSubmitMovieWithFormik,
+		validationSchema,
+	});
+
+	useEffect(() => {
+		formik.values.genresList = genresList;
+		formik.values.duration = durationString;
+	}, [genresList, durationString]);
 
 	const handleDurationLoseFocus = (value: string) => {
 		setDurationString(value);
@@ -185,45 +154,43 @@ const MovieForm = () => {
 
 	const handleDurationFocus = () => {
 		setDurationValue(durationString);
+		formik.values.duration = durationString;
 	};
 
-	const handleReset = () => {
-		setImageUrl(newMovie.imageUrl);
-		setMovieName(newMovie.movieName);
-		setReleaseDate(newMovie.releaseDate);
-		setGenresList(newMovie.genresList ? newMovie.genresList : []);
-		setRatingString(newMovie.rating ? newMovie.rating.toString() : '');
+	const resetForm = () => {
+		formik.resetForm({ values: { ...newMovie } });
 		setDurationString(newMovie.duration ? newMovie.duration.toString() : '');
 		setDurationValue(
-			newMovie.duration ? getMovieDuration(newMovie.duration) : ''
+			newMovie.duration ? getMovieDuration(+newMovie.duration) : ''
 		);
-		setDescription(newMovie.description);
-		cleanErrors();
+		setGenresList(newMovie.genresList ? newMovie.genresList : []);
 	};
 
 	return (
 		<div className='movie-edit-form'>
-			<form onSubmit={handleSubmitMovie}>
+			<form onSubmit={formik.handleSubmit}>
 				<div className='movie-edit-form-top'>
 					<div className='movie-edit-form-top-left'>
 						<div>
 							<Input
+								inputId='movieName'
 								dataTestid='movie-form-title-input'
 								labelText='TITLE'
-								value={movieName}
+								value={formik.values.movieName}
 								placeholderText='Enter Movie Title'
-								error={movieNameError}
-								onChange={setMovieName}
+								error={formik.touched.movieName && formik.errors.movieName}
+								directOnChange={formik.handleChange}
 							/>
 						</div>
 						<div className='edit-movie-title'>
 							<Input
+								inputId='imageUrl'
 								dataTestid='movie-form-url-input'
 								labelText='MOVIE URL'
-								value={imageUrl}
+								value={formik.values.imageUrl}
 								placeholderText='https://'
-								error={imageUrlError}
-								onChange={setImageUrl}
+								error={formik.touched.imageUrl && formik.errors.imageUrl}
+								directOnChange={formik.handleChange}
 							/>
 						</div>
 						<div className='edit-movie-genre'>
@@ -231,7 +198,10 @@ const MovieForm = () => {
 								labelText='GENRE'
 								placeholderText='Select Genre'
 								value={genresList}
-								error={genresError}
+								error={
+									formik.touched.genresList &&
+									formik.errors.genresList?.toString()
+								}
 								onSelect={setGenresList}
 							/>
 						</div>
@@ -239,30 +209,36 @@ const MovieForm = () => {
 					<div className='movie-edit-form-top-right'>
 						<div className='release-date-input-wrapper'>
 							<Input
+								inputId='releaseDate'
 								dataTestid='movie-form-date-input'
 								labelText='RELEASE DATE'
-								value={releaseDate}
-								onChange={setReleaseDate}
+								value={formik.values.releaseDate}
+								directOnChange={formik.handleChange}
 								onInputFocus={(e) => setDateType('date')}
 								onLoseFocus={(e) => setDateType('text')}
 								type={dateType}
 								placeholderText='Select Date'
-								error={releaseDateError}
+								error={
+									formik.touched.releaseDate &&
+									formik.errors.releaseDate?.toString()
+								}
 							/>
 						</div>
 						<div className='edit-movie-rating'>
 							<Input
+								inputId='rating'
 								dataTestid='movie-form-rating-input'
 								labelText='RATING'
-								value={ratingString}
+								value={formik.values.rating.toString()}
 								placeholderText='7.7'
 								pattern='^\d$|^\d\.$|^\d\.\d$'
-								error={ratingError}
-								onChange={setRatingString}
+								error={formik.touched.rating && formik.errors.rating}
+								directOnChange={formik.handleChange}
 							/>
 						</div>
 						<div className='edit-movie-duration'>
 							<Input
+								inputId='duration'
 								dataTestid='movie-form-duration-input'
 								labelText='RUNTIME'
 								value={durationValue}
@@ -270,7 +246,7 @@ const MovieForm = () => {
 								onInputFocus={handleDurationFocus}
 								placeholderText='minutes'
 								pattern='^\d+$|^\d+min$|^\d+h $|^\d+h \d+min$'
-								error={durationError}
+								error={formik.touched.duration && formik.errors.duration}
 								onChange={(e) => {
 									setDurationValue(e);
 									setDurationString(e);
@@ -281,17 +257,18 @@ const MovieForm = () => {
 				</div>
 				<div className='movie-edit-form-textarea'>
 					<TextArea
+						inputId='description'
 						dataTestid='movie-form-description-input'
-						onChange={setDescription}
-						value={description}
+						directOnChange={formik.handleChange}
+						value={formik.values.description}
 						labelText='OVERVIEW'
-						error={descriptionError}
+						error={formik.touched.description && formik.errors.description}
 						placeholderText='Movie description'
 					/>
 				</div>
 				<div className='movie-edit-form-buttons'>
 					<div className='movie-edit-form-reset'>
-						<Button onClick={handleReset} type='reset'>
+						<Button type='reset' onClick={resetForm}>
 							<Typography type={TypographyTypes.DELETE_CONFIRM}>
 								RESET
 							</Typography>

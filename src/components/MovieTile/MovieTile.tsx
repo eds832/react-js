@@ -10,15 +10,9 @@ import getReleaseYear from './../../helpers/getReleaseYear';
 
 interface MovieTileProps {
 	movie: MovieType;
-	//handleEditClicked?: (id: number) => void;
-	//handleDeleteClicked?: (id: number) => void;
 }
 
-const MovieTile: FC<MovieTileProps> = ({
-	movie,
-	//handleEditClicked,
-	//handleDeleteClicked,
-}) => {
+const MovieTile: FC<MovieTileProps> = ({ movie }) => {
 	const [showPopupMenu, setShowPopupMenu] = useState(false);
 
 	const handleClickThreeDots = (event: React.MouseEvent<HTMLElement>) => {
@@ -71,14 +65,12 @@ const MovieTile: FC<MovieTileProps> = ({
 
 	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
-		//handleEditClicked(id);
 		handleClickThreeDots(event);
 		navigate(linkToEdit);
 	};
 
 	const onDeleteClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
-		//handleDeleteClicked(id);
 		handleClickThreeDots(event);
 		navigate(linkToDelete);
 	};
