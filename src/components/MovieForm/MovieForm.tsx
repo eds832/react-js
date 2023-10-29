@@ -104,6 +104,7 @@ const MovieForm = () => {
 					navigate(0);
 				} else {
 					navigate(`/${link}`);
+					navigate(0);
 				}
 			});
 		} else {
@@ -113,6 +114,7 @@ const MovieForm = () => {
 					navigate(0);
 				} else {
 					navigate(`/${link}`);
+					navigate(0);
 				}
 			});
 		}
