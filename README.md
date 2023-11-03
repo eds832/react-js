@@ -318,6 +318,29 @@ npx cypress run --headed
 npm run test
 npm run storybook
 npm run start  
+npx cypress run --headed --spec "cypress\e2e\MovieForm\MovieForm.cy.js"
+
+
+** Task 8 **
+
+Choose a framework
+
+Consider either writing your own solution for server-side rendering or switch to Remix or Next.js framework.
+The frameworks support server-side rendering out of the box, but would require you to rewrite parts of your logic. The good thing is that Remix comes with react-router, so you can keep most of your routing code and make it work with Remix without rewriting a lot of code. If you choose Next.js, be ready to rewrite the routing since the framework uses its own router.
+Selecting a custom solution is only recommended if you're curious and ready to extreme challenges.
+
+Implement SSR
+
+Disable JavaScript in your browser. Open your app and see that it does not work with disabled JavaScript. This simulates a web crawler environment, although modern web crawlers learned to run sync JavaScript. But since your app performs async AJAX calls after all the code is loaded in the browser, this is not SEO-optimized yet.
+Your task for this module is to make your app work without JavaScript in the browser. Navigating to different URLs should display correct UI with correct search results. The proper work of search, filter and sort components with JavaScript disabled is not required, though still desired to complete this task.
+
+To get 90-100 point:
+Opening the app with disabled JavaScript loads the movies page with movie list containing movies from API.
+Opening the app with search parameters and JavaScript disabled loads the movies page with proper search results.
+Clicking on a movie in the list with JavaScript disabled navigates to /:movieId route and shows selected movie details.
+Opening /:movieId route with JavaScript disabled shows the selected movie description.
+
+
 
 
 
