@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 
-import './GenreSelect.css';
 import Button from '../Button/Button';
 
 export interface GenreSelectProps {

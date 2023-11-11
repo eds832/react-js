@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './PopupMenu.css';
 import Button from '../Button/Button';
 
 interface PopupMenuProps {

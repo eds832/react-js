@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-import './GenreDropdownSelect.css';
 import { GENRES } from '../../constants';
 import Input from '../Input/Input';
 

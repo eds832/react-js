@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './SortControl.css';
 import Option from '../Option/Option';
 import { RELEASE_DATE, TITLE } from './../../constants';
 

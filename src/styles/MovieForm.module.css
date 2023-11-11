@@ -39,7 +39,7 @@
 }
 
 .release-date-input-wrapper input[type=text] {
-    background: url("./../../assets/calendar.svg") right / contain no-repeat; 
+    background: url("./../assets/calendar.svg") right / contain no-repeat; 
     background-size: 24px 24px; 
     background-position: 94% 50%;
     background-color: #424242;

@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
-import { BrowserRouter } from 'react-router-dom';
-import React from 'react';
 
 import MovieTile from './MovieTile';
 import { MovieType } from './../../types/movies/types';
@@ -10,13 +8,6 @@ const meta = {
 	title: 'MovieTile component',
 	component: MovieTile,
 	tags: ['autodocs'],
-	decorators: [
-		(Story) => (
-			<BrowserRouter>
-				<Story />
-			</BrowserRouter>
-		),
-	],
 } satisfies Meta<typeof MovieTile>;
 
 export default meta;
@@ -29,6 +20,9 @@ const movie: MovieType = {
 	movieName: 'Movie 1',
 	releaseDate: '2022-07-07',
 	genresList: ['Comedy', 'Action'],
+	rating: 7.7,
+	duration: 111,
+	description: 'A movie description',
 };
 
 export const OnMovieClick: Story = {

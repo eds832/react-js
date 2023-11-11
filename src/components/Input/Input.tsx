@@ -61,7 +61,13 @@ const Input: React.FC<InputProps> = ({
 			<label htmlFor={inputId}>{labelText}</label>
 			<input
 				id={inputId}
-				value={pattern ? (value.match(pattern) ? value : '') : value}
+				value={
+					pattern
+						? typeof value === 'string' && value.match(pattern)
+							? value
+							: ''
+						: value
+				}
 				onChange={handleInputChange}
 				onKeyDown={handleInputKeyDown}
 				onBlur={handleLoseFocus}

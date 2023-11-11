@@ -1,35 +1,29 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
-import './SearchForm.css';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 
-interface SearchFormProps {
-	initialQuery: string;
-	onSearch: (query: string) => void;
-}
-
-const SearchForm: FC<SearchFormProps> = ({ initialQuery, onSearch }) => {
-	const [query, setQuery] = useState(initialQuery);
-	const [searchParams, setSearchParams] = useSearchParams();
-
-	useEffect(() => {
-		if (searchParams.get('query')) {
-			setQuery(searchParams.get('query'));
-		}
-	}, []);
+const SearchForm = () => {
+	const router = useRouter();
+	const { query } = router;
+	const { search } = query;
+	const [searchEntry, setSearchEntry] = useState(search ? search : '');
 
 	const handleInputChange = (value: string) => {
-		setQuery(value);
+		setSearchEntry(value);
 		if (!value) {
-			onSearch('');
+			router.replace({
+				query: { ...query, search: '' },
+			});
 		}
 	};
 
-	const handleSearch = (event: { preventDefault: () => void }) => {
-		event.preventDefault();
-		onSearch(query);
+	const handleSearch = (event?: { preventDefault: () => void }) => {
+		event?.preventDefault();
+		router.replace({
+			query: { ...query, search: searchEntry },
+		});
 	};
 
 	return (
@@ -37,7 +31,7 @@ const SearchForm: FC<SearchFormProps> = ({ initialQuery, onSearch }) => {
 			<Input
 				type='text'
 				placeholderText='What do you want to watch...'
-				value={query}
+				value={searchEntry?.toString()}
 				onChange={handleInputChange}
 				dataTestid='search-input'
 			/>

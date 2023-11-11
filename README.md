@@ -340,7 +340,16 @@ Opening the app with search parameters and JavaScript disabled loads the movies 
 Clicking on a movie in the list with JavaScript disabled navigates to /:movieId route and shows selected movie details.
 Opening /:movieId route with JavaScript disabled shows the selected movie description.
 
+** Scripts used in task8 **
 
-
-
+npm install --save-dev next
+npm install --save-dev next-redux-wrapper
+npm install --save-dev @reduxjs/toolkit
+npm uninstall react-router-dom
+npm install --save-dev redux-mock-store
+npm install --save-dev querystring-es3
+dev mode: npm run dev 
+build: npm run build
+run after build (can work without JS): npm run start
+runs on http://localhost:3000/movies
 

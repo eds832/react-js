@@ -1,100 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useRouter } from 'next/router';
 
-import './MovieDetails.css';
 import Netflixroulette from '../Netflixroulette/Netflixroulette';
 import Button from '../Button/Button';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import getMovieDuration from './../../helpers/getMovieDuration';
 import getReleaseYear from './../../helpers/getReleaseYear';
-import { getMovie } from './../../services';
+import useQuery from '../../hooks/useQuery';
+import { MovieType } from '../../types/movies/types';
 
 interface MovieDetailsProps {
-	onOpen: () => void;
-	onClose: () => void;
+	movie: MovieType;
 }
 
-const MovieDetails: React.FC<MovieDetailsProps> = ({ onOpen, onClose }) => {
-	const { movieId } = useParams();
+const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => {
+	const router = useRouter();
+	const q = useQuery();
+	const { query } = router;
 
-	const [movie, setMovie] = useState({
-		id: movieId ? +movieId : 77,
-		imageUrl: 'https://via.placeholder.com/300x450.png?text=Movie',
-		movieName: 'Unknown Movie',
-		releaseDate: '2000-01-01',
-		rating: 5,
-		duration: 60,
-		description: 'Unknown',
-		genresList: ['All'],
-	});
+	const handleGoToAllMoviesClick = () => {
+		q.delete('movie');
+		delete query.movieId;
+		router.replace({
+			pathname: '/movies',
+			query: { ...query },
+		});
+	};
 
-	useEffect(() => onOpen(), []);
-
-	useEffect(() => {
-		getMovie(movieId)
-			.then((m) => [m])
-			.then((mv) =>
-				mv.map((m) => ({
-					id: m.id,
-					tagline: m.tagline,
-					imageUrl: m.poster_path,
-					movieName: m.title,
-					releaseDate: m.release_date,
-					genresList: m.genres,
-					rating: m.vote_average,
-					ratingCount: m.vote_count,
-					budget: m.budget,
-					revenue: m.revenue,
-					duration: m.runtime,
-					description: m.overview,
-				}))
-			)
-			.then((m) => setMovie(m[0]))
-			.catch((err) => console.log('Error fetching movie', err));
-	}, [movieId]);
 	const ratingString =
-		movie.rating % 1 == 0 ? movie.rating + '.0' : movie.rating + '';
-
-	const [searchParams, setSearchParams] = useSearchParams();
-
-	const link = `/${
-		searchParams.get('query') ||
-		searchParams.get('genre') ||
-		searchParams.get('limit') ||
-		searchParams.get('sortBy')
-			? '?'
-			: ''
-	}${
-		searchParams.get('query')
-			? 'searchBy=title&query=' + searchParams.get('query')
-			: ''
-	}${searchParams.get('query') && searchParams.get('genre') ? '&' : ''}${
-		searchParams.get('genre') ? 'genre=' + searchParams.get('genre') : ''
-	}${
-		(searchParams.get('query') || searchParams.get('genre')) &&
-		searchParams.get('limit')
-			? '&'
-			: ''
-	}${searchParams.get('limit') ? 'limit=' + searchParams.get('limit') : ''}${
-		(searchParams.get('query') ||
-			searchParams.get('genre') ||
-			searchParams.get('limit')) &&
-		searchParams.get('sortBy')
-			? '&'
-			: ''
-	}${searchParams.get('sortBy') ? 'sortBy=' + searchParams.get('sortBy') : ''}`;
-
-	const navigate = useNavigate();
-
+		+movie.rating % 1 == 0 ? movie.rating + '.0' : movie.rating + '';
 	return (
 		<>
 			<div className='movie-details-netflixroulette-line'>
 				<Netflixroulette light='light' />
 				<Button
-					onClick={() => {
-						onClose();
-						navigate(link);
-					}}
+					onClick={handleGoToAllMoviesClick}
 					buttonClass='go-to-all-movies-button'
 					children='⚲'
 					dataTestid='go-to-all-movies-button'
@@ -103,7 +43,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ onOpen, onClose }) => {
 			<div className='movie-details'>
 				<div className='movie-details-poster'>
 					<img
-						data-testid={'movie-details-img-' + movie.id}
+						data-testid={'movie-details-img'}
 						src={movie.imageUrl}
 						alt={movie.movieName}
 						onError={({ currentTarget }) => {
@@ -149,7 +89,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ onOpen, onClose }) => {
 							dataTestid={'movie-details-duration-' + movie.id}
 							type={TypographyTypes.MOVIE_DETAILS_RELEASE_YEAR_AND_DURATION}
 						>
-							{getMovieDuration(movie.duration)}
+							{getMovieDuration(+movie.duration)}
 						</Typography>
 					</div>
 					<Typography

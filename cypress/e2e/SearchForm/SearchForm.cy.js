@@ -1,6 +1,6 @@
 describe('SearchForm', () => {
 	it('find correct movie by a query', () => {
-		cy.visit('http://localhost:3000/');
+		cy.visit('http://localhost:3000/movies');
 		cy.get('[data-testid="movie-grid"]')
 			.find('.movie-tile-description', { timeout: 10000 })
 			.should('have.length', 50);

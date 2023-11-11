@@ -1,146 +1,87 @@
+import { HYDRATE } from 'next-redux-wrapper';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+import convertToMovieType from './helpers/convertToMovieType';
+import convertFromMovieType from './helpers/convertFromMovieType';
 import { TITLE } from './constants';
 import { MovieType } from './types/movies/types';
 
-export let abortController = null;
+interface ApiProps {
+	movieId?: string;
+	searchEntry?: string;
+	sortBy?: string;
+	filter?: string;
+	limit?: string;
+	search?: string;
+}
 
-export const getMovies = async (
-	search: string,
-	filter: string,
-	limit: string,
-	sort: string
-) => {
-	abortController = new AbortController();
-	const url = `http://localhost:4000/movies?${
-		search ? 'searchBy=title&search=' + search : ''
-	}${search && filter ? '&' : ''}${filter ? 'filter=' + filter : ''}${
-		(search || filter) && limit ? '&' : ''
-	}${limit ? 'limit=' + limit : ''}${
-		(search || filter || limit) && sort ? '&' : ''
-	}
-	${
-		sort
-			? sort == TITLE
-				? 'sortBy=title&sortOrder=asc'
-				: 'sortBy=release_date&sortOrder=desc'
-			: ''
-	}`;
-	console.log('fetch', url);
-	const response = await fetch(url, {
-		method: 'GET',
-		signal: abortController.signal,
-		headers: {
-			'Content-Type': 'application/json',
-			accept: '*/*',
-		},
-	});
-	if (response.ok) {
-		const data = await response.json();
-		abortController = null;
-		return data.data;
-	} else {
-		console.log('fetch movies failed', response);
-		return [];
-	}
-};
-
-export const getMovie = async (movieId: string) => {
-	const url = `http://localhost:4000/movies/${movieId}`;
-	console.log('fetch', url);
-	const response = await fetch(url, {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			accept: '*/*',
-		},
-	});
-	if (response.ok) {
-		const data = await response.json();
-		return data;
-	} else {
-		console.log('fetch movie failed', response);
-		return {};
-	}
-};
-
-export const deleteMovie = async (movieId: string) => {
-	const url = `http://localhost:4000/movies/${movieId}`;
-	console.log('delete', url);
-	const response = await fetch(url, {
-		method: 'DELETE',
-		headers: {
-			'Content-Type': 'application/json',
-			accept: '*/*',
-		},
-	});
-	if (response.ok) {
-		return true;
-	} else {
-		console.log('delete movie failed', response);
-		return false;
-	}
-};
-
-export const addMovie = async (movie: MovieType) => {
-	const url = 'http://localhost:4000/movies';
-	console.log('Post', url);
-	const response = await fetch(url, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			accept: 'application/json',
-		},
-		body: JSON.stringify({
-			title: movie.movieName,
-			tagline: movie.tagline,
-			vote_average: +movie.rating,
-			vote_count: movie.ratingCount,
-			release_date: movie.releaseDate,
-			poster_path: movie.imageUrl,
-			overview: movie.description,
-			budget: movie.budget,
-			revenue: movie.revenue,
-			runtime: +movie.duration,
-			genres: movie.genresList,
+export const api = createApi({
+	reducerPath: 'api',
+	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/' }),
+	tagTypes: ['Movies'],
+	extractRehydrationInfo(action, { reducerPath }) {
+		if (action.type === HYDRATE) {
+			return action.payload[reducerPath];
+		}
+	},
+	endpoints: (builder) => ({
+		getMovies: builder.query<any, ApiProps>({
+			query: (arg) => {
+				const { sortBy, filter, limit, search } = arg;
+				const path = 'movies?';
+				const searchParams = new URLSearchParams('');
+				filter !== 'All' ? searchParams.append('filter', filter) : undefined;
+				sortBy === TITLE
+					? searchParams.append('sortBy', TITLE.toLowerCase())
+					: searchParams.append('sortBy', 'release_date');
+				sortBy === TITLE
+					? searchParams.append('sortOrder', 'asc')
+					: searchParams.append('sortOrder', 'desc');
+				search ? searchParams.append('search', search) : undefined;
+				limit
+					? searchParams.append('limit', limit)
+					: searchParams.append('limit', '50');
+				searchParams.append('searchBy', 'title');
+				return path.concat(searchParams.toString());
+			},
+			providesTags: ['Movies'],
+			transformResponse: (response: { data: MovieType[] }) =>
+				response.data.map((mv) => convertToMovieType(mv)),
 		}),
-	});
-	if (response.ok) {
-		const data = await response.json();
-		return data?.id;
-	} else {
-		console.log('post movie failed', response);
-		return null;
-	}
-};
-
-export const updateMovie = async (movie: MovieType) => {
-	const url = 'http://localhost:4000/movies';
-	console.log('Put', url);
-	const response = await fetch(url, {
-		method: 'PUT',
-		headers: {
-			'Content-Type': 'application/json',
-			accept: 'application/json',
-		},
-		body: JSON.stringify({
-			id: movie.id,
-			title: movie.movieName,
-			tagline: movie.tagline,
-			vote_average: +movie.rating,
-			vote_count: movie.ratingCount,
-			release_date: movie.releaseDate,
-			poster_path: movie.imageUrl,
-			overview: movie.description,
-			budget: movie.budget,
-			revenue: movie.revenue,
-			runtime: +movie.duration,
-			genres: movie.genresList,
+		getMovieById: builder.query<any, any>({
+			query: (id: string | number) => `movies/${+id}`,
+			transformResponse: (response: MovieType) => convertToMovieType(response),
 		}),
-	});
-	if (response.ok) {
-		const data = await response.json();
-		return data?.id;
-	} else {
-		console.log('put movie failed', response);
-		return null;
-	}
-};
+		createMovie: builder.mutation<MovieType, Omit<MovieType, 'id'>>({
+			query(data) {
+				const { ...body } = convertFromMovieType(data);
+				return {
+					url: 'movies',
+					method: 'POST',
+					body,
+				};
+			},
+			invalidatesTags: [{ type: 'Movies' }],
+		}),
+		updateMovie: builder.mutation<MovieType, MovieType>({
+			query(data) {
+				const { ...body } = convertFromMovieType(data);
+				return {
+					url: 'movies',
+					method: 'PUT',
+					body,
+				};
+			},
+			invalidatesTags: [{ type: 'Movies' }],
+		}),
+		deleteMovie: builder.mutation<{ success: boolean; id: number }, number>({
+			query(id) {
+				return {
+					url: `movies/${id}`,
+					method: 'DELETE',
+				};
+			},
+			invalidatesTags: (movie) => [{ type: 'Movies', id: movie.id }],
+		}),
+	}),
+});

@@ -1,85 +1,58 @@
-import React, { FC, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import React, { FC, useContext, useState } from 'react';
 
-import './MovieTile.css';
 import { MovieType } from './../../types/movies/types';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import Button from '../Button/Button';
 import PopupMenu from '../PopupMenu/PopupMenu';
 import getReleaseYear from './../../helpers/getReleaseYear';
+import { useAppDispatch } from 'src/redux/store';
+import { moviesActions } from '../../redux/movieSlice';
+import { MovieDialogContext } from '../../context/MovieDialogContextProvider';
+import { useRouter } from 'next/router';
 
 interface MovieTileProps {
 	movie: MovieType;
 }
 
 const MovieTile: FC<MovieTileProps> = ({ movie }) => {
+	const router = useRouter();
+	const { query } = router;
+	const dispatch = useAppDispatch();
+	const [, setOpenDialog] = useContext(MovieDialogContext);
+
 	const [showPopupMenu, setShowPopupMenu] = useState(false);
 
 	const handleClickThreeDots = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
-		if (showPopupMenu) {
-			setShowPopupMenu(false);
-		} else {
-			setShowPopupMenu(true);
-		}
+		setShowPopupMenu(!showPopupMenu);
 	};
 
 	const { id, imageUrl, movieName, releaseDate, genresList } = movie;
 
-	const navigate = useNavigate();
-
-	const [searchParams, setSearchParams] = useSearchParams();
-
-	const partialLink = `${
-		searchParams.get('query') ||
-		searchParams.get('genre') ||
-		searchParams.get('limit') ||
-		searchParams.get('sortBy')
-			? '?'
-			: ''
-	}${
-		searchParams.get('query')
-			? 'searchBy=title&query=' + searchParams.get('query')
-			: ''
-	}${searchParams.get('query') && searchParams.get('genre') ? '&' : ''}${
-		searchParams.get('genre') ? 'genre=' + searchParams.get('genre') : ''
-	}${
-		(searchParams.get('query') || searchParams.get('genre')) &&
-		searchParams.get('limit')
-			? '&'
-			: ''
-	}${searchParams.get('limit') ? 'limit=' + searchParams.get('limit') : ''}${
-		(searchParams.get('query') ||
-			searchParams.get('genre') ||
-			searchParams.get('limit')) &&
-		searchParams.get('sortBy')
-			? '&'
-			: ''
-	}${searchParams.get('sortBy') ? 'sortBy=' + searchParams.get('sortBy') : ''}`;
-
-	const linkToDetails = `/${id}${partialLink}`;
-
-	const linkToEdit = `/${id}/edit${partialLink}`;
-
-	const linkToDelete = `/${id}/delete${partialLink}`;
-
 	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
+		dispatch(moviesActions.setMovie(movie));
+		setOpenDialog('edit');
 		handleClickThreeDots(event);
-		navigate(linkToEdit);
 	};
 
 	const onDeleteClicked = (event: React.MouseEvent<HTMLElement>) => {
 		event.stopPropagation();
+		dispatch(moviesActions.setMovie(movie));
+		setOpenDialog('delete');
 		handleClickThreeDots(event);
-		navigate(linkToDelete);
+	};
+
+	const handleMovieClick = () => {
+		dispatch(moviesActions.setMovie(movie));
+		router.replace({
+			pathname: '/movies/[movieId]',
+			query: { ...query, movieId: movie.id },
+		});
 	};
 
 	return (
-		<div
-			onClick={() => navigate(linkToDetails)}
-			data-testid={`movie-tile-${id}-div`}
-		>
+		<div onClick={handleMovieClick} data-testid={`movie-tile-${id}-div`}>
 			<div className='movie-img'>
 				<img
 					data-testid={'movie-tile-img-' + id}

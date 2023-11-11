@@ -43,6 +43,8 @@
 			}
 		],
 		"@typescript-eslint/no-namespace": "off",
-		"no-duplicate-imports": "error"
+		"no-duplicate-imports": "error",		
+		"react/no-unescaped-entities": "off",
+    	"@next/next/no-page-custom-font": "off"
 	}
 }
