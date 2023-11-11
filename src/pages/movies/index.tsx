@@ -9,7 +9,6 @@ import MovieListPage from '../../components/MovieListPage/MovieListPage';
 import MovieDialogContextProvider from '../../context/MovieDialogContextProvider';
 import Layout from '../../components/Layout/Layout';
 import { MovieType } from '../../types/movies/types';
-import getReleaseYear from '../../helpers/getReleaseYear';
 import { TITLE } from '../../constants';
 import capitalize from '../../helpers/capitalize';
 

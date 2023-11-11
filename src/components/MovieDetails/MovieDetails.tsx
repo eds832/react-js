@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 
 import Netflixroulette from '../Netflixroulette/Netflixroulette';
