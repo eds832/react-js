@@ -23,6 +23,7 @@ const MovieTile: FC<MovieTileProps> = ({ movie }) => {
 	const [showPopupMenu, setShowPopupMenu] = useState(false);
 
 	const handleClickThreeDots = (event: React.MouseEvent<HTMLElement>) => {
+		event.preventDefault();
 		event.stopPropagation();
 		setShowPopupMenu(!showPopupMenu);
 	};
@@ -30,6 +31,7 @@ const MovieTile: FC<MovieTileProps> = ({ movie }) => {
 	const { id, imageUrl, movieName, releaseDate, genresList } = movie;
 
 	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
+		event.preventDefault();
 		event.stopPropagation();
 		dispatch(moviesActions.setMovie(movie));
 		setOpenDialog('edit');
@@ -37,13 +39,16 @@ const MovieTile: FC<MovieTileProps> = ({ movie }) => {
 	};
 
 	const onDeleteClicked = (event: React.MouseEvent<HTMLElement>) => {
+		event.preventDefault();
 		event.stopPropagation();
 		dispatch(moviesActions.setMovie(movie));
 		setOpenDialog('delete');
 		handleClickThreeDots(event);
 	};
 
-	const handleMovieClick = () => {
+	const handleMovieClick = (event: React.MouseEvent<HTMLElement>) => {
+		event.preventDefault();
+		event.stopPropagation();
 		dispatch(moviesActions.setMovie(movie));
 		router.replace({
 			pathname: '/movies/[movieId]',
@@ -52,7 +57,11 @@ const MovieTile: FC<MovieTileProps> = ({ movie }) => {
 	};
 
 	return (
-		<div onClick={handleMovieClick} data-testid={`movie-tile-${id}-div`}>
+		<a
+			onClick={handleMovieClick}
+			data-testid={`movie-tile-${id}-div`}
+			href={`/movies/${movie.id}`}
+		>
 			<div className='movie-img'>
 				<img
 					data-testid={'movie-tile-img-' + id}
@@ -102,7 +111,7 @@ const MovieTile: FC<MovieTileProps> = ({ movie }) => {
 					{genresList.join(', ')}
 				</Typography>
 			</div>
-		</div>
+		</a>
 	);
 };
 
