@@ -18,7 +18,9 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => {
 	const q = useQuery();
 	const { query } = router;
 
-	const handleGoToAllMoviesClick = () => {
+	const handleGoToAllMoviesClick = (event: React.MouseEvent<HTMLElement>) => {
+		event.preventDefault();
+		event.stopPropagation();
 		q.delete('movie');
 		delete query.movieId;
 		router.replace({
@@ -33,12 +35,15 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => {
 		<>
 			<div className='movie-details-netflixroulette-line'>
 				<Netflixroulette light='light' />
+
 				<Button
-					onClick={handleGoToAllMoviesClick}
 					buttonClass='go-to-all-movies-button'
-					children='⚲'
 					dataTestid='go-to-all-movies-button'
-				/>
+				>
+					<a onClick={handleGoToAllMoviesClick} href='/movies'>
+						⚲
+					</a>
+				</Button>
 			</div>
 			<div className='movie-details'>
 				<div className='movie-details-poster'>

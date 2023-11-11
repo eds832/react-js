@@ -34,7 +34,7 @@
   padding-right: 60px;
 }
 
-.go-to-all-movies-button:hover {
+.go-to-all-movies-button:hover a {
   color: #555555;
 }
 
@@ -50,6 +50,11 @@
   -moz-transform: rotate(45deg); 
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.go-to-all-movies-button a {
+  text-decoration: none;
+  color: #F65261;
 }
 
 .movie-details-title-and-rating, .movie-details-release-year-and-duration-div {
