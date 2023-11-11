@@ -6,7 +6,7 @@ import Typography, { TypographyTypes } from '../Typography/Typography';
 import Netflixroulette from '../Netflixroulette/Netflixroulette';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { MovieDialogContext } from '../../context/MovieDialogContextProvider';
-import { moviesActions } from 'src/redux/movieSlice';
+import { moviesActions } from '../../redux/movieSlice';
 import Dialog from '../Dialog/Dialog';
 import MovieForm from '../MovieForm/MovieForm';
 import Success from '../Success/Success';

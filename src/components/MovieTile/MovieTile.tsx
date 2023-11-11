@@ -5,7 +5,7 @@ import Typography, { TypographyTypes } from '../Typography/Typography';
 import Button from '../Button/Button';
 import PopupMenu from '../PopupMenu/PopupMenu';
 import getReleaseYear from './../../helpers/getReleaseYear';
-import { useAppDispatch } from 'src/redux/store';
+import { useAppDispatch } from '../../redux/store';
 import { moviesActions } from '../../redux/movieSlice';
 import { MovieDialogContext } from '../../context/MovieDialogContextProvider';
 import { useRouter } from 'next/router';
