@@ -8,6 +8,7 @@ import getMovieDuration from './../../helpers/getMovieDuration';
 import getReleaseYear from './../../helpers/getReleaseYear';
 import useQuery from '../../hooks/useQuery';
 import { MovieType } from '../../types/movies/types';
+import convertQueryToPath from '../../helpers/convertQueryToPath';
 
 interface MovieDetailsProps {
 	movie: MovieType;
@@ -40,7 +41,10 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie }) => {
 					buttonClass='go-to-all-movies-button'
 					dataTestid='go-to-all-movies-button'
 				>
-					<a onClick={handleGoToAllMoviesClick} href='/movies'>
+					<a
+						onClick={handleGoToAllMoviesClick}
+						href={`/movies?${convertQueryToPath(query)}`}
+					>
 						⚲
 					</a>
 				</Button>

@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../redux/store';
 import { moviesActions } from '../../redux/movieSlice';
 import { MovieDialogContext } from '../../context/MovieDialogContextProvider';
 import { useRouter } from 'next/router';
+import convertQueryToPath from '../../helpers/convertQueryToPath';
 
 interface MovieTileProps {
 	movie: MovieType;
@@ -60,7 +61,7 @@ const MovieTile: FC<MovieTileProps> = ({ movie }) => {
 		<a
 			onClick={handleMovieClick}
 			data-testid={`movie-tile-${id}-div`}
-			href={`/movies/${movie.id}`}
+			href={`/movies/${movie.id}?${convertQueryToPath(query)}`}
 		>
 			<div className='movie-img'>
 				<img
