@@ -10,15 +10,9 @@ import getReleaseYear from './../../helpers/getReleaseYear';
 
 interface MovieTileProps {
 	movie: MovieType;
-	handleEditClicked?: (id: number) => void;
-	handleDeleteClicked?: (id: number) => void;
 }
 
-const MovieTile: FC<MovieTileProps> = ({
-	movie,
-	handleEditClicked,
-	handleDeleteClicked,
-}) => {
+const MovieTile: FC<MovieTileProps> = ({ movie }) => {
 	const [showPopupMenu, setShowPopupMenu] = useState(false);
 
 	const handleClickThreeDots = (event: React.MouseEvent<HTMLElement>) => {
@@ -32,23 +26,11 @@ const MovieTile: FC<MovieTileProps> = ({
 
 	const { id, imageUrl, movieName, releaseDate, genresList } = movie;
 
-	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
-		event.stopPropagation();
-		handleEditClicked(id);
-		handleClickThreeDots(event);
-	};
-
-	const onDeleteClicked = (event: React.MouseEvent<HTMLElement>) => {
-		event.stopPropagation();
-		handleDeleteClicked(id);
-		handleClickThreeDots(event);
-	};
-
 	const navigate = useNavigate();
 
 	const [searchParams, setSearchParams] = useSearchParams();
 
-	const link = `/${id}${
+	const partialLink = `${
 		searchParams.get('query') ||
 		searchParams.get('genre') ||
 		searchParams.get('limit') ||
@@ -75,8 +57,29 @@ const MovieTile: FC<MovieTileProps> = ({
 			: ''
 	}${searchParams.get('sortBy') ? 'sortBy=' + searchParams.get('sortBy') : ''}`;
 
+	const linkToDetails = `/${id}${partialLink}`;
+
+	const linkToEdit = `/${id}/edit${partialLink}`;
+
+	const linkToDelete = `/${id}/delete${partialLink}`;
+
+	const onEditClicked = (event: React.MouseEvent<HTMLElement>) => {
+		event.stopPropagation();
+		handleClickThreeDots(event);
+		navigate(linkToEdit);
+	};
+
+	const onDeleteClicked = (event: React.MouseEvent<HTMLElement>) => {
+		event.stopPropagation();
+		handleClickThreeDots(event);
+		navigate(linkToDelete);
+	};
+
 	return (
-		<div onClick={() => navigate(link)} data-testid={`movie-tile-${id}-div`}>
+		<div
+			onClick={() => navigate(linkToDetails)}
+			data-testid={`movie-tile-${id}-div`}
+		>
 			<div className='movie-img'>
 				<img
 					data-testid={'movie-tile-img-' + id}

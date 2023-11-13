@@ -2,10 +2,11 @@ import React from 'react';
 
 export interface InputProps {
 	value: string;
-	onChange: (value: string) => void;
+	onChange?: (value: string) => void;
 	onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 	onLoseFocus?: (value: string) => void;
 	onInputFocus?: (value: string) => void;
+	directOnChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	inputId?: string;
 	labelText?: string;
 	type?: string;
@@ -25,6 +26,7 @@ const Input: React.FC<InputProps> = ({
 	onKeyDown,
 	onLoseFocus,
 	onInputFocus,
+	directOnChange,
 	inputId,
 	labelText,
 	type,
@@ -38,7 +40,8 @@ const Input: React.FC<InputProps> = ({
 	name,
 }) => {
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		onChange(event.target.value);
+		directOnChange?.(event);
+		onChange?.(event.target.value);
 	};
 
 	const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

@@ -1,30 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet, useParams, useSearchParams } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 
 import './MovieListPage.css';
 import { GenreSelect, MovieGrid, MovieCounter } from '..';
 import { GENRES, RELEASE_DATE } from '../../constants';
 import SortControl from '../SortControl/SortControl';
-import { MovieType } from '../../types/movies/types';
 import Footer from '../Footer/Footer';
 import UnderHeaderLine from '../UnderHeaderLine/UnderHeaderLine';
-import Dialog from '../Dialog/Dialog';
-import MovieForm from '../MovieForm/MovieForm';
-import Success from '../Success/Success';
-import Delete from '../Delete/Delete';
 import { abortController, getMovies } from '../../services';
 
 interface MovieListPageProps {
 	query: string;
-	openAddDialog: boolean;
-	handleCloseAddDialog: () => void;
 	refreshSearch: (query: string) => void;
 }
 
 const MovieListPage: React.FC<MovieListPageProps> = ({
 	query,
-	openAddDialog,
-	handleCloseAddDialog,
 	refreshSearch,
 }) => {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -34,8 +25,6 @@ const MovieListPage: React.FC<MovieListPageProps> = ({
 			refreshSearch(searchParams.get('query'));
 		}
 	}, []);
-
-	const { movieId } = useParams();
 
 	const [movies, setMovies] = useState([]);
 
@@ -48,49 +37,7 @@ const MovieListPage: React.FC<MovieListPageProps> = ({
 		searchParams.set('sortBy', sort);
 	};
 
-	const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
-	const [openEditDialog, setOpenEditDialog] = useState(null);
-	const [openDeleteDialog, setOpenDeleteDialog] = useState(null);
 	const [count, setCount] = useState(0);
-
-	const hadleCloseSuccessDialog = () => {
-		setOpenSuccessDialog(false);
-	};
-
-	const handleMovieAddSuccess = (movie: MovieType) => {
-		console.log(movie);
-		handleCloseAddDialog();
-		setOpenSuccessDialog(true);
-	};
-
-	const handleOpenEditDialog = (id: number) => {
-		const movie = movies.find((m) => m.id === id);
-		setOpenEditDialog(movie);
-	};
-
-	const hadleCloseEditDialog = () => {
-		setOpenEditDialog(null);
-	};
-
-	const handleMovieEditSuccess = (movie: MovieType) => {
-		console.log(movie);
-		setOpenEditDialog(null);
-		setOpenSuccessDialog(true);
-	};
-
-	const handleOpenDeleteDialog = (id: number) => {
-		const movie = movies.find((m) => m.id === id);
-		setOpenDeleteDialog(movie);
-	};
-
-	const handleCloseDeleteDialog = () => {
-		setOpenDeleteDialog(null);
-	};
-
-	const handleDeleteMovie = () => {
-		console.log(openDeleteDialog, 'was deleted');
-		setOpenDeleteDialog(null);
-	};
 
 	const [genreState, setGenreState] = useState(
 		searchParams.get('genre') ? searchParams.get('genre') : 'All'
@@ -164,71 +111,17 @@ const MovieListPage: React.FC<MovieListPageProps> = ({
 					</div>
 					<UnderHeaderLine />
 					<MovieCounter count={count} />
-					<MovieGrid
-						movies={movies}
-						handleEditClicked={handleOpenEditDialog}
-						handleDeleteClicked={handleOpenDeleteDialog}
-					/>
+					<MovieGrid movies={movies} />
 				</div>
 				<Footer />
 			</>
 		);
 	};
 
-	const openDialog =
-		openAddDialog || openDeleteDialog || openEditDialog || openSuccessDialog;
-
-	const containerClass = openDialog
-		? 'container blur'
-		: movieId
-		? 'container details'
-		: 'container';
-
 	return (
 		<>
-			{openAddDialog && (
-				<Dialog
-					dialogClass='add'
-					title='ADD MOVIE'
-					onClose={handleCloseAddDialog}
-				>
-					<MovieForm onMovieSubmit={handleMovieAddSuccess} />
-				</Dialog>
-			)}
-
-			{openEditDialog && (
-				<Dialog
-					dialogClass='add'
-					title='EDIT MOVIE'
-					onClose={hadleCloseEditDialog}
-				>
-					<MovieForm
-						movie={openEditDialog}
-						onMovieSubmit={handleMovieEditSuccess}
-					/>
-				</Dialog>
-			)}
-
-			{openSuccessDialog && (
-				<Dialog
-					dialogClass='success'
-					title=''
-					onClose={hadleCloseSuccessDialog}
-				>
-					<Success />
-				</Dialog>
-			)}
-
-			{openDeleteDialog && (
-				<Dialog dialogClass='delete' title='' onClose={handleCloseDeleteDialog}>
-					<Delete onDelete={handleDeleteMovie} />
-				</Dialog>
-			)}
-
-			<div className={containerClass}>
-				<Outlet />
-				<UnderHeader />
-			</div>
+			<Outlet />
+			<UnderHeader />
 		</>
 	);
 };
