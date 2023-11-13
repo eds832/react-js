@@ -11,5 +11,4 @@ export interface MovieType {
 	revenue?: number;
 	duration?: number;
 	description?: string;
-	onMovieClick?: (id: number) => void;
 }

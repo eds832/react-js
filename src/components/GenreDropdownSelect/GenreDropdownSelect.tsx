@@ -20,7 +20,9 @@ const GenreDropdownSelect: React.FC<GenreDropdownSelectProps> = ({
 	onSelect,
 }) => {
 	const [opened, setOpened] = useState(false);
-	const options = GENRES.filter((g) => g !== 'All');
+	const options = GENRES.map(
+		(g) => g.charAt(0).toUpperCase() + g.slice(1)
+	).filter((g) => g !== 'All');
 	const ref = useRef<HTMLDivElement>(null);
 
 	const handleDropdownClick = () => {

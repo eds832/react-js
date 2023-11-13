@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
+import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
 
 import MovieDetails from './MovieDetails';
 
@@ -7,6 +9,13 @@ const meta = {
 	title: 'MovieDetails component',
 	component: MovieDetails,
 	tags: ['autodocs'],
+	decorators: [
+		(Story) => (
+			<BrowserRouter>
+				<Story />
+			</BrowserRouter>
+		),
+	],
 } satisfies Meta<typeof MovieDetails>;
 
 export default meta;
@@ -14,17 +23,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const OnGoToAllMoviesClick: Story = {
-	args: {
-		id: 777,
-		imageUrl: 'https://via.placeholder.com/300x450.png?text=Movie+1',
-		movieName: 'Movie 1',
-		releaseDate: '2022-07-07',
-		rating: 8.9,
-		duration: 177,
-		description: 'A description of the movie',
-		genresList: ['Action'],
-		onMovieClick: () => console.log('go to all movies clicked'),
-	},
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
 		const goToAllMoviesButton = await canvas.getByTestId(
