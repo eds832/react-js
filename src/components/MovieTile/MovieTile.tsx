@@ -59,6 +59,7 @@ const MovieTile: FC<MovieTileProps> = ({ movie }) => {
 
 	return (
 		<a
+			className='movie-tile-link'
 			onClick={handleMovieClick}
 			data-testid={`movie-tile-${id}-div`}
 			href={`/movies/${movie.id}?${convertQueryToPath(query)}`}

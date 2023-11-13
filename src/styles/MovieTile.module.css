@@ -43,3 +43,7 @@
   margin-top: 18px;
   width: 65px;
 }
+
+.movie-tile-link {
+  text-decoration: none;
+}
