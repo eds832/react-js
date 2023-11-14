@@ -1,57 +1,63 @@
-import React from 'react';
-import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 
-import './Header.css';
 import SearchForm from '../SearchForm/SearchForm';
 import Button from '../Button/Button';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 import Netflixroulette from '../Netflixroulette/Netflixroulette';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { MovieDialogContext } from '../../context/MovieDialogContextProvider';
+import { moviesActions } from '../../redux/movieSlice';
+import Dialog from '../Dialog/Dialog';
+import MovieForm from '../MovieForm/MovieForm';
+import Success from '../Success/Success';
+import Delete from '../Delete/Delete';
+import { api } from '../../services';
 
-interface HeaderProps {
-	onSearch?: (query: string) => void;
-	initialQuery: string;
-}
+const Header = () => {
+	const dispatch = useAppDispatch();
+	const [openDialog, setOpenDialog] = useContext(MovieDialogContext);
+	const [dialog, setDialog] = useState(openDialog);
+	const mv = useAppSelector((state) => state.movies.movie);
+	const [deleteMovie] = api.useDeleteMovieMutation();
 
-const Header: React.FC<HeaderProps> = ({ onSearch, initialQuery }) => {
-	const [searchParams, setSearchParams] = useSearchParams();
+	useEffect(() => {
+		setDialog(openDialog);
+	}, [openDialog]);
 
-	const link = `new/${
-		searchParams.get('query') ||
-		searchParams.get('genre') ||
-		searchParams.get('limit') ||
-		searchParams.get('sortBy')
-			? '?'
-			: ''
-	}${
-		searchParams.get('query')
-			? 'searchBy=title&query=' + searchParams.get('query')
-			: ''
-	}${searchParams.get('query') && searchParams.get('genre') ? '&' : ''}${
-		searchParams.get('genre') ? 'genre=' + searchParams.get('genre') : ''
-	}${
-		(searchParams.get('query') || searchParams.get('genre')) &&
-		searchParams.get('limit')
-			? '&'
-			: ''
-	}${searchParams.get('limit') ? 'limit=' + searchParams.get('limit') : ''}${
-		(searchParams.get('query') ||
-			searchParams.get('genre') ||
-			searchParams.get('limit')) &&
-		searchParams.get('sortBy')
-			? '&'
-			: ''
-	}${searchParams.get('sortBy') ? 'sortBy=' + searchParams.get('sortBy') : ''}`;
-
-	const navigate = useNavigate();
-
-	const handleAddMovie = (event?: React.MouseEvent<HTMLElement>) => {
-		event.stopPropagation();
-		navigate(link);
+	const handleAddMovie = () => {
+		const newMovie = {
+			imageUrl: '',
+			movieName: '',
+			releaseDate: '',
+			genresList: [],
+			rating: '',
+			duration: '',
+			description: '',
+		};
+		dispatch(moviesActions.setMovie(newMovie));
+		setOpenDialog('add');
 	};
+
+	const handleCloseAddDialog = () => {
+		dispatch(moviesActions.setMovie(null));
+		setOpenDialog(null);
+	};
+
+	const handleSuccess = () => {
+		setOpenDialog('success');
+	};
+
+	const handleCloseSuccessDialog = () => {
+		setOpenDialog(null);
+	};
+
+	const handleDelete = () => {
+		deleteMovie(mv.id).then(() => setOpenDialog(null));
+	};
+
 	return (
 		<>
-			<Outlet />
-			<header>
+			<header className='header'>
 				<div className='head-line'>
 					<Netflixroulette />
 					<Button onClick={handleAddMovie} children='+ ADD MOVIE' />
@@ -59,8 +65,38 @@ const Header: React.FC<HeaderProps> = ({ onSearch, initialQuery }) => {
 				<div className='title-div'>
 					<Typography children='FIND YOUR MOVIE' type={TypographyTypes.TITLE} />
 				</div>
-				<SearchForm initialQuery={initialQuery} onSearch={onSearch} />
+				<SearchForm />
 			</header>
+
+			{(dialog === 'add' || dialog === 'edit') && (
+				<Dialog
+					title={dialog === 'add' ? 'ADD MOVIE' : 'EDIT MOVIE'}
+					onClose={handleCloseAddDialog}
+					dialogClass='add'
+				>
+					<MovieForm onSuccess={handleSuccess} />
+				</Dialog>
+			)}
+
+			{dialog === 'success' && (
+				<Dialog
+					title=''
+					onClose={handleCloseSuccessDialog}
+					dialogClass='success'
+				>
+					<Success />
+				</Dialog>
+			)}
+
+			{dialog === 'delete' && (
+				<Dialog
+					title=''
+					onClose={handleCloseSuccessDialog}
+					dialogClass='delete'
+				>
+					<Delete handleDelete={handleDelete} />
+				</Dialog>
+			)}
 		</>
 	);
 };

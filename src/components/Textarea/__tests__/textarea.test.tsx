@@ -1,14 +1,14 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
 
-import Textarea, { TextareaProps } from '../Textarea';
+import Textarea, { TextAreaProps } from '../Textarea';
 import userEvent from '@testing-library/user-event';
 
 describe('Textarea', () => {
 	const handleKeyDown = jest.fn();
 	const handleOnChange = jest.fn();
 
-	const val: TextareaProps = {
+	const val: TextAreaProps = {
 		value: '7777',
 		onChange: handleOnChange,
 		onKeyDown: handleKeyDown,

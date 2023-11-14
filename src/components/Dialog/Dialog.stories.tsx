@@ -1,6 +1,5 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
 
 import Dialog from './Dialog';
 import MovieForm from '../MovieForm/MovieForm';
@@ -11,22 +10,17 @@ const meta = {
 	title: 'Dialog component',
 	component: Dialog,
 	tags: ['autodocs'],
-	decorators: [
-		(Story) => (
-			<BrowserRouter>
-				<Story />
-			</BrowserRouter>
-		),
-	],
 } satisfies Meta<typeof Dialog>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const add = <MovieForm />;
-const edit = <MovieForm />;
-const del = <Delete />;
+const onSuccess = () => console.log('success');
+const handleDelete = () => console.log('delete');
+const add = <MovieForm onSuccess={onSuccess} />;
+const edit = <MovieForm onSuccess={onSuccess} />;
+const del = <Delete handleDelete={handleDelete} />;
 const success = <Success />;
 
 export const AddMovie: Story = {

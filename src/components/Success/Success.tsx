@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './Success.css';
 import Typography, { TypographyTypes } from '../Typography/Typography';
 
 const Success = () => {

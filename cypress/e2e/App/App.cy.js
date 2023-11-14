@@ -1,7 +1,7 @@
 describe('App', () => {
 	it('shows correct page after opening URL with parametres', () => {
 		cy.visit(
-			'http://localhost:3000/?sortBy=TITLE&limit=50&genre=comedy&query=co&searchBy=title'
+			'http://localhost:3000/movies?sortBy=TITLE&limit=50&filter=comedy&search=co&searchBy=TITLE'
 		);
 		cy.get('[data-testid="movie-grid"]')
 			.find('.movie-tile-description', { timeout: 10000 })
@@ -19,7 +19,7 @@ describe('App', () => {
 
 	it('shows correct COCO movie page by its link', () => {
 		cy.visit(
-			'http://localhost:3000/354912?genre=comedy&limit=50&sortBy=TITLE&query=co&searchBy=title'
+			'http://localhost:3000/movies/354912?filter=comedy&limit=50&sortBy=TITLE&search=co&searchBy=TITLE'
 		);
 		cy.get('[data-testid="movie-grid"]')
 			.find('.movie-tile-description', { timeout: 10000 })

@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import './Typography.css';
-
 export const enum TypographyTypes {
 	TITLE = 'title',
 	NETFLIX_ROULETTE = 'netflix-roulette',

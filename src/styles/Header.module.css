@@ -1,6 +1,6 @@
 /* Set header styles */
-header {	    
-  background-image: url("./../../assets/header-background.svg");
+.header {	    
+  background-image: url("./../assets/header-background.svg");
 }
 
 .head-line {

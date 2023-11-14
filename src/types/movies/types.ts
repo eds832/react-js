@@ -5,10 +5,10 @@ export interface MovieType {
 	movieName: string;
 	releaseDate: string;
 	genresList?: string[];
-	rating?: number | string;
+	rating: number | string;
 	ratingCount?: number;
 	budget?: number;
 	revenue?: number;
-	duration?: number | string;
-	description?: string;
+	duration: number | string;
+	description: string;
 }

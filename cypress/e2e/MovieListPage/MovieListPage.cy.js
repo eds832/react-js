@@ -1,6 +1,6 @@
 describe('MovieListPage', () => {
 	it('shows correct MovieDetails after MovieTile clicked', () => {
-		cy.visit('http://localhost:3000/');
+		cy.visit('http://localhost:3000/movies');
 		cy.get('[data-testid="movie-grid"]')
 			.find('.movie-tile-description', { timeout: 10000 })
 			.should('have.length', 50);
@@ -12,7 +12,7 @@ describe('MovieListPage', () => {
 	});
 
 	it('shows SearchForm after MovieDetails search button clicked', () => {
-		cy.visit('http://localhost:3000/');
+		cy.visit('http://localhost:3000/movies');
 		cy.get('[data-testid="movie-grid"]')
 			.find('.movie-tile-description', { timeout: 10000 })
 			.should('have.length', 50);
